@@ -658,3 +658,233 @@
   z-index: 1;
   padding-left: 0 !important;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* ========================================= */
+/* CLASSE AVSEC */
+/* ========================================= */
+
+.container-avsec {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.container-buttons-avsec {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  margin-top: 2rem;
+  justify-content: space-between;
+}
+
+.wrapper-btn-avsec {
+  display: flex;
+}
+
+.dobra-btn-avsec {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 32px solid #d32f2f;
+}
+
+.btn-avsec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white !important;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-weight: semibold;
+  width: 200px;
+  height: 60px;
+  z-index: 2;
+}
+
+.container-conteudo-completo-avsec {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-trilhas-aprendizagem-avsec {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: end;
+  background-color: #004d85;
+  position: relative;
+  z-index: 1;
+  height: 8rem;
+  margin-top: -3.5rem;
+  padding-left: 8rem;
+}
+
+.container-trilhas-aprendizagem-avsec h2 {
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.container-modulos-avsec {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 0;
+  justify-content: space-between;
+}
+
+.card-modulo-avsec {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #1c65a9;
+  color: white !important;
+  padding: 12px 0;
+  cursor: pointer;
+  width: 350px;
+  height: 80px;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+.card-modulo-avsec:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-modulo-avsec span {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: semibold;
+  z-index: 1;
+}
+
+/* Cores para os módulos AVSEC - 5 cores diferentes */
+.card-modulo-avsec:nth-child(1) {
+  background-color: #1c65a9;
+}
+
+.card-modulo-avsec:nth-child(2) {
+  background-color: #2572b0;
+}
+
+.card-modulo-avsec:nth-child(3) {
+  background-color: #357fb6;
+}
+
+.card-modulo-avsec:nth-child(4) {
+  background-color: #488cbd;
+}
+
+.card-modulo-avsec:nth-child(5) {
+  background-color: #5a9fc9;
+}
+
+/* Cores para os botões AVSEC */
+.wrapper-btn-avsec:nth-child(1) .btn-avsec {
+  background-color: #fb9c4b;
+}
+.wrapper-btn-avsec:nth-child(1) .btn-avsec:hover {
+  background-color: #fca738ff;
+}
+.wrapper-btn-avsec:nth-child(1) .dobra-btn-avsec {
+  border-color: transparent transparent #bf7739 transparent;
+}
+
+.wrapper-btn-avsec:nth-child(2) .btn-avsec {
+  background-color: #fbb351;
+}
+.wrapper-btn-avsec:nth-child(2) .btn-avsec:hover {
+  background-color: #fca738ff;
+}
+
+.wrapper-btn-avsec:nth-child(3) .btn-avsec {
+  background-color: #fcbd50;
+}
+.wrapper-btn-avsec:nth-child(3) .btn-avsec:hover {
+  background-color: #fca738ff;
+}
+
+.wrapper-btn-avsec:nth-child(4) .btn-avsec {
+  background-color: #faa74f;
+}
+.wrapper-btn-avsec:nth-child(4) .btn-avsec:hover {
+  background-color: #fca738ff;
+}
+
+.wrapper-btn-avsec:nth-child(5) .btn-avsec {
+  background-color: #fb9c4b;
+}
+.wrapper-btn-avsec:nth-child(5) .btn-avsec:hover {
+  background-color: #fca738ff;
+}
+
+.container-modulos-sescinc {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  position: relative;
+  z-index: 0; /* Garante que os cards fiquem abaixo da barra */
+}
+
+.card-modulo-sescinc {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  align-items: center;
+  background-color: #949494;
+  color: white !important;
+  padding: 20px 0;
+  cursor: pointer;
+  width: 150px;
+  height: 50px;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+/* Efeito hover para o card */
+.card-modulo-sescinc:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Conteúdo do card */
+.card-modulo-sescinc span {
+  font-size: 18px !important;
+  color: white;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.card-modulo-sescinc h2 {
+  font-size: 18px !important;
+  color: white !important;
+  font-weight: bold !important;
+  margin: 0;
+  z-index: 1;
+  padding-left: 0 !important;
+}
