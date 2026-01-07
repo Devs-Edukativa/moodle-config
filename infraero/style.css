@@ -795,9 +795,12 @@
 }
 
 .container-buttons-avsec {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.75rem;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   width: 100%;
   position: relative;
   z-index: 3;
@@ -817,7 +820,11 @@
   border-bottom: 32px solid #d32f2f;
 }
 
-.btn-avsec {
+.wrapper-btn-avsec {
+  display: flex;
+}
+
+.wrapper-btn-avsec .btn-avsec {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -829,9 +836,23 @@
   font-family: "Poppins", sans-serif;
   cursor: pointer;
   font-weight: semibold;
-  width: 200px;
-  height: 60px;
+  width: 100%;
+  height: 100px;
   z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.wrapper-btn-avsec .btn-avsec:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dobra-btn-avsec {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 15px solid #fb9c4b;
 }
 
 .container-conteudo-completo-avsec {
@@ -865,11 +886,29 @@
 
 .container-modulos-avsec {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   gap: 0.75rem;
   position: relative;
   z-index: 0;
-  justify-content: space-between;
+}
+
+/* Grid responsivo para diferentes tamanhos */
+@media (max-width: 1024px) {
+  .container-buttons-avsec {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .container-buttons-avsec {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .container-buttons-avsec {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card-modulo-avsec {
@@ -882,7 +921,7 @@
   color: white !important;
   padding: 12px 0;
   cursor: pointer;
-  width: 350px;
+  width: 250px;
   height: 80px;
   position: relative;
   transition: all 0.3s ease;
@@ -928,38 +967,50 @@
   background-color: #fb9c4b;
 }
 .wrapper-btn-avsec:nth-child(1) .btn-avsec:hover {
-  background-color: #fca738ff;
+  background-color: #f5923f;
 }
 .wrapper-btn-avsec:nth-child(1) .dobra-btn-avsec {
-  border-color: transparent transparent #bf7739 transparent;
+  border-color: transparent transparent #f5923f transparent;
 }
 
 .wrapper-btn-avsec:nth-child(2) .btn-avsec {
   background-color: #fbb351;
 }
 .wrapper-btn-avsec:nth-child(2) .btn-avsec:hover {
-  background-color: #fca738ff;
+  background-color: #f5923f;
+}
+.wrapper-btn-avsec:nth-child(2) .dobra-btn-avsec {
+  border-color: transparent transparent #f5923f transparent;
 }
 
 .wrapper-btn-avsec:nth-child(3) .btn-avsec {
   background-color: #fcbd50;
 }
 .wrapper-btn-avsec:nth-child(3) .btn-avsec:hover {
-  background-color: #fca738ff;
+  background-color: #f5923f;
+}
+.wrapper-btn-avsec:nth-child(3) .dobra-btn-avsec {
+  border-color: transparent transparent #f5923f transparent;
 }
 
 .wrapper-btn-avsec:nth-child(4) .btn-avsec {
   background-color: #faa74f;
 }
 .wrapper-btn-avsec:nth-child(4) .btn-avsec:hover {
-  background-color: #fca738ff;
+  background-color: #f5923f;
+}
+.wrapper-btn-avsec:nth-child(4) .dobra-btn-avsec {
+  border-color: transparent transparent #f5923f transparent;
 }
 
 .wrapper-btn-avsec:nth-child(5) .btn-avsec {
   background-color: #fb9c4b;
 }
 .wrapper-btn-avsec:nth-child(5) .btn-avsec:hover {
-  background-color: #fca738ff;
+  background-color: #f5923f;
+}
+.wrapper-btn-avsec:nth-child(5) .dobra-btn-avsec {
+  border-color: transparent transparent #f5923f transparent;
 }
 
 .container-modulos-sescinc {
