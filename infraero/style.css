@@ -987,7 +987,7 @@
   padding: 8px 10px;
   text-align: center;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
   font-weight: semibold;
@@ -1344,5 +1344,580 @@
   .dobra-btn-tps {
     border-left: 15px solid transparent;
     border-bottom: 20px solid #fb9c4b;
+  }
+}
+
+/* ========================================= */
+/* CLASSE LADOAR */
+/* ========================================= */
+
+.container-ladoar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.container-buttons-ladoar {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  margin-top: 2rem;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.dobra-btn-ladoar {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 32px solid #d32f2f;
+}
+
+.wrapper-btn-ladoar .btn-ladoar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white !important;
+  padding: 8px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-weight: semibold;
+  width: 100%;
+  height: 60px;
+  z-index: 2;
+  transition: all 0.3s ease;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.wrapper-btn-ladoar .btn-ladoar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.container-conteudo-completo-ladoar {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-trilhas-aprendizagem-ladoar {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: end;
+  background-color: #1a3558;
+  position: relative;
+  z-index: 1;
+  height: 8rem;
+  margin-top: -2.9rem;
+}
+
+.container-trilhas-aprendizagem-ladoar h2 {
+  color: #ffffff !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.container-modulos-ladoar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 0;
+  overflow-x: auto;
+}
+
+.card-modulo-ladoar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #4576d3;
+  color: white !important;
+  padding: 12px 0;
+  cursor: pointer;
+  width: 360px;
+  height: 80px;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+.card-modulo-ladoar:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-modulo-ladoar span {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* Botões LADOAR */
+.wrapper-btn-ladoar:nth-child(1) .btn-ladoar {
+  background-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(1) .btn-ladoar:hover {
+  background-color: #4593d3;
+}
+.wrapper-btn-ladoar:nth-child(1) .dobra-btn-ladoar {
+  border-bottom-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(2) .btn-ladoar {
+  background-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(2) .btn-ladoar:hover {
+  background-color: #4593d3;
+}
+.wrapper-btn-ladoar:nth-child(2) .dobra-btn-ladoar {
+  border-bottom-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(3) .btn-ladoar {
+  background-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(3) .btn-ladoar:hover {
+  background-color: #4593d3;
+}
+.wrapper-btn-ladoar:nth-child(3) .dobra-btn-ladoar {
+  border-bottom-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(4) .btn-ladoar {
+  background-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(4) .btn-ladoar:hover {
+  background-color: #4593d3;
+}
+.wrapper-btn-ladoar:nth-child(4) .dobra-btn-ladoar {
+  border-bottom-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(5) .btn-ladoar {
+  background-color: #299abd;
+}
+.wrapper-btn-ladoar:nth-child(5) .btn-ladoar:hover {
+  background-color: #4593d3;
+}
+.wrapper-btn-ladoar:nth-child(5) .dobra-btn-ladoar {
+  border-bottom-color: #299abd;
+}
+
+/* Media query LADOAR */
+@media (max-width: 848px) {
+  .container-buttons-ladoar {
+    gap: 0.25rem;
+  }
+
+  .wrapper-btn-ladoar .btn-ladoar {
+    font-size: 10px;
+    padding: 0;
+  }
+
+  .dobra-btn-ladoar {
+    border-left: 15px solid transparent;
+    border-bottom: 20px solid #bd7029;
+  }
+}
+
+/* ========================================= */
+/* CLASSE MANUTENÇÃO */
+/* ========================================= */
+
+.container-manutencao {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.container-buttons-manutencao {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  margin-top: 2rem;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.dobra-btn-manutencao {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 32px solid #d32f2f;
+}
+
+.wrapper-btn-manutencao .btn-manutencao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white !important;
+  padding: 8px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-weight: semibold;
+  width: 100%;
+  height: 60px;
+  z-index: 2;
+  transition: all 0.3s ease;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.wrapper-btn-manutencao .btn-manutencao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.container-conteudo-completo-manutencao {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-trilhas-aprendizagem-manutencao {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: end;
+  background-color: #0858ac;
+  position: relative;
+  z-index: 1;
+  height: 8rem;
+  margin-top: -2.9rem;
+}
+
+.container-trilhas-aprendizagem-manutencao h2 {
+  color: #ffffff !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.container-modulos-manutencao {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 0;
+  overflow-x: auto;
+}
+
+.card-modulo-manutencao {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #bd7029;
+  color: white !important;
+  padding: 12px 0;
+  cursor: pointer;
+  width: 360px;
+  height: 80px;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+.card-modulo-manutencao:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-modulo-manutencao span {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* Botões MANUTENÇÃO */
+.wrapper-btn-manutencao:nth-child(1) .btn-manutencao {
+  background-color: #bd7029;
+}
+.wrapper-btn-manutencao:nth-child(1) .btn-manutencao:hover {
+  background-color: #a36326;
+}
+.wrapper-btn-manutencao:nth-child(1) .dobra-btn-manutencao {
+  border-bottom-color: #bd7029;
+}
+
+.wrapper-btn-manutencao:nth-child(2) .btn-manutencao {
+  background-color: #d3894b;
+}
+.wrapper-btn-manutencao:nth-child(2) .btn-manutencao:hover {
+  background-color: #f5923f;
+}
+.wrapper-btn-manutencao:nth-child(2) .dobra-btn-manutencao {
+  border-bottom-color: #d3894b;
+}
+
+.wrapper-btn-manutencao:nth-child(3) .btn-manutencao {
+  background-color: #d3894b;
+}
+.wrapper-btn-manutencao:nth-child(3) .btn-manutencao:hover {
+  background-color: #f5923f;
+}
+.wrapper-btn-manutencao:nth-child(3) .dobra-btn-manutencao {
+  border-bottom-color: #d3894b;
+}
+
+.wrapper-btn-manutencao:nth-child(4) .btn-manutencao {
+  background-color: #c87d3a;
+}
+.wrapper-btn-manutencao:nth-child(4) .btn-manutencao:hover {
+  background-color: #f5923f;
+}
+.wrapper-btn-manutencao:nth-child(4) .dobra-btn-manutencao {
+  border-bottom-color: #c87d3a;
+}
+
+.wrapper-btn-manutencao:nth-child(5) .btn-manutencao {
+  background-color: #bd7029;
+}
+.wrapper-btn-manutencao:nth-child(5) .btn-manutencao:hover {
+  background-color: #f5923f;
+}
+.wrapper-btn-manutencao:nth-child(5) .dobra-btn-manutencao {
+  border-bottom-color: #bd7029;
+}
+
+/* Media query MANUTENÇÃO */
+@media (max-width: 848px) {
+  .container-buttons-manutencao {
+    gap: 0.25rem;
+  }
+
+  .wrapper-btn-manutencao .btn-manutencao {
+    font-size: 10px;
+    padding: 0;
+  }
+
+  .dobra-btn-manutencao {
+    border-left: 15px solid transparent;
+    border-bottom: 20px solid #bd7029;
+  }
+}
+
+/* ========================================= */
+/* CLASSE PROCEDIMENTOS */
+/* ========================================= */
+
+.container-procedimentos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.container-buttons-procedimentos {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: repeat(5, 1fr);
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  margin-top: 2rem;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.dobra-btn-procedimentos {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 32px solid #d32f2f;
+}
+
+.wrapper-btn-procedimentos .btn-procedimentos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white !important;
+  padding: 8px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-weight: semibold;
+  width: 100%;
+  height: 60px;
+  z-index: 2;
+  transition: all 0.3s ease;
+  word-break: break-word;
+  white-space: normal;
+}
+
+.wrapper-btn-procedimentos .btn-procedimentos:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.container-conteudo-completo-procedimentos {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-trilhas-aprendizagem-procedimentos {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: end;
+  background-color: #176822;
+  position: relative;
+  z-index: 1;
+  height: 8rem;
+  margin-top: -2.9rem;
+}
+
+.container-trilhas-aprendizagem-procedimentos h2 {
+  color: #ffffff !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.container-modulos-procedimentos {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 0;
+  overflow-x: auto;
+}
+
+.card-modulo-procedimentos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #bd7029;
+  color: white !important;
+  padding: 12px 0;
+  cursor: pointer;
+  width: 360px;
+  height: 80px;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+.card-modulo-procedimentos:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-modulo-procedimentos span {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* Botões PROCEDIMENTOS */
+.wrapper-btn-procedimentos:nth-child(1) .btn-procedimentos {
+  background-color: #bd7029;
+}
+.wrapper-btn-procedimentos:nth-child(1) .btn-procedimentos:hover {
+  background-color: #a36326;
+}
+.wrapper-btn-procedimentos:nth-child(1) .dobra-btn-procedimentos {
+  border-bottom-color: #bd7029;
+}
+
+.wrapper-btn-procedimentos:nth-child(2) .btn-procedimentos {
+  background-color: #d3894b;
+}
+.wrapper-btn-procedimentos:nth-child(2) .btn-procedimentos:hover {
+  background-color: #f5923f;
+}
+.wrapper-btn-procedimentos:nth-child(2) .dobra-btn-procedimentos {
+  border-bottom-color: #d3894b;
+}
+
+.wrapper-btn-procedimentos:nth-child(3) .btn-procedimentos {
+  background-color: #d3894b;
+}
+.wrapper-btn-procedimentos:nth-child(3) .btn-procedimentos:hover {
+  background-color: #f5923f;
+}
+.wrapper-btn-procedimentos:nth-child(3) .dobra-btn-procedimentos {
+  border-bottom-color: #d3894b;
+}
+
+.wrapper-btn-procedimentos:nth-child(4) .btn-procedimentos {
+  background-color: #c87d3a;
+}
+.wrapper-btn-procedimentos:nth-child(4) .btn-procedimentos:hover {
+  background-color: #f5923f;
+}
+.wrapper-btn-procedimentos:nth-child(4) .dobra-btn-procedimentos {
+  border-bottom-color: #c87d3a;
+}
+
+.wrapper-btn-procedimentos:nth-child(5) .btn-procedimentos {
+  background-color: #bd7029;
+}
+.wrapper-btn-procedimentos:nth-child(5) .btn-procedimentos:hover {
+  background-color: #f5923f;
+}
+.wrapper-btn-procedimentos:nth-child(5) .dobra-btn-procedimentos {
+  border-bottom-color: #bd7029;
+}
+
+/* Media query PROCEDIMENTOS */
+@media (max-width: 848px) {
+  .container-buttons-procedimentos {
+    gap: 0.25rem;
+  }
+
+  .wrapper-btn-procedimentos .btn-procedimentos {
+    font-size: 10px;
+    padding: 0;
+  }
+
+  .dobra-btn-procedimentos {
+    border-left: 15px solid transparent;
+    border-bottom: 20px solid #bd7029;
   }
 }
