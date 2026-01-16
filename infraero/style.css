@@ -763,13 +763,12 @@
   justify-content: center;
   align-items: center;
   color: white !important;
-  padding: 12px 24px;
+  padding: 8px 10px;
   text-align: center;
   text-decoration: none;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  font-weight: bold;
   width: 210px;
   height: 100px;
   z-index: 2;
