@@ -769,8 +769,8 @@
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  width: 210px;
-  height: 100px;
+  width: 150px;
+  height: 60px;
   z-index: 2;
   transition: all 0.3s ease;
 }
