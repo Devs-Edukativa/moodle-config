@@ -59,14 +59,13 @@
 .container-trilhas-aprendizagem-pnae {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: center;
   align-items: end;
   background-color: #a9dbf8;
   position: relative;
   z-index: 1;
   height: 8rem;
   margin-top: -3rem;
-  padding-left: 8rem;
 }
 
 .container-trilhas-aprendizagem-pnae h2 {
@@ -524,7 +523,7 @@
 .container-trilhas-aprendizagem-emergencia {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: center;
   align-items: end;
   background-color: #676767;
   color: #ffffff;
@@ -532,7 +531,6 @@
   z-index: 1;
   height: 8rem;
   margin-top: -3rem;
-  padding-left: 8rem;
 }
 
 .container-trilhas-aprendizagem-emergencia h2 {
@@ -956,15 +954,22 @@
 }
 
 .container-buttons-aspectos {
-  display: grid;
-  gap: 48px;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
   width: 100%;
   position: relative;
   z-index: 3;
   margin-top: 2rem;
+  justify-content: space-between;
   overflow-x: hidden;
   padding: 0;
+}
+
+.wrapper-btn-aspectos {
+  display: flex;
+  width: 165px;
+  flex-shrink: 0;
 }
 
 .dobra-btn-aspectos {
@@ -972,7 +977,7 @@
   height: 0;
   border-left: 20px solid transparent;
   border-right: 0px solid transparent;
-  border-bottom: 32px solid #d32f2f;
+  border-bottom: 20px solid #d32f2f;
 }
 
 .wrapper-btn-aspectos .btn-aspectos {
@@ -986,13 +991,10 @@
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  font-weight: semibold;
-  width: 100%;
+  width: 150px;
   height: 60px;
   z-index: 2;
   transition: all 0.3s ease;
-  word-break: break-word;
-  white-space: normal;
 }
 
 .wrapper-btn-aspectos .btn-aspectos:hover {
@@ -1156,15 +1158,22 @@
 }
 
 .container-buttons-tps {
-  display: grid;
-  gap: 48px;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
   width: 100%;
   position: relative;
   z-index: 3;
   margin-top: 2rem;
+  justify-content: space-between;
   overflow-x: hidden;
   padding: 0;
+}
+
+.wrapper-btn-tps {
+  display: flex;
+  width: 165px;
+  flex-shrink: 0;
 }
 
 .dobra-btn-tps {
@@ -1172,7 +1181,7 @@
   height: 0;
   border-left: 20px solid transparent;
   border-right: 0px solid transparent;
-  border-bottom: 32px solid #d32f2f;
+  border-bottom: 20px solid #d32f2f;
 }
 
 .wrapper-btn-tps .btn-tps {
@@ -1183,16 +1192,13 @@
   padding: 8px 10px;
   text-align: center;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  font-weight: semibold;
-  width: 100%;
+  width: 150px;
   height: 60px;
   z-index: 2;
   transition: all 0.3s ease;
-  word-break: break-word;
-  white-space: normal;
 }
 
 .wrapper-btn-tps .btn-tps:hover {
@@ -1355,9 +1361,10 @@
 }
 
 .container-buttons-ladoar {
-  display: grid;
-  gap: 48px;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  justify-content: space-between;
   width: 100%;
   position: relative;
   z-index: 3;
@@ -1366,12 +1373,18 @@
   padding: 0;
 }
 
+.wrapper-btn-ladoar {
+  display: flex;
+  width: 165px;
+  flex-shrink: 0;
+}
+
 .dobra-btn-ladoar {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 0px solid transparent;
-  border-bottom: 32px solid #d32f2f;
+  border-bottom: 20px solid #d32f2f;
 }
 
 .wrapper-btn-ladoar .btn-ladoar {
@@ -1385,13 +1398,10 @@
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  font-weight: semibold;
-  width: 100%;
+  width: 150px;
   height: 60px;
   z-index: 2;
   transition: all 0.3s ease;
-  word-break: break-word;
-  white-space: normal;
 }
 
 .wrapper-btn-ladoar .btn-ladoar:hover {
@@ -1544,9 +1554,10 @@
 }
 
 .container-buttons-manutencao {
-  display: grid;
-  gap: 48px;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  justify-content: space-between;
   width: 100%;
   position: relative;
   z-index: 3;
@@ -1555,12 +1566,18 @@
   padding: 0;
 }
 
+.wrapper-btn-manutencao {
+  display: flex;
+  width: 165px;
+  flex-shrink: 0;
+}
+
 .dobra-btn-manutencao {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 0px solid transparent;
-  border-bottom: 32px solid #d32f2f;
+  border-bottom: 20px solid #d32f2f;
 }
 
 .wrapper-btn-manutencao .btn-manutencao {
@@ -1574,13 +1591,10 @@
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  font-weight: semibold;
-  width: 100%;
+  width: 150px;
   height: 60px;
   z-index: 2;
   transition: all 0.3s ease;
-  word-break: break-word;
-  white-space: normal;
 }
 
 .wrapper-btn-manutencao .btn-manutencao:hover {
@@ -1737,9 +1751,10 @@
 }
 
 .container-buttons-procedimentos {
-  display: grid;
-  gap: 48px;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  justify-content: space-between;
   width: 100%;
   position: relative;
   z-index: 3;
@@ -1748,12 +1763,18 @@
   padding: 0;
 }
 
+.wrapper-btn-procedimentos {
+  display: flex;
+  width: 165px;
+  flex-shrink: 0;
+}
+
 .dobra-btn-procedimentos {
   width: 0;
   height: 0;
   border-left: 20px solid transparent;
   border-right: 0px solid transparent;
-  border-bottom: 32px solid #d32f2f;
+  border-bottom: 20px solid #d32f2f;
 }
 
 .wrapper-btn-procedimentos .btn-procedimentos {
@@ -1767,13 +1788,10 @@
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  font-weight: semibold;
-  width: 100%;
+  width: 150px;
   height: 60px;
   z-index: 2;
   transition: all 0.3s ease;
-  word-break: break-word;
-  white-space: normal;
 }
 
 .wrapper-btn-procedimentos .btn-procedimentos:hover {
