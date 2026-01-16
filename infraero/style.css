@@ -790,14 +790,13 @@
 .container-trilhas-aprendizagem-avsec {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: center;
   align-items: end;
   background-color: #004d85;
   position: relative;
   z-index: 1;
   height: 8rem;
   margin-top: -2.9rem;
-  padding-left: 8rem;
 }
 
 .container-trilhas-aprendizagem-avsec h2 {
@@ -806,7 +805,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
-  text-align: start;
+  text-align: center;
   width: 100%;
 }
 
