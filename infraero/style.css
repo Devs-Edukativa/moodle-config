@@ -19,7 +19,49 @@
   width: 100%;
 }
 
+.container-buttons-intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.container-buttons-intro-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.container-buttons-intro-bottom .wrapper-btn-intro {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.container-buttons-intro-bottom .btn-intro {
+  width: 210px !important;
+  height: 100px !important;
+  flex-shrink: 0;
+}
+
+.container-buttons-intro-bottom .dobra-btn-intro {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 20px solid #4caf50;
+  flex-shrink: 0;
+}
+
 .wrapper-btn-pnae {
+  display: flex;
+}
+
+.wrapper-btn-intro {
+  display: flex;
+}
+
+.wrapper-btn-intro {
   display: flex;
 }
 
@@ -31,7 +73,33 @@
   border-bottom: 20px solid #4caf50;
 }
 
+.dobra-btn-intro {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 20px solid #4caf50;
+}
+
 .btn-pnae {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px white solid;
+  color: white !important;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-weight: bold;
+  width: 210px;
+  height: 100px;
+  z-index: 2;
+}
+
+.btn-intro {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -180,6 +248,86 @@
   background-color: hsl(34.23, 93.98%, 62.45%);
 }
 .wrapper-btn-pnae:nth-child(5) .dobra-btn-pnae {
+  border-color: transparent transparent hsl(34.23, 93.98%, 62.45%) transparent;
+}
+
+/* Botões INTRO */
+.wrapper-btn-intro:nth-child(1) .btn-intro {
+  background-color: hsl(120, 39%, 49%);
+}
+.wrapper-btn-intro:nth-child(1) .btn-intro:hover {
+  background-color: hsl(120, 39%, 44%);
+}
+.wrapper-btn-intro:nth-child(1) .dobra-btn-intro {
+  border-color: transparent transparent hsl(120, 39%, 44%) transparent;
+}
+
+.wrapper-btn-intro:nth-child(2) .btn-intro {
+  background-color: hsl(150, 69%, 48%);
+}
+.wrapper-btn-intro:nth-child(2) .btn-intro:hover {
+  background-color: hsl(150, 69%, 43%);
+}
+.wrapper-btn-intro:nth-child(2) .dobra-btn-intro {
+  border-color: transparent transparent hsl(150, 69%, 43%) transparent;
+}
+
+.wrapper-btn-intro:nth-child(3) .btn-intro {
+  background-color: hsl(45, 100%, 51%);
+}
+.wrapper-btn-intro:nth-child(3) .btn-intro:hover {
+  background-color: hsl(45, 100%, 46%);
+}
+.wrapper-btn-intro:nth-child(3) .dobra-btn-intro {
+  border-color: transparent transparent hsl(45, 100%, 46%) transparent;
+}
+
+.wrapper-btn-intro:nth-child(4) .btn-intro {
+  background-color: hsl(36, 100%, 50%);
+}
+.wrapper-btn-intro:nth-child(4) .btn-intro:hover {
+  background-color: hsl(36, 100%, 45%);
+}
+.wrapper-btn-intro:nth-child(4) .dobra-btn-intro {
+  border-color: transparent transparent hsl(36, 100%, 45%) transparent;
+}
+
+.wrapper-btn-intro:nth-child(5) .btn-intro {
+  background-color: hsl(34.23, 93.98%, 67.45%);
+}
+.wrapper-btn-intro:nth-child(5) .btn-intro:hover {
+  background-color: hsl(34.23, 93.98%, 62.45%);
+}
+.wrapper-btn-intro:nth-child(5) .dobra-btn-intro {
+  border-color: transparent transparent hsl(34.23, 93.98%, 62.45%) transparent;
+}
+
+/* Botões intro bottom (container separado) */
+.container-buttons-intro-bottom .wrapper-btn-intro:nth-child(1) .btn-intro {
+  background-color: hsl(36, 100%, 50%);
+}
+.container-buttons-intro-bottom
+  .wrapper-btn-intro:nth-child(1)
+  .btn-intro:hover {
+  background-color: hsl(36, 100%, 45%);
+}
+.container-buttons-intro-bottom
+  .wrapper-btn-intro:nth-child(1)
+  .dobra-btn-intro {
+  border-color: transparent transparent hsl(36, 100%, 45%) transparent;
+}
+
+.container-buttons-intro-bottom .wrapper-btn-intro:nth-child(2) .btn-intro {
+  background-color: hsl(34.23, 93.98%, 67.45%);
+}
+.container-buttons-intro-bottom
+  .wrapper-btn-intro:nth-child(2)
+  .btn-intro:hover {
+  background-color: hsl(34.23, 93.98%, 62.45%);
+}
+.container-buttons-intro-bottom
+  .wrapper-btn-intro:nth-child(2)
+  .dobra-btn-intro {
   border-color: transparent transparent hsl(34.23, 93.98%, 62.45%) transparent;
 }
 
