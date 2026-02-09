@@ -1550,6 +1550,7 @@
   height: 60px;
   z-index: 2;
   transition: all 0.3s ease;
+  border: 1px solid white;
 }
 
 .wrapper-btn-ladoar .btn-ladoar:hover {
@@ -1602,7 +1603,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  background-color: #4576d3;
+  background-color: #4a9996;
   color: white !important;
   padding: 12px 0;
   cursor: pointer;
@@ -1628,49 +1629,49 @@
 
 /* Botões LADOAR */
 .wrapper-btn-ladoar:nth-child(1) .btn-ladoar {
-  background-color: #299abd;
+  background-color: #549db0;
 }
 .wrapper-btn-ladoar:nth-child(1) .btn-ladoar:hover {
-  background-color: #4593d3;
+  background-color: #225d82;
 }
 .wrapper-btn-ladoar:nth-child(1) .dobra-btn-ladoar {
-  border-bottom-color: #299abd;
+  border-bottom-color: #104261;
 }
 .wrapper-btn-ladoar:nth-child(2) .btn-ladoar {
-  background-color: #299abd;
+  background-color: #60b5cc;
 }
 .wrapper-btn-ladoar:nth-child(2) .btn-ladoar:hover {
-  background-color: #4593d3;
+  background-color: #225d82;
 }
 .wrapper-btn-ladoar:nth-child(2) .dobra-btn-ladoar {
-  border-bottom-color: #299abd;
+  border-bottom-color: #104261;
 }
 .wrapper-btn-ladoar:nth-child(3) .btn-ladoar {
-  background-color: #299abd;
+  background-color: #6dcbe5;
 }
 .wrapper-btn-ladoar:nth-child(3) .btn-ladoar:hover {
-  background-color: #4593d3;
+  background-color: #225d82;
 }
 .wrapper-btn-ladoar:nth-child(3) .dobra-btn-ladoar {
-  border-bottom-color: #299abd;
+  border-bottom-color: #104261;
 }
 .wrapper-btn-ladoar:nth-child(4) .btn-ladoar {
-  background-color: #299abd;
+  background-color: #60b4cc;
 }
 .wrapper-btn-ladoar:nth-child(4) .btn-ladoar:hover {
-  background-color: #4593d3;
+  background-color: #225d82;
 }
 .wrapper-btn-ladoar:nth-child(4) .dobra-btn-ladoar {
-  border-bottom-color: #299abd;
+  border-bottom-color: #104261;
 }
 .wrapper-btn-ladoar:nth-child(5) .btn-ladoar {
-  background-color: #299abd;
+  background-color: #539db0;
 }
 .wrapper-btn-ladoar:nth-child(5) .btn-ladoar:hover {
-  background-color: #4593d3;
+  background-color: #225d82;
 }
 .wrapper-btn-ladoar:nth-child(5) .dobra-btn-ladoar {
-  border-bottom-color: #299abd;
+  border-bottom-color: #104261;
 }
 
 /* Media query LADOAR */
