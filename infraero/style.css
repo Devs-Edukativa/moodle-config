@@ -1763,7 +1763,7 @@
   flex-direction: row;
   justify-content: start;
   align-items: end;
-  background-color: #0858ac;
+  background-color: #d39e00;
   position: relative;
   z-index: 1;
   height: 8rem;
@@ -1781,13 +1781,11 @@
 }
 
 .container-modulos-manutencao {
-  display: flex;
-  justify-content: center;
-  flex-wrap: nowrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
   position: relative;
   z-index: 0;
-  overflow-x: auto;
 }
 
 .card-modulo-manutencao {
@@ -1796,11 +1794,11 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  background-color: #bd7029;
+  background-color: #0165c7;
   color: white !important;
   padding: 12px 0;
   cursor: pointer;
-  width: 360px;
+  width: 100%;
   height: 80px;
   position: relative;
   transition: all 0.3s ease;
@@ -1822,53 +1820,53 @@
 
 /* Botões MANUTENÇÃO */
 .wrapper-btn-manutencao:nth-child(1) .btn-manutencao {
-  background-color: #bd7029;
+  background-color: #997100;
 }
 .wrapper-btn-manutencao:nth-child(1) .btn-manutencao:hover {
-  background-color: #a36326;
+  background-color: #e4bd5b;
 }
 .wrapper-btn-manutencao:nth-child(1) .dobra-btn-manutencao {
-  border-bottom-color: #bd7029;
+  border-bottom-color: #8e6601;
 }
 
 .wrapper-btn-manutencao:nth-child(2) .btn-manutencao {
-  background-color: #d3894b;
+  background-color: #a67a01;
 }
 .wrapper-btn-manutencao:nth-child(2) .btn-manutencao:hover {
-  background-color: #f5923f;
+  background-color: #e4bd5b;
 }
 .wrapper-btn-manutencao:nth-child(2) .dobra-btn-manutencao {
-  border-bottom-color: #d3894b;
+  border-bottom-color: #8e6601;
 }
 
 .wrapper-btn-manutencao:nth-child(3) .btn-manutencao {
-  background-color: #d3894b;
+  background-color: #b38400;
 }
 .wrapper-btn-manutencao:nth-child(3) .btn-manutencao:hover {
-  background-color: #f5923f;
+  background-color: #e4bd5b;
 }
 .wrapper-btn-manutencao:nth-child(3) .dobra-btn-manutencao {
-  border-bottom-color: #d3894b;
+  border-bottom-color: #8e6601;
 }
 
 .wrapper-btn-manutencao:nth-child(4) .btn-manutencao {
-  background-color: #c87d3a;
+  background-color: #be8d00;
 }
 .wrapper-btn-manutencao:nth-child(4) .btn-manutencao:hover {
-  background-color: #f5923f;
+  background-color: #e4bd5b;
 }
 .wrapper-btn-manutencao:nth-child(4) .dobra-btn-manutencao {
-  border-bottom-color: #c87d3a;
+  border-bottom-color: #8e6601;
 }
 
 .wrapper-btn-manutencao:nth-child(5) .btn-manutencao {
-  background-color: #bd7029;
+  background-color: #be8d00;
 }
 .wrapper-btn-manutencao:nth-child(5) .btn-manutencao:hover {
-  background-color: #f5923f;
+  background-color: #e4bd5b;
 }
 .wrapper-btn-manutencao:nth-child(5) .dobra-btn-manutencao {
-  border-bottom-color: #bd7029;
+  border-bottom-color: #8e6601;
 }
 
 /* Media query MANUTENÇÃO */
