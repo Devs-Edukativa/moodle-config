@@ -1,0 +1,1618 @@
+/* Tipografia base */
+body,
+.navbar,
+.btn {
+  font-family: "Open Sans", sans-serif;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+}
+
+/* Faixa amarela do "eyebrow" sobre seções */
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fbba00;
+  font-weight: 600;
+}
+
+/* CTAs primários sem border-radius arredondado (manual prefere formas mais retas) */
+.btn-primary {
+  border-radius: 2px;
+  padding: 10px 22px;
+  font-weight: 600;
+}
+
+/* Login split-screen */
+#page-login-index .login-container {
+  max-width: none;
+  padding: 0;
+}
+#page-login-index .login-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  min-height: 100vh;
+}
+#page-login-index .login-wrapper::before {
+  content: "";
+  background: #0f2137 url("/path/foto-institucional.jpg") center/cover;
+  background-blend-mode: multiply;
+}
+#page-login-index .login-form {
+  align-self: center;
+}
+
+/* Dark mode overrides — Lambda usa data-bs-theme="dark" */
+[data-bs-theme="dark"] body {
+  background: #0f1620;
+  color: #e6ecf3;
+}
+[data-bs-theme="dark"] .card,
+[data-bs-theme="dark"] .login-form {
+  background: #1a2333;
+  border-color: #2e3a4d;
+}
+
+/* sub-nav: item ativo com borda amarela embaixo */
+.primary-navigation .nav-link.active {
+  color: #fbba00 !important;
+  border-bottom: 2px solid #fbba00;
+}
+
+footer a:hover,
+.footer-container a:hover {
+  color: #fbba00 !important;
+  text-decoration: none;
+}
+
+/* ─── FUNPRESP-JUD · Home pública (V2) — versão definitiva ─── */
+
+/* 1) Permite que blocos escapem das regiões do Lambda.
+       O .no-overflow tinha overflow:hidden — era o vilão principal. */
+#page-site-index,
+#page-site-index #page,
+#page-site-index #page-content,
+#page-site-index #region-main-box,
+#page-site-index #region-main,
+#page-site-index .card.card-block,
+#page-site-index .card-body,
+#page-site-index .card-text,
+#page-site-index .no-overflow,
+#page-site-index #page-top-blocks,
+#page-site-index #page-bottom-blocks,
+#page-site-index .block-region,
+#page-site-index .block_html {
+  overflow: visible !important;
+}
+
+/* 2) Zera padding/margin/cards dos containers que envolvem o block na home */
+#page-site-index #region-main {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#page-site-index #region-main-box {
+  padding: 0 !important;
+}
+#page-site-index .card.card-block {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+#page-site-index .block,
+#page-site-index .block_html {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#page-site-index .block .card-body,
+#page-site-index .block_html .card-body {
+  padding: 0 !important;
+}
+#page-site-index .block .card-text,
+#page-site-index .block_html .card-text {
+  margin: 0 !important;
+}
+
+/* 3) Bloqueia scroll horizontal causado por 100vw + scrollbar */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* 4) Fecha o gap branco entre o header e o hero — versão agressiva */
+body.path-site,
+body.pagelayout-frontpage {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+#page-site-index nav,
+#page-site-index header,
+#page-site-index .primary-navigation,
+#page-site-index .navbar,
+#page-site-index #page-header,
+#page-site-index .page-header-headings,
+#page-site-index .page-context-header,
+#page-site-index .breadcrumb-nav,
+#page-site-index .breadcrumb-section {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#page-site-index #page,
+#page-site-index #page-content,
+#page-site-index .main-inner,
+#page-site-index #region-main-box,
+#page-site-index #region-main,
+#page-site-index #page-top-blocks,
+#page-site-index main,
+#page-site-index #page-wrapper {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+#page-site-index .skip-block,
+#page-site-index #maincontent {
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Esconde o wrapper do slider Lambda quando vazio (não estamos usando) */
+#page-site-index #fp-slider-wrapper:empty {
+  display: none !important;
+}
+#page-site-index #fp-slider-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 5) Esconde tabs (Página inicial / Configurações / Participantes / Relatórios...)
+       e as labels de posição dos blocos (Top Block Position etc) */
+#page-site-index .secondary-navigation,
+#page-site-index .block-pos-desc,
+#page-site-index .fp-admin-blocks .admin-blocks {
+  display: none !important;
+}
+
+/* 6) Full-bleed robusto */
+.funp-hero,
+.funp-shortcuts-wrap,
+.funp-known {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.funp-hero .container-fluid,
+.funp-shortcuts-wrap .container-fluid,
+.funp-known .container-fluid {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* 7) Hero */
+.funp-hero {
+  background: #0f2137;
+  color: #fff;
+  padding: 64px 0 96px;
+}
+.funp-eyebrow {
+  color: #fbba00;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.funp-hero h1 {
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 18px;
+  color: #fff;
+}
+.funp-hero p {
+  opacity: 0.75;
+  max-width: 480px;
+  margin-bottom: 26px;
+}
+.funp-btn-primary {
+  background: #0578be;
+  color: #fff !important;
+  padding: 12px 26px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 10px;
+  transition: background 0.2s;
+}
+.funp-btn-primary:hover {
+  background: #0e509a;
+  color: #fff !important;
+}
+.funp-btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff !important;
+  padding: 12px 26px;
+  font-size: 13px;
+  text-decoration: none;
+  display: inline-block;
+}
+.funp-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff !important;
+}
+
+/* 8) 3 atalhos */
+.funp-shortcuts-wrap {
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 40px;
+}
+.funp-shortcut {
+  background: #fff;
+  padding: 28px 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border-top: 3px solid #0578be;
+  height: 100%;
+}
+.funp-shortcut-icon {
+  width: 40px;
+  height: 40px;
+  background: #eef4fa;
+  border: 1px dashed #0578be;
+  margin-bottom: 14px;
+  border-radius: 4px;
+}
+.funp-shortcut h5 {
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #0f2137;
+  font-size: 18px;
+}
+.funp-shortcut p {
+  color: #666;
+  font-size: 13px;
+  margin: 0 0 12px;
+}
+.funp-shortcut a {
+  color: #0578be;
+  font-weight: 600;
+  font-size: 12px;
+  text-decoration: none;
+}
+.funp-shortcut a:hover {
+  color: #0e509a;
+}
+
+/* 9) Conheça a plataforma */
+.funp-known {
+  background: #f5f5f5;
+  padding: 64px 0;
+  margin-top: 40px;
+}
+.funp-known-bar {
+  width: 60px;
+  height: 3px;
+  background: #0578be;
+  margin-bottom: 18px;
+}
+.funp-known h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  color: #0f2137;
+}
+.funp-known p {
+  color: #555;
+  max-width: 520px;
+  margin-bottom: 22px;
+}
+.funp-btn-dark {
+  background: #0f2137;
+  color: #fff !important;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+.funp-btn-dark:hover {
+  background: #0a1626;
+  color: #fff !important;
+}
+
+/* 10) Dark mode */
+[data-bs-theme="dark"] .funp-known {
+  background: #1a2333;
+}
+[data-bs-theme="dark"] .funp-known h2 {
+  color: #fff;
+}
+[data-bs-theme="dark"] .funp-known p {
+  color: #94a3b8;
+}
+[data-bs-theme="dark"] .funp-shortcut {
+  background: #1a2333;
+}
+[data-bs-theme="dark"] .funp-shortcut h5 {
+  color: #fff;
+}
+[data-bs-theme="dark"] .funp-shortcut p {
+  color: #94a3b8;
+}
+
+/* 11) Responsivo */
+@media (max-width: 768px) {
+  .funp-hero {
+    padding: 48px 0 80px;
+  }
+  .funp-hero h1 {
+    font-size: 32px;
+  }
+  .funp-shortcuts-wrap {
+    margin-top: -30px;
+  }
+  .funp-hero .container-fluid,
+  .funp-shortcuts-wrap .container-fluid,
+  .funp-known .container-fluid {
+    padding: 0 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* 12) CURSOS DISPONÍVEIS — estilo "em destaque" (wireframe V2) */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* Wrapper centralizado, com position pra ancorar o "Ver todos" */
+#page-site-index #frontpage-available-course-list {
+  position: relative;
+  padding: 70px 32px 60px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* H2 alinhado à esquerda com fio azul ACIMA */
+#page-site-index #frontpage-available-course-list > h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f2137;
+  text-align: left;
+  margin: 0 0 28px;
+  position: relative;
+}
+#page-site-index #frontpage-available-course-list > h2::before {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #0578be;
+  margin-bottom: 10px;
+}
+
+/* "Todos os cursos" — link no canto direito, alinhado com o H2 */
+#page-site-index .paging-morelink {
+  position: absolute !important;
+  top: 70px !important;
+  right: 32px !important;
+  bottom: auto !important;
+  left: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: right !important;
+  z-index: 10 !important;
+  width: auto !important;
+}
+#page-site-index .paging-morelink a,
+#page-site-index .paging-morelink .btn,
+#page-site-index .paging-morelink a.btn-secondary {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #0578be !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+#page-site-index .paging-morelink a:hover {
+  color: #0e509a !important;
+}
+
+/* TURMA 1 ACIMA do título (reordena com flex) */
+#page-site-index .coursebox .summary {
+  padding: 14px 16px 18px;
+  display: flex !important;
+  flex-direction: column !important;
+}
+#page-site-index .coursebox .summary .coursecat {
+  order: -1 !important;
+  margin-bottom: 6px !important;
+}
+#page-site-index .coursebox .summary .coursename {
+  order: 0 !important;
+}
+
+/* Grid 4 colunas */
+#page-site-index .frontpage-course-list-all {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 992px) {
+  #page-site-index .frontpage-course-list-all {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #page-site-index .paging-morelink {
+    position: static;
+    margin-top: 24px;
+    text-align: right;
+  }
+}
+@media (max-width: 576px) {
+  #page-site-index .frontpage-course-list-all {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card minimal */
+#page-site-index .coursebox {
+  background: #fff;
+  border: 1px solid #ededed;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+  display: flex;
+  flex-direction: column;
+  float: none !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+#page-site-index .coursebox:hover {
+  border-color: #0578be;
+}
+
+/* Esconde título duplicado e textos longos */
+#page-site-index .coursebox .info {
+  display: none !important;
+}
+#page-site-index .coursebox .summary > div:last-child {
+  display: none;
+}
+
+/* Imagem 130px de altura */
+#page-site-index .coursebox .content > a {
+  display: block;
+  text-decoration: none;
+}
+#page-site-index .coursebox .courseimage {
+  width: 100%;
+  height: 130px;
+  background-size: cover;
+  background-position: center;
+  background-color: #f3f3f3;
+}
+
+/* Conteúdo */
+#page-site-index .coursebox .summary {
+  padding: 14px 16px 18px;
+}
+
+/* Eyebrow cinza, uppercase */
+#page-site-index .coursebox .coursecat {
+  font-size: 10px !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 6px !important;
+  color: #888 !important;
+  position: static !important;
+  background: transparent !important;
+  padding: 0 !important;
+  display: block;
+}
+#page-site-index .coursebox .coursecat .categoryname {
+  color: #888 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 10px !important;
+}
+#page-site-index .coursebox .coursecat .sr-only {
+  display: none;
+}
+
+/* Título */
+#page-site-index .coursebox .summary .coursename {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.35;
+  text-align: left;
+}
+#page-site-index .coursebox .summary .coursename a {
+  color: #0f2137 !important;
+  text-decoration: none;
+}
+#page-site-index .coursebox .summary .coursename a:hover {
+  color: #0578be !important;
+}
+
+/* Dark mode */
+[data-bs-theme="dark"] #page-site-index .coursebox {
+  background: #1a2333;
+  border-color: #2e3a4d;
+}
+[data-bs-theme="dark"] #page-site-index .coursebox .summary .coursename a {
+  color: #fff !important;
+}
+[data-bs-theme="dark"] #page-site-index #frontpage-available-course-list > h2 {
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FUNPRESP-JUD · Meus Cursos (V1) — escopo /my/courses.php
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1) Page header — eyebrow + h1 limpo */
+body#page-my-index #page-header {
+  background: #fff !important;
+  padding: 36px 32px 28px !important;
+  border-bottom: 1px solid #ededed !important;
+  margin-bottom: 0 !important;
+}
+body#page-my-index #page-header .page-context-header {
+  margin-bottom: 0 !important;
+}
+body#page-my-index #page-header .page-header-headings {
+  position: relative !important;
+  display: block !important;
+}
+/* Breadcrumb-style eyebrow ACIMA do h1 */
+body#page-my-index #page-header .page-header-headings::before {
+  content: "Início › Meus cursos" !important;
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #fbba00 !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+body#page-my-index #page-header h1 {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: #0f2137 !important;
+  margin: 0 !important;
+  line-height: 1.1 !important;
+}
+/* Esconde "Em modo de manutenção" do header */
+body#page-my-index #page-header a[href*="maintenancemode"] {
+  display: none !important;
+}
+/* Esconde os botões admin (Gerenciar / Criar curso) — descomente para esconder:
+body#page-my-index #page-header .course-manage { display: none !important; } */
+
+/* 2) Container do bloco — remove o "card" do bloco myoverview */
+body#page-my-index .block_myoverview.card,
+body#page-my-index .block_myoverview > .card-body {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+body#page-my-index .block_myoverview > .card-body > h3.card-title {
+  display: none !important;
+}
+body#page-my-index .block-myoverview {
+  padding: 24px 32px 60px !important;
+}
+body#page-my-index #region-main {
+  background: #f5f6f8 !important;
+}
+body#page-my-index #region-main > .card.card-block {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 3) Filter bar — dropdowns como pills */
+body#page-my-index [data-region="filter"] {
+  margin: 0 0 24px !important;
+}
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle {
+  background: #fff !important;
+  border: 1px solid #d8dde3 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 0 16px !important;
+  height: 40px !important;
+  line-height: 38px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+/* Força texto visível no span interno do botão (o Lambda esconde com color */
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle,
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle
+  * {
+  color: #0f2137 !important;
+}
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle:hover,
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle[aria-expanded="true"] {
+  border-color: #0578be !important;
+}
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle:hover
+  *,
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle[aria-expanded="true"]
+  * {
+  color: #0578be !important;
+}
+body#page-my-index [data-region="filter"] .dropdown-menu {
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  font-size: 13px !important;
+  padding: 6px !important;
+}
+body#page-my-index [data-region="filter"] .dropdown-item-active {
+  background: #eef4fa !important;
+  color: #0578be !important;
+  font-weight: 600 !important;
+}
+
+body#page-my-index [data-region="filter"] .simplesearchform {
+  max-width: 360px !important;
+}
+body#page-my-index [data-region="filter"] .searchbar {
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  background: #fff !important;
+  height: 40px !important;
+  align-items: center !important;
+}
+body#page-my-index [data-region="filter"] .searchbar input.form-control {
+  border: 0 !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+  padding: 0 12px !important;
+  background: transparent !important;
+  height: 38px !important;
+}
+
+/* 4) Grid 3 colunas */
+body#page-my-index .card-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 22px !important;
+  margin: 0 !important;
+}
+body#page-my-index .card-grid > .col {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  flex: 0 1 auto !important;
+}
+@media (max-width: 992px) {
+  body#page-my-index .card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 576px) {
+  body#page-my-index .card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 5) Course card — minimal, retangular */
+body#page-my-index .course-card {
+  background: #fff !important;
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+  margin: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  transition:
+    border-color 0.15s,
+    transform 0.15s !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: none !important;
+}
+body#page-my-index .course-card:hover {
+  border-color: #0578be !important;
+  transform: translateY(-2px) !important;
+}
+
+/* Imagem 150px — força <a> pai a ser bloco */
+body#page-my-index .course-card > a {
+  display: block !important;
+}
+
+/* ORDER explícito via nth-child — vence qualquer order do Lambda */
+body#page-my-index .course-card > :nth-child(1) {
+  order: 1 !important;
+}
+body#page-my-index .course-card > :nth-child(2) {
+  order: 2 !important;
+}
+body#page-my-index .course-card > :nth-child(3) {
+  order: 3 !important;
+}
+body#page-my-index .course-card .card-img-top {
+  height: 150px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: #eef4fa !important;
+  border-radius: 0 !important;
+  position: relative !important;
+}
+
+/* Badge de status (derivado da % via JS — data-status no card) */
+body#page-my-index .course-card[data-status] > a .card-img-top::after {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+body#page-my-index
+  .course-card[data-status="andamento"]
+  > a
+  .card-img-top::after {
+  content: "Em andamento";
+  background: #0578be;
+}
+body#page-my-index
+  .course-card[data-status="concluido"]
+  > a
+  .card-img-top::after {
+  content: "Concluído";
+  background: #2a8e4e;
+}
+body#page-my-index
+  .course-card[data-status="naoiniciado"]
+  > a
+  .card-img-top::after {
+  content: "Não iniciado";
+  background: #888;
+}
+
+/* Card body — cresce para empurrar o progress pro fundo */
+body#page-my-index .course-card .card-body {
+  padding: 14px 18px 8px !important;
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+/* O .w-100.text-truncate contém title + categoria — INVERTE ordem
+   (eyebrow ACIMA do título) e mata o text-truncate que esconde tudo */
+body#page-my-index .course-card .card-body .w-100 {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  overflow: visible !important;
+}
+
+/* Eyebrow azul — categoria (override do .text-truncate Bootstrap) */
+body#page-my-index .course-card .categoryname,
+body#page-my-index .course-card .categoryname.text-truncate {
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: #0578be !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 6px !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: none !important;
+}
+body#page-my-index .course-card .text-muted.muted {
+  color: transparent !important;
+  margin: 0 0 4px !important;
+}
+
+/* Título — esquerda, bold, 2 linhas máx */
+body#page-my-index .course-card a.coursename,
+body#page-my-index .course-card .coursename {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #0f2137 !important;
+  text-decoration: none !important;
+  text-align: left !important;
+  display: block !important;
+}
+body#page-my-index .course-card a.coursename:hover {
+  color: #0578be !important;
+}
+body#page-my-index .course-card .coursename .multiline {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+
+/* Footer wrapper (ABAIXO do body, empurrado pro fundo) */
+body#page-my-index .course-card > .d-flex.align-items-start {
+  align-items: stretch !important;
+  margin-top: auto !important;
+}
+body#page-my-index .course-card .card-footer {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 18px 16px !important;
+}
+body#page-my-index .course-card .card-footer.menu {
+  display: none !important;
+}
+
+/* Progress text — vira barra + número */
+body#page-my-index .course-card .progress-text {
+  position: relative !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #0f2137 !important;
+  padding-top: 18px !important;
+  margin-top: auto !important;
+  text-align: left !important;
+}
+body#page-my-index .course-card .progress-text::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px !important;
+  background: #eef2f6 !important;
+  border-radius: 2px !important;
+}
+body#page-my-index .course-card .progress-text::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: var(--progress, 0%) !important;
+  height: 4px !important;
+  background: #0578be !important;
+  border-radius: 2px !important;
+  transition: width 0.4s ease !important;
+}
+body#page-my-index .course-card[data-status="concluido"] .progress-text::after {
+  background: #2a8e4e !important;
+}
+body#page-my-index
+  .course-card[data-status="naoiniciado"]
+  .progress-text::after {
+  background: #d8dde3 !important;
+}
+
+/* 6) Dark mode (Lambda) */
+[data-bs-theme="dark"] body#page-my-index #page-header {
+  background: #0f1620 !important;
+  border-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"] body#page-my-index #page-header h1 {
+  color: #fff !important;
+}
+[data-bs-theme="dark"] body#page-my-index #region-main {
+  background: #0f1620 !important;
+}
+[data-bs-theme="dark"] body#page-my-index .course-card {
+  background: #1a2333 !important;
+  border-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"] body#page-my-index .course-card .coursename {
+  color: #fff !important;
+}
+[data-bs-theme="dark"] body#page-my-index .course-card .progress-text {
+  color: #e6ecf3 !important;
+}
+[data-bs-theme="dark"] body#page-my-index .course-card .progress-text::before {
+  background: #2e3a4d !important;
+}
+[data-bs-theme="dark"]
+  body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle,
+[data-bs-theme="dark"]
+  body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle
+  * {
+  background: #1a2333 !important;
+  border-color: #2e3a4d !important;
+  color: #e6ecf3 !important;
+}
+[data-bs-theme="dark"] body#page-my-index [data-region="filter"] .searchbar {
+  background: #1a2333 !important;
+  border-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"]
+  body#page-my-index
+  [data-region="filter"]
+  .searchbar
+  input {
+  color: #e6ecf3 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FUNPRESP-JUD · Login v3 — escopo body#page-login-index
+   Funciona em conjunto com o Custom JS (passo 1)
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1) Reset Moodle/Lambda — esconde tudo exceto nosso wrapper */
+html body#page-login-index {
+  background: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body#page-login-index #page-wrapper,
+html body#page-login-index #page,
+html body#page-login-index #page-content,
+html body#page-login-index #page-header,
+html body#page-login-index #page-navbar,
+html body#page-login-index .navbar,
+html body#page-login-index .breadcrumb-nav,
+html body#page-login-index .breadcrumb-section,
+html body#page-login-index footer.py-3,
+html body#page-login-index #page-footer {
+  display: none !important;
+}
+
+/* 2) Wrapper split-screen — criado pelo JS, direto no <body> */
+html body#page-login-index > .funp-login-wrapper {
+  display: grid !important;
+  grid-template-columns: 1.1fr 1fr !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 !important;
+  background: #fff !important;
+}
+
+/* 3) Painel esquerdo — BRAND */
+html body#page-login-index .funp-login-brand {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 33, 55, 0.78) 0%,
+      rgba(15, 33, 55, 0.94) 100%
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0 1px,
+      transparent 1px 14px
+    ),
+    #0f2137 !important;
+  color: #fff !important;
+  padding: 60px 64px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative;
+  overflow: hidden;
+}
+html body#page-login-index .funp-brand-eyebrow {
+  font-size: 12px !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  color: #fbba00 !important;
+  font-weight: 600 !important;
+  margin-bottom: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+html body#page-login-index .funp-brand-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 2px;
+  background: #fbba00;
+}
+html body#page-login-index .funp-login-brand h1 {
+  font-size: 42px !important;
+  font-weight: 300 !important;
+  margin: 0 0 14px !important;
+  line-height: 1.1 !important;
+  color: #fff !important;
+}
+html body#page-login-index .funp-login-brand h1 em {
+  font-style: italic !important;
+  font-weight: 700 !important;
+}
+html body#page-login-index .funp-brand-lede {
+  max-width: 380px !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+html body#page-login-index .funp-brand-footer {
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  line-height: 1.5 !important;
+  max-width: 380px !important;
+}
+
+/* 4) Painel direito — FORM */
+html body#page-login-index .funp-login-form {
+  padding: 60px 64px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  background: #fff !important;
+}
+html body#page-login-index .funp-login-form-inner {
+  max-width: 380px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* 5) Logo Funpresp (mantém o do Moodle, só ajusta tamanho) */
+html body#page-login-index .funp-login-form #loginlogo,
+html body#page-login-index .funp-login-form .login-logo {
+  text-align: left !important;
+  margin-bottom: 28px !important;
+}
+html body#page-login-index .funp-login-form #loginlogo img,
+html body#page-login-index .funp-login-form .login-logo img {
+  max-height: 44px !important;
+  width: auto !important;
+}
+html body#page-login-index .funp-login-form .login-heading.visually-hidden {
+  display: none !important;
+}
+
+/* 6) Form fields — .login-form-* da Lambda */
+html body#page-login-index .funp-login-form .login-form-username,
+html body#page-login-index .funp-login-form .login-form-password {
+  margin-bottom: 16px !important;
+}
+html body#page-login-index .funp-login-form .login-form-username input,
+html body#page-login-index .funp-login-form .login-form-password input,
+html body#page-login-index .funp-login-form #username,
+html body#page-login-index .funp-login-form #password {
+  height: 46px !important;
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  padding: 0 20px !important;
+  font-size: 14px !important;
+  color: #0f2137 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  font-family: inherit !important;
+}
+html body#page-login-index .funp-login-form input:focus,
+html body#page-login-index .funp-login-form #username:focus,
+html body#page-login-index .funp-login-form #password:focus {
+  border-color: #0578be !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(5, 120, 190, 0.12) !important;
+}
+
+/* 7) Input-group do password (com botão olho da Lambda) */
+html body#page-login-index .funp-login-form .toggle-sensitive-wrapper {
+  display: flex !important;
+  align-items: stretch !important;
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  background: #fff !important;
+  overflow: hidden !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .toggle-sensitive-wrapper
+  input.form-control,
+html
+  body#page-login-index
+  .funp-login-form
+  .toggle-sensitive-wrapper
+  #password {
+  border: 0 !important;
+  box-shadow: none !important;
+  flex: 1 !important;
+  height: 44px !important;
+  padding: 0 20px !important;
+}
+html body#page-login-index .funp-login-form .toggle-sensitive-btn {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 1px solid #ededed !important;
+  color: #888 !important;
+  padding: 0 20px !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+html body#page-login-index .funp-login-form .toggle-sensitive-btn:hover {
+  color: #0578be !important;
+}
+
+/* 8) Botão Acessar */
+html body#page-login-index .funp-login-form .login-form-submit {
+  margin-bottom: 14px !important;
+}
+html body#page-login-index .funp-login-form .login-form-submit #loginbtn,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-submit
+  button.btn-primary,
+html body#page-login-index .funp-login-form #loginbtn {
+  background: #0578be !important;
+  border: 0 !important;
+  color: #fff !important;
+  padding: 14px !important;
+  width: 100% !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background 0.2s !important;
+}
+html body#page-login-index .funp-login-form #loginbtn:hover {
+  background: #0e509a !important;
+}
+
+/* 9) "Perdeu a senha?" */
+html body#page-login-index .funp-login-form .login-form-forgotpassword {
+  text-align: center !important;
+  margin-bottom: 20px !important;
+}
+html body#page-login-index .funp-login-form .login-form-forgotpassword a {
+  font-size: 12px !important;
+  color: #0578be !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+html body#page-login-index .funp-login-form .login-form-forgotpassword a:hover {
+  color: #0e509a !important;
+  text-decoration: underline !important;
+}
+
+/* 10) Divisor Lambda (linha) */
+html body#page-login-index .funp-login-form .login-divider {
+  height: 1px !important;
+  background: #ededed !important;
+  margin: 18px 0 !important;
+  border: 0 !important;
+}
+
+/* 11) Signup ("Esta é a sua primeira vez aqui?") */
+html body#page-login-index .funp-login-form .login-instructions {
+  text-align: center !important;
+  font-size: 12px !important;
+  color: #777 !important;
+  margin-bottom: 14px !important;
+}
+html body#page-login-index .funp-login-form .login-instructions .login-heading {
+  display: block !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #0f2137 !important;
+  margin: 0 0 6px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  visibility: visible !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+}
+html body#page-login-index .funp-login-form .login-signup {
+  text-align: center !important;
+  margin-bottom: 18px !important;
+}
+html body#page-login-index .funp-login-form .login-signup a.btn,
+html body#page-login-index .funp-login-form .login-signup a {
+  display: inline-block !important;
+  background: transparent !important;
+  color: #0578be !important;
+  border: 1px solid #0578be !important;
+  border-radius: 2px !important;
+  padding: 10px 22px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: all 0.15s !important;
+}
+html body#page-login-index .funp-login-form .login-signup a:hover {
+  background: #0578be !important;
+  color: #fff !important;
+}
+
+/* 12) Esconde Lambda toggle ("Would you like to log in now…") */
+html body#page-login-index .funp-login-form .loginform-toggle,
+html body#page-login-index .funp-login-form .lambda-toggle {
+  display: none !important;
+}
+
+/* 13) Footer aux — idioma + cookies */
+html body#page-login-index .funp-login-form .loginform > .d-flex:last-child {
+  margin-top: 14px !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  font-size: 11px !important;
+  color: #888 !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .login-languagemenu
+  .dropdown-toggle {
+  color: #777 !important;
+  font-size: 11px !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .loginform
+  > .d-flex
+  > button.btn-secondary {
+  background: transparent !important;
+  color: #777 !important;
+  border: 0 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .loginform
+  > .d-flex
+  > button.btn-secondary:hover {
+  color: #0578be !important;
+}
+html body#page-login-index .funp-login-form .loginform > .d-flex .divider {
+  display: none !important;
+}
+
+/* 14) Mensagens de erro */
+html body#page-login-index .funp-login-form .loginerrors,
+html body#page-login-index .funp-login-form #loginerrormessage,
+html body#page-login-index .funp-login-form .alert-danger {
+  background: #fef2f0 !important;
+  border-left: 3px solid #d64545 !important;
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  color: #8b2e2e !important;
+  border-radius: 2px !important;
+  padding: 12px 14px !important;
+  font-size: 13px !important;
+  margin-bottom: 20px !important;
+}
+
+/* 15) Responsivo — empilha em mobile */
+@media (max-width: 900px) {
+  html body#page-login-index > .funp-login-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  html body#page-login-index .funp-login-brand {
+    min-height: 280px !important;
+    padding: 40px 32px !important;
+  }
+  html body#page-login-index .funp-login-brand h1 {
+    font-size: 30px !important;
+  }
+  html body#page-login-index .funp-login-form {
+    padding: 40px 32px !important;
+  }
+}
+
+/* 16) Dark mode (Lambda data-bs-theme="dark") */
+[data-bs-theme="dark"] html body#page-login-index .funp-login-form {
+  background: #0f1620 !important;
+}
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  input,
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  input,
+[data-bs-theme="dark"] html body#page-login-index .funp-login-form #username,
+[data-bs-theme="dark"] html body#page-login-index .funp-login-form #password {
+  background: #1a2333 !important;
+  border-color: #2e3a4d !important;
+  color: #e6ecf3 !important;
+}
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-instructions
+  .login-heading {
+  color: #fff !important;
+}
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-divider {
+  background: #2e3a4d !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FUNPRESP-JUD · Login v3.4
+   — centraliza texto do painel esquerdo
+   — aumenta largura dos inputs para 100% do form-inner
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1) Centralização vertical do conteúdo no painel esquerdo ──
+   O primeiro filho do .funp-login-brand (o bloco com eyebrow + h1 + lede)
+   cresce para preencher o espaço disponível e centraliza verticalmente. */
+html body#page-login-index .funp-login-brand > div:first-child {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+/* ── 2) Inputs full-width — resolve a cadeia de containeres ──
+   Garante que .loginform, form, e o input-group sejam 100% em todos os níveis */
+html body#page-login-index .funp-login-form-inner .loginform,
+html body#page-login-index .funp-login-form-inner form#login,
+html body#page-login-index .funp-login-form-inner form {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+html body#page-login-index .funp-login-form .login-form-username,
+html body#page-login-index .funp-login-form .login-form-password {
+  width: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  margin-bottom: 14px !important;
+}
+
+html body#page-login-index .funp-login-form .login-form-username .input-group,
+html body#page-login-index .funp-login-form .login-form-password .input-group {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: stretch !important;
+  flex-wrap: nowrap !important;
+  box-sizing: border-box !important;
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  height: 46px !important;
+  box-shadow: none !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group:focus-within,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group:focus-within {
+  border-color: #0578be !important;
+  box-shadow: 0 0 0 3px rgba(5, 120, 190, 0.12) !important;
+}
+
+/* Input dentro do grupo */
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group
+  .form-control,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group
+  .form-control,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group
+  #username,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group
+  #password {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  height: 100% !important;
+  padding: 0 20px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  background: transparent !important;
+  background-image: none !important;
+  font-size: 14px !important;
+  color: #0f2137 !important;
+  font-family: inherit !important;
+  margin: 0 !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group
+  .form-control:focus,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group
+  .form-control:focus {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Dark mode inputs */
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group,
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group {
+  background: #1a2333 !important;
+  border-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group
+  .form-control,
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group
+  .form-control,
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group
+  #username,
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group
+  #password {
+  color: #e6ecf3 !important;
+}
+
+/* ── 3) Botão Acessar / Log in — também full-width ── */
+html body#page-login-index .funp-login-form .login-form-submit,
+html body#page-login-index .funp-login-form .login-form-submit button {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* ── 4) Placeholder suave ── */
+html
+  body#page-login-index
+  .funp-login-form
+  .input-group
+  .form-control::placeholder,
+html body#page-login-index .funp-login-form #username::placeholder,
+html body#page-login-index .funp-login-form #password::placeholder {
+  color: #aab0ba !important;
+}
+
+/* ── 5) h2 "Esta é a sua primeira vez aqui?" ── */
+html body#page-login-index .funp-login-form .login-instructions h2 {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #0f2137 !important;
+  margin: 0 0 8px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  display: block !important;
+  visibility: visible !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+}
+[data-bs-theme="dark"]
+  html
+  body#page-login-index
+  .funp-login-form
+  .login-instructions
+  h2 {
+  color: #fff !important;
+}
+
+/* ── 6) Botão "Criar uma conta" — garante outline ── */
+html body#page-login-index .funp-login-form .login-signup .btn-secondary {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #0578be !important;
+  border: 1px solid #0578be !important;
+}
+html body#page-login-index .funp-login-form .login-signup .btn-secondary:hover {
+  background: #0578be !important;
+  color: #fff !important;
+}
