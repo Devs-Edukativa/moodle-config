@@ -1616,3 +1616,711 @@ html body#page-login-index .funp-login-form .login-signup .btn-secondary:hover {
   background: #0578be !important;
   color: #fff !important;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   FUNPRESP-JUD · Auto-inscrição (enrol_self) — escopo /enrol/index.php
+   Estrutura real:
+     #lambda-incourse-header > h2 "Detalhes de inscrições"
+     #region-main > [role=main] >
+       > h2 "Opções de inscrição"  (escondido — duplicado)
+       > .box.generalbox.info > .coursebox.grid   (card do curso)
+       > .box.generalbox.enrol-instance > .card   (card de inscrição)
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1) Page wrapper — fundo cinza, zera bordas do region-main */
+body#page-enrol-index {
+  background: #f5f6f8 !important;
+}
+body#page-enrol-index #region-main,
+body#page-enrol-index #region-main.mx-15 {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 2) Page header — "Detalhes de inscrições" (Lambda-specific) */
+body#page-enrol-index #lambda-incourse-header {
+  background: #fff !important;
+  padding: 36px 32px 28px !important;
+  border-bottom: 1px solid #ededed !important;
+  margin: 0 !important;
+}
+body#page-enrol-index #lambda-incourse-header h2 {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: #0f2137 !important;
+  margin: 0 !important;
+  line-height: 1.15 !important;
+  position: relative !important;
+}
+body#page-enrol-index #lambda-incourse-header h2::before {
+  content: "Início › Cursos › Inscrição" !important;
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #fbba00 !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+
+/* 3) Wrapper do conteúdo (centralizado, padding generoso) */
+body#page-enrol-index #region-main [role="main"] {
+  max-width: 960px !important;
+  margin: 0 auto !important;
+  padding: 32px 32px 60px !important;
+}
+
+/* 4) Esconde o h2 redundante "Opções de inscrição" */
+body#page-enrol-index #region-main [role="main"] > h2 {
+  display: none !important;
+}
+
+/* ───────────────────────────────────────────────────
+   5) CARD 1 — info do curso
+   ─────────────────────────────────────────────────── */
+
+/* Container .box.generalbox.info — sem fundo/borda */
+body#page-enrol-index .box.generalbox.info {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 0 24px 0 !important;
+}
+
+/* O coursebox vira o card visual */
+body#page-enrol-index .coursebox.grid {
+  display: flex !important;
+  flex-direction: column !important;
+  background: #fff !important;
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Esconde o .info duplicado (h3 + moreinfo + ícone "→") */
+body#page-enrol-index .coursebox.grid > .info {
+  display: none !important;
+}
+
+/* .content — wrapper da imagem + summary, vertical */
+body#page-enrol-index .coursebox.grid > .content {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body#page-enrol-index .coursebox.grid > .content > a:first-child {
+  display: block !important;
+  width: 100% !important;
+  text-decoration: none !important;
+}
+
+/* IMAGEM BANNER — full-width no topo */
+body#page-enrol-index .coursebox.grid .courseimage {
+  display: block !important;
+  width: 100% !important;
+  height: 280px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: #eef4fa !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Summary (conteúdo de texto) */
+body#page-enrol-index .coursebox.grid .summary {
+  padding: 28px 32px 32px !important;
+  margin: 0 !important;
+}
+
+/* Categoria "Turma 1" como EYEBROW azul ACIMA do título */
+body#page-enrol-index .coursebox.grid .summary .coursecat {
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: #0578be !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 10px 0 !important;
+  display: block !important;
+  text-align: left !important;
+  position: static !important;
+}
+body#page-enrol-index .coursebox.grid .summary .coursecat .categoryname,
+body#page-enrol-index .coursebox.grid .summary .coursecat .categoryname.text-truncate {
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  color: #0578be !important;
+  background: transparent !important;
+  padding: 0 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: none !important;
+}
+body#page-enrol-index .coursebox.grid .summary .coursecat .sr-only {
+  display: none !important;
+}
+
+/* Título do curso — esquerda, bold, grande */
+body#page-enrol-index .coursebox.grid .summary h3.coursename {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  margin: 0 0 18px 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  color: #0f2137 !important;
+}
+body#page-enrol-index .coursebox.grid .summary h3.coursename a {
+  color: #0f2137 !important;
+  text-decoration: none !important;
+}
+body#page-enrol-index .coursebox.grid .summary h3.coursename a:hover {
+  color: #0578be !important;
+}
+
+/* Texto do summary — legível */
+body#page-enrol-index .coursebox.grid .summary .no-overflow {
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+  color: #4b5563 !important;
+  text-align: left !important;
+}
+body#page-enrol-index .coursebox.grid .summary .no-overflow p {
+  margin: 0 0 12px 0 !important;
+}
+body#page-enrol-index .coursebox.grid .summary .no-overflow strong {
+  color: #0f2137 !important;
+}
+
+/* ───────────────────────────────────────────────────
+   6) CARD 2 — form de inscrição (.enrol-instance)
+   ─────────────────────────────────────────────────── */
+
+body#page-enrol-index .box.generalbox.enrol-instance {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body#page-enrol-index .enrol-instance .card {
+  background: #fff !important;
+  border: 1px solid #ededed !important;
+  border-left: 4px solid #0578be !important;
+  border-radius: 2px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  overflow: hidden !important;
+}
+
+/* Header com eyebrow azul */
+body#page-enrol-index .enrol-instance .card-header {
+  background: #fff !important;
+  border: 0 !important;
+  border-bottom: 1px solid #ededed !important;
+  padding: 22px 28px 18px !important;
+  position: relative !important;
+}
+body#page-enrol-index .enrol-instance .card-header::before {
+  content: "INSCRIÇÃO" !important;
+  display: block !important;
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  color: #0578be !important;
+  font-weight: 700 !important;
+  margin-bottom: 6px !important;
+}
+body#page-enrol-index .enrol-instance .card-header h3 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #0f2137 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.3 !important;
+}
+
+/* Body com alert */
+body#page-enrol-index .enrol-instance .card-body {
+  padding: 22px 28px !important;
+  background: #fff !important;
+}
+body#page-enrol-index .enrol-instance .card-body .alert {
+  background: #eef4fa !important;
+  border: 1px solid #cfe2f3 !important;
+  border-radius: 2px !important;
+  color: #0a4d80 !important;
+  padding: 12px 16px !important;
+  margin: 0 !important;
+  font-size: 14px !important;
+}
+
+/* Footer com o botão Inscreva-me */
+body#page-enrol-index .enrol-instance .card-footer {
+  background: #fafbfc !important;
+  border: 0 !important;
+  border-top: 1px solid #ededed !important;
+  padding: 18px 28px !important;
+  text-align: left !important;
+}
+body#page-enrol-index .enrol-instance .singlebutton,
+body#page-enrol-index .enrol-instance .singlebutton form {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-block !important;
+}
+body#page-enrol-index .enrol-instance .btn-primary,
+body#page-enrol-index .enrol-instance button[type="submit"] {
+  background: #0578be !important;
+  border: 0 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  padding: 12px 32px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+}
+body#page-enrol-index .enrol-instance .btn-primary:hover,
+body#page-enrol-index .enrol-instance button[type="submit"]:hover {
+  background: #0e509a !important;
+}
+
+/* Espaço entre múltiplas instâncias (caso o curso tenha mais de um plugin ativo) */
+body#page-enrol-index .enrol-instance + .enrol-instance {
+  margin-top: 20px !important;
+}
+
+/* ───────────────────────────────────────────────────
+   7) Dark mode
+   ─────────────────────────────────────────────────── */
+[data-bs-theme="dark"] body#page-enrol-index { background: #0f1620 !important; }
+[data-bs-theme="dark"] body#page-enrol-index #lambda-incourse-header {
+  background: #0f1620 !important;
+  border-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"] body#page-enrol-index #lambda-incourse-header h2 { color: #fff !important; }
+[data-bs-theme="dark"] body#page-enrol-index .coursebox.grid {
+  background: #1a2333 !important;
+  border-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"] body#page-enrol-index .coursebox.grid .summary h3.coursename,
+[data-bs-theme="dark"] body#page-enrol-index .coursebox.grid .summary h3.coursename a { color: #fff !important; }
+[data-bs-theme="dark"] body#page-enrol-index .coursebox.grid .summary .no-overflow { color: #94a3b8 !important; }
+[data-bs-theme="dark"] body#page-enrol-index .coursebox.grid .summary .no-overflow strong { color: #fff !important; }
+[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card {
+  background: #1a2333 !important;
+  border-color: #2e3a4d !important;
+  border-left-color: #0578be !important;
+}
+[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-header {
+  background: #1a2333 !important;
+  border-bottom-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-header h3 { color: #fff !important; }
+[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-body { background: #1a2333 !important; }
+[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-body .alert {
+  background: #0a3a5e !important;
+  border-color: #1c5a85 !important;
+  color: #cfe2f3 !important;
+}
+[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-footer {
+  background: #131c28 !important;
+  border-top-color: #2e3a4d !important;
+}
+
+/* ───────────────────────────────────────────────────
+   8) Responsivo
+   ─────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  body#page-enrol-index #lambda-incourse-header {
+    padding: 24px 20px 18px !important;
+  }
+  body#page-enrol-index #lambda-incourse-header h2 { font-size: 24px !important; }
+  body#page-enrol-index #region-main [role="main"] { padding: 20px 16px 40px !important; }
+  body#page-enrol-index .coursebox.grid .courseimage { height: 180px !important; }
+  body#page-enrol-index .coursebox.grid .summary { padding: 20px 20px 24px !important; }
+  body#page-enrol-index .coursebox.grid .summary h3.coursename { font-size: 18px !important; }
+  body#page-enrol-index .enrol-instance .card-header,
+  body#page-enrol-index .enrol-instance .card-body,
+  body#page-enrol-index .enrol-instance .card-footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FUNPRESP-JUD · Signup v2 STANDALONE — /login/signup.php
+   Bloco independente, não depende do CSS do login.
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1) Reset Moodle/Lambda — esconde page-wrapper original */
+html body#page-login-signup {
+  background: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body#page-login-signup #page-wrapper,
+html body#page-login-signup #page,
+html body#page-login-signup #page-content,
+html body#page-login-signup #page-header,
+html body#page-login-signup #page-navbar,
+html body#page-login-signup .navbar,
+html body#page-login-signup .breadcrumb-nav,
+html body#page-login-signup .breadcrumb-section,
+html body#page-login-signup footer.py-3,
+html body#page-login-signup #page-footer {
+  display: none !important;
+}
+
+/* 2) Wrapper split-screen 1.1fr / 1fr */
+html body#page-login-signup > .funp-login-wrapper {
+  display: grid !important;
+  grid-template-columns: 1.1fr 1fr !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 !important;
+  background: #fff !important;
+}
+
+/* 3) PAINEL ESQUERDO — BRAND (fundo dark + gradient, centralizado vertical) */
+html body#page-login-signup .funp-login-brand {
+  background:
+    linear-gradient(180deg, rgba(15,33,55,0.88) 0%, rgba(15,33,55,0.96) 100%),
+    repeating-linear-gradient(45deg, #0f2137 0, #0f2137 2px, #142a44 2px, #142a44 4px) !important;
+  color: #fff !important;
+  padding: 64px 56px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+html body#page-login-signup .funp-login-brand > div:first-child {
+  max-width: 480px !important;
+}
+html body#page-login-signup .funp-login-brand .funp-brand-eyebrow {
+  font-size: 11px !important;
+  letter-spacing: 2.5px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: #fbba00 !important;
+  margin-bottom: 28px !important;
+}
+html body#page-login-signup .funp-login-brand h1 {
+  font-size: 44px !important;
+  font-weight: 800 !important;
+  line-height: 1.12 !important;
+  color: #fff !important;
+  margin: 0 0 24px 0 !important;
+  letter-spacing: -0.5px !important;
+}
+html body#page-login-signup .funp-login-brand h1 em {
+  font-style: italic !important;
+  font-weight: 800 !important;
+  color: #fbba00 !important;
+}
+html body#page-login-signup .funp-login-brand .funp-brand-lede {
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  color: rgba(255,255,255,0.78) !important;
+  margin: 0 !important;
+  max-width: 460px !important;
+}
+html body#page-login-signup .funp-login-brand .funp-brand-footer {
+  position: absolute !important;
+  bottom: 40px !important;
+  left: 56px !important;
+  right: 56px !important;
+  max-width: none !important;
+  font-size: 11px !important;
+  color: rgba(255,255,255,0.45) !important;
+  letter-spacing: 0.3px !important;
+  line-height: 1.55 !important;
+}
+
+/* 4) PAINEL DIREITO — FORM (scrollable) */
+html body#page-login-signup .funp-login-form {
+  background: #fff !important;
+  overflow-y: auto !important;
+  max-height: 100vh !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+}
+html body#page-login-signup .funp-login-form-inner {
+  width: 100% !important;
+  max-width: 480px !important;
+  padding: 56px 40px !important;
+}
+
+/* 5) H1 com eyebrow azul */
+body#page-login-signup .signupform h1.login-heading {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  color: #0f2137 !important;
+  margin: 0 0 28px 0 !important;
+  line-height: 1.2 !important;
+}
+body#page-login-signup .signupform h1.login-heading::before {
+  content: "CADASTRO" !important;
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #0578be !important;
+  font-weight: 700 !important;
+  margin-bottom: 8px !important;
+}
+
+/* 6) Form — empilha label + input */
+body#page-login-signup .signupform .mform .fitem.row,
+body#page-login-signup .signupform .mform .row.fitem {
+  display: block !important;
+  margin: 0 0 18px 0 !important;
+}
+body#page-login-signup .signupform .mform .col-md-3.col-form-label {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  padding: 0 !important;
+  margin: 0 0 6px 0 !important;
+  display: flex !important;
+}
+body#page-login-signup .signupform .mform .col-md-9 {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  padding: 0 !important;
+}
+body#page-login-signup .signupform .mform .fitem.femptylabel > .col-md-3 {
+  display: none !important;
+}
+body#page-login-signup .signupform .mform .fitem.femptylabel > .col-md-9 {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+body#page-login-signup .signupform .mform label {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #0f2137 !important;
+  letter-spacing: 0.3px !important;
+  margin: 0 !important;
+}
+body#page-login-signup .signupform .mform .form-label-addon {
+  display: inline-flex !important;
+  margin-left: 6px !important;
+}
+body#page-login-signup .signupform .mform .form-label-addon .icon {
+  font-size: 10px !important;
+}
+body#page-login-signup .signupform .mform .form-control,
+body#page-login-signup .signupform .mform .form-select {
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  padding: 10px 12px !important;
+  height: auto !important;
+  font-size: 14px !important;
+  width: 100% !important;
+  background-color: #fff !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s !important;
+}
+body#page-login-signup .signupform .mform .form-control:focus,
+body#page-login-signup .signupform .mform .form-select:focus {
+  border-color: #0578be !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 3px rgba(5,120,190,0.12) !important;
+}
+
+/* Password policy info */
+body#page-login-signup .signupform .mform .form-control-static {
+  font-size: 12px !important;
+  color: #4b5563 !important;
+  background: #fffbea !important;
+  border: 1px solid #fde68a !important;
+  border-radius: 2px !important;
+  padding: 10px 12px !important;
+  line-height: 1.5 !important;
+}
+
+/* Fieldset Dados Pessoais */
+body#page-login-signup .signupform .mform fieldset.collapsible {
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+  padding: 20px !important;
+  margin: 24px 0 !important;
+  background: #fafbfc !important;
+}
+body#page-login-signup .signupform .mform fieldset.collapsible legend {
+  display: none !important;
+}
+body#page-login-signup .signupform .mform fieldset.collapsible h3 {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #0578be !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  margin: 0 !important;
+}
+body#page-login-signup .signupform .mform fieldset.collapsible .ftoggler {
+  margin-bottom: 16px !important;
+}
+
+/* LGPD checkbox */
+body#page-login-signup .signupform .form-check {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  padding: 16px !important;
+  background: #fff !important;
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+}
+body#page-login-signup .signupform .form-check-input {
+  margin-top: 2px !important;
+  flex-shrink: 0 !important;
+}
+body#page-login-signup .signupform .form-check label {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  line-height: 1.55 !important;
+  color: #4b5563 !important;
+}
+
+/* Required */
+body#page-login-signup .signupform .fdescription.required {
+  font-size: 11px !important;
+  color: #6b7280 !important;
+  margin: 12px 0 !important;
+}
+
+/* Botões */
+body#page-login-signup .signupform [data-groupname="buttonar"] {
+  margin-top: 28px !important;
+  padding-top: 24px !important;
+  border-top: 1px solid #ededed !important;
+}
+body#page-login-signup .signupform [data-groupname="buttonar"] .d-flex {
+  gap: 12px !important;
+}
+body#page-login-signup .signupform [data-groupname="buttonar"] .fitem {
+  margin: 0 !important;
+}
+body#page-login-signup .signupform input[type="submit"].btn-primary {
+  background: #0578be !important;
+  border: 0 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  padding: 13px 28px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+}
+body#page-login-signup .signupform input[type="submit"].btn-primary:hover {
+  background: #0e509a !important;
+}
+body#page-login-signup .signupform input[type="submit"].btn-secondary {
+  background: transparent !important;
+  border: 1px solid #d8dde3 !important;
+  color: #4b5563 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  padding: 13px 28px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: all 0.15s !important;
+}
+body#page-login-signup .signupform input[type="submit"].btn-secondary:hover {
+  background: #f5f6f8 !important;
+  border-color: #b8c0cc !important;
+  color: #0f2137 !important;
+}
+
+/* Toggle "Would you like to log in..." */
+body#page-login-signup .loginform-toggle {
+  margin-top: 32px !important;
+  padding-top: 20px !important;
+  border-top: 1px solid #ededed !important;
+  text-align: center !important;
+}
+body#page-login-signup .loginform-toggle .login-heading,
+body#page-login-signup .loginform-toggle .lambda-toggle {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #6b7280 !important;
+  margin: 0 !important;
+}
+
+/* 7) Dark mode */
+[data-bs-theme="dark"] body#page-login-signup .funp-login-form { background: #0f1620 !important; }
+[data-bs-theme="dark"] body#page-login-signup .signupform h1.login-heading,
+[data-bs-theme="dark"] body#page-login-signup .signupform .mform label,
+[data-bs-theme="dark"] body#page-login-signup .signupform .mform fieldset.collapsible h3 { color: #fff !important; }
+[data-bs-theme="dark"] body#page-login-signup .signupform .mform .form-control,
+[data-bs-theme="dark"] body#page-login-signup .signupform .mform .form-select {
+  background-color: #1a2333 !important;
+  border-color: #2e3a4d !important;
+  color: #e6ecf3 !important;
+}
+[data-bs-theme="dark"] body#page-login-signup .signupform .mform fieldset.collapsible {
+  background: #131c28 !important;
+  border-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"] body#page-login-signup .signupform .form-check {
+  background: #1a2333 !important;
+  border-color: #2e3a4d !important;
+}
+[data-bs-theme="dark"] body#page-login-signup .signupform .form-check label,
+[data-bs-theme="dark"] body#page-login-signup .signupform .mform .form-control-static {
+  color: #94a3b8 !important;
+}
+
+/* 8) Responsivo — stack vertical em telas <= 992px */
+@media (max-width: 992px) {
+  html body#page-login-signup > .funp-login-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  html body#page-login-signup .funp-login-brand {
+    padding: 40px 32px !important;
+    justify-content: flex-start !important;
+  }
+  html body#page-login-signup .funp-login-brand h1 {
+    font-size: 32px !important;
+  }
+  html body#page-login-signup .funp-login-brand .funp-brand-footer {
+    position: static !important;
+    margin-top: 32px !important;
+  }
+  html body#page-login-signup .funp-login-form {
+    max-height: none !important;
+  }
+}
+@media (max-width: 768px) {
+  html body#page-login-signup .funp-login-form-inner {
+    padding: 32px 20px !important;
+  }
+  body#page-login-signup .signupform h1.login-heading {
+    font-size: 24px !important;
+  }
+}
