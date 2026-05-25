@@ -271,13 +271,19 @@ body.pagelayout-frontpage {
   border-top: 3px solid #0578be;
   height: 100%;
 }
+
+/* Caixa do ícone — substitui o dashed antigo */
 .funp-shortcut-icon {
-  width: 40px;
-  height: 40px;
-  background: #eef4fa;
-  border: 1px dashed #0578be;
-  margin-bottom: 14px;
-  border-radius: 4px;
+  width: 48px !important;
+  height: 48px !important;
+  background: #eef4fa !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  margin-bottom: 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #0578be !important;
 }
 .funp-shortcut h5 {
   font-weight: 700;
@@ -298,6 +304,22 @@ body.pagelayout-frontpage {
 }
 .funp-shortcut a:hover {
   color: #0e509a;
+}
+
+/* SVG Lucide — força outline (fill:none + stroke) e ignora o default do Moodle */
+.funp-shortcut-icon svg {
+  width: 24px !important;
+  height: 24px !important;
+  display: block !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+.funp-shortcut-icon svg * {
+  fill: none !important;
+  stroke: currentColor !important;
 }
 
 /* 9) Conheça a plataforma */
