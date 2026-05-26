@@ -257,7 +257,7 @@ body.pagelayout-frontpage {
   color: #fff !important;
 }
 
-/* 8) 3 atalhos */
+/* 8) 3 atalhos — layout horizontal (ícone grande à esquerda, texto à direita) */
 .funp-shortcuts-wrap {
   margin-top: -40px;
   position: relative;
@@ -266,35 +266,47 @@ body.pagelayout-frontpage {
 }
 .funp-shortcut {
   background: #fff;
-  padding: 28px 24px;
+  padding: 24px;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
   border-top: 3px solid #0578be;
   height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
-/* Caixa do ícone — substitui o dashed antigo */
+/* Caixa do ícone — grande, à esquerda */
 .funp-shortcut-icon {
-  width: 48px !important;
-  height: 48px !important;
+  width: 72px !important;
+  height: 72px !important;
+  flex: 0 0 72px !important;
   background: #eef4fa !important;
   border: 0 !important;
   border-radius: 8px !important;
-  margin-bottom: 16px !important;
+  margin: 0 !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   color: #0578be !important;
 }
+
+/* Wrapper de texto à direita (cria via JS — ver passo abaixo)
+   OU funciona sem wrapper: o h5/p/a ficam alinhados naturalmente */
+.funp-shortcut-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .funp-shortcut h5 {
   font-weight: 700;
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   color: #0f2137;
   font-size: 18px;
 }
 .funp-shortcut p {
   color: #666;
   font-size: 13px;
-  margin: 0 0 12px;
+  margin: 0 0 8px;
 }
 .funp-shortcut a {
   color: #0578be;
@@ -306,10 +318,10 @@ body.pagelayout-frontpage {
   color: #0e509a;
 }
 
-/* SVG Lucide — força outline (fill:none + stroke) e ignora o default do Moodle */
+/* SVG Lucide — agora MAIOR (36px ao invés de 24px) */
 .funp-shortcut-icon svg {
-  width: 24px !important;
-  height: 24px !important;
+  width: 36px !important;
+  height: 36px !important;
   display: block !important;
   fill: none !important;
   stroke: currentColor !important;
