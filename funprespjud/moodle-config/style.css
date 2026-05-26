@@ -1,4 +1,42 @@
-/* Tipografia base */
+/* ═══════════════════════════════════════════════════════════
+   FUNPRESP-JUD · Moodle Lambda — Custom CSS
+   ───────────────────────────────────────────────────────────
+   Escopo: overrides do tema Lambda do Moodle para o portal
+   FUNPRESP-JUD. Tema light-only (sem dark mode).
+
+   Estratégia geral:
+     • Seletores ancorados em body#page-<id> para escopar
+       cada página e vencer a especificidade do Lambda.
+     • Uso de !important quando o Lambda aplica estilos
+       inline ou com seletores muito específicos.
+     • Blocos .funp-* são markup customizado injetado por
+       script.js e pelos blocos HTML do Moodle.
+
+   Paleta principal:
+     • Azul-primário .... #0578be   (links, CTA)
+     • Azul-hover ....... #0e509a
+     • Azul-marinho ..... #0f2137   (texto principal)
+     • Amarelo brand .... #fbba00   (eyebrows, destaque)
+     • Cinza claro fundo. #f5f5f5 / #f5f6f8
+     • Borda neutra ..... #ededed / #d8dde3
+   ───────────────────────────────────────────────────────────
+   ÍNDICE
+     1. Base & tipografia
+     2. Home pública            (#page-site-index)
+     3. Cursos disponíveis      (frontpage course list)
+     4. Meus cursos             (#page-my-index)
+     5. Login                   (#page-login-index)
+     6. Auto-inscrição          (#page-enrol-index)
+     7. Signup                  (#page-login-signup)
+     8. Footer global
+   ═══════════════════════════════════════════════════════════ */
+
+
+/* ═══════════════════════════════════════════════════════════
+   1. BASE & TIPOGRAFIA
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1.1 — Fonte global. Open Sans em todos os textos e headings. */
 body,
 .navbar,
 .btn {
@@ -12,7 +50,7 @@ h4 {
   font-weight: 700;
 }
 
-/* Faixa amarela do "eyebrow" sobre seções */
+/* 1.2 — Eyebrow amarelo padrão usado em várias seções. */
 .section-eyebrow {
   font-size: 11px;
   letter-spacing: 2px;
@@ -21,14 +59,14 @@ h4 {
   font-weight: 600;
 }
 
-/* CTAs primários sem border-radius arredondado (manual prefere formas mais retas) */
+/* 1.3 — CTAs primários com cantos quase retos (manual da marca). */
 .btn-primary {
   border-radius: 2px;
   padding: 10px 22px;
   font-weight: 600;
 }
 
-/* Login split-screen */
+/* 1.4 — Login split-screen (regras base; v3 abaixo substitui na prática). */
 #page-login-index .login-container {
   max-width: none;
   padding: 0;
@@ -47,33 +85,32 @@ h4 {
   align-self: center;
 }
 
-/* Dark mode overrides — Lambda usa data-bs-theme="dark" */
-[data-bs-theme="dark"] body {
-  background: #0f1620;
-  color: #e6ecf3;
-}
-[data-bs-theme="dark"] .card,
-[data-bs-theme="dark"] .login-form {
-  background: #1a2333;
-  border-color: #2e3a4d;
-}
-
-/* sub-nav: item ativo com borda amarela embaixo */
+/* 1.5 — Sub-nav: item ativo ganha borda amarela. */
 .primary-navigation .nav-link.active {
   color: #fbba00 !important;
   border-bottom: 2px solid #fbba00;
 }
 
+/* 1.6 — Hover global em links de footer. */
 footer a:hover,
 .footer-container a:hover {
   color: #fbba00 !important;
   text-decoration: none;
 }
 
-/* ─── FUNPRESP-JUD · Home pública (V2) — versão definitiva ─── */
 
-/* 1) Permite que blocos escapem das regiões do Lambda.
-       O .no-overflow tinha overflow:hidden — era o vilão principal. */
+/* ═══════════════════════════════════════════════════════════
+   2. HOME PÚBLICA — #page-site-index
+   ───────────────────────────────────────────────────────────
+   Markup customizado (.funp-hero, .funp-shortcuts-wrap,
+   .funp-known) é injetado num bloco HTML do Moodle. Vários
+   overrides existem para escapar dos wrappers do Lambda
+   (.card.card-block, .no-overflow, etc.).
+   ═══════════════════════════════════════════════════════════ */
+
+/* 2.1 — Lambda envolve blocos em .card.card-block com overflow:hidden,
+         o que impede o full-bleed do hero. Forçamos overflow:visible
+         em toda a cadeia de containers. */
 #page-site-index,
 #page-site-index #page,
 #page-site-index #page-content,
@@ -90,7 +127,7 @@ footer a:hover,
   overflow: visible !important;
 }
 
-/* 2) Zera padding/margin/cards dos containers que envolvem o block na home */
+/* 2.2 — Zera padding/margin/card-styles dos wrappers do bloco na home. */
 #page-site-index #region-main {
   margin: 0 !important;
   padding: 0 !important;
@@ -121,13 +158,14 @@ footer a:hover,
   margin: 0 !important;
 }
 
-/* 3) Bloqueia scroll horizontal causado por 100vw + scrollbar */
+/* 2.3 — Bloqueia scroll horizontal causado pelo truque 100vw + scrollbar. */
 html,
 body {
   overflow-x: hidden;
 }
 
-/* 4) Fecha o gap branco entre o header e o hero — versão agressiva */
+/* 2.4 — Fecha o gap branco entre header e hero (Lambda adiciona padding-top
+         em frontpage). Versão agressiva por segurança. */
 body.path-site,
 body.pagelayout-frontpage {
   padding-top: 0 !important;
@@ -167,7 +205,7 @@ body.pagelayout-frontpage {
   padding: 0;
 }
 
-/* Esconde o wrapper do slider Lambda quando vazio (não estamos usando) */
+/* 2.5 — Slider do Lambda não é usado; esconde wrapper vazio. */
 #page-site-index #fp-slider-wrapper:empty {
   display: none !important;
 }
@@ -176,15 +214,15 @@ body.pagelayout-frontpage {
   padding: 0 !important;
 }
 
-/* 5) Esconde tabs (Página inicial / Configurações / Participantes / Relatórios...)
-       e as labels de posição dos blocos (Top Block Position etc) */
+/* 2.6 — Esconde tabs do Lambda (Configurações/Participantes/Relatórios)
+         e labels de posição de bloco que o admin vê. */
 #page-site-index .secondary-navigation,
 #page-site-index .block-pos-desc,
 #page-site-index .fp-admin-blocks .admin-blocks {
   display: none !important;
 }
 
-/* 6) Full-bleed robusto */
+/* 2.7 — Full-bleed robusto via truque 100vw + margem negativa. */
 .funp-hero,
 .funp-shortcuts-wrap,
 .funp-known {
@@ -203,7 +241,7 @@ body.pagelayout-frontpage {
   padding: 0 32px;
 }
 
-/* 7) Hero */
+/* 2.8 — Hero principal (fundo azul-marinho). */
 .funp-hero {
   background: #0f2137;
   color: #fff;
@@ -257,7 +295,8 @@ body.pagelayout-frontpage {
   color: #fff !important;
 }
 
-/* 8) 3 atalhos — layout horizontal (ícone grande à esquerda, texto à direita) */
+/* 2.9 — Atalhos (3 cards horizontais sobrepostos ao hero).
+         margin-top negativo cria o efeito de "subir" sobre o hero. */
 .funp-shortcuts-wrap {
   margin-top: -40px;
   position: relative;
@@ -275,7 +314,7 @@ body.pagelayout-frontpage {
   gap: 20px;
 }
 
-/* Caixa do ícone — grande, à esquerda */
+/* Caixa do ícone grande à esquerda. */
 .funp-shortcut-icon {
   width: 72px !important;
   height: 72px !important;
@@ -290,8 +329,7 @@ body.pagelayout-frontpage {
   color: #0578be !important;
 }
 
-/* Wrapper de texto à direita (cria via JS — ver passo abaixo)
-   OU funciona sem wrapper: o h5/p/a ficam alinhados naturalmente */
+/* Wrapper de texto (h5/p/a) à direita do ícone. */
 .funp-shortcut-body {
   flex: 1 1 auto;
   min-width: 0;
@@ -318,7 +356,7 @@ body.pagelayout-frontpage {
   color: #0e509a;
 }
 
-/* SVG Lucide — agora MAIOR (36px ao invés de 24px) */
+/* SVG Lucide dentro do ícone — força stroke e tamanho maior. */
 .funp-shortcut-icon svg {
   width: 36px !important;
   height: 36px !important;
@@ -334,7 +372,7 @@ body.pagelayout-frontpage {
   stroke: currentColor !important;
 }
 
-/* 9) Conheça a plataforma */
+/* 2.10 — Bloco "Conheça a plataforma" (faixa cinza). */
 .funp-known {
   background: #f5f5f5;
   padding: 64px 0;
@@ -371,27 +409,7 @@ body.pagelayout-frontpage {
   color: #fff !important;
 }
 
-/* 10) Dark mode */
-[data-bs-theme="dark"] .funp-known {
-  background: #1a2333;
-}
-[data-bs-theme="dark"] .funp-known h2 {
-  color: #fff;
-}
-[data-bs-theme="dark"] .funp-known p {
-  color: #94a3b8;
-}
-[data-bs-theme="dark"] .funp-shortcut {
-  background: #1a2333;
-}
-[data-bs-theme="dark"] .funp-shortcut h5 {
-  color: #fff;
-}
-[data-bs-theme="dark"] .funp-shortcut p {
-  color: #94a3b8;
-}
-
-/* 11) Responsivo */
+/* 2.11 — Responsivo home. */
 @media (max-width: 768px) {
   .funp-hero {
     padding: 48px 0 80px;
@@ -409,11 +427,16 @@ body.pagelayout-frontpage {
   }
 }
 
-/* ═══════════════════════════════════════════════════════════ */
-/* 12) CURSOS DISPONÍVEIS — estilo "em destaque" (wireframe V2) */
-/* ═══════════════════════════════════════════════════════════ */
 
-/* Wrapper centralizado, com position pra ancorar o "Ver todos" */
+/* ═══════════════════════════════════════════════════════════
+   3. CURSOS DISPONÍVEIS — frontpage course list
+   ───────────────────────────────────────────────────────────
+   Estilo "em destaque" do wireframe V2: H2 alinhado à esquerda
+   com fio azul acima, link "Todos os cursos" ancorado à direita,
+   grid de 4 colunas com cards minimalistas.
+   ═══════════════════════════════════════════════════════════ */
+
+/* 3.1 — Wrapper centralizado, position:relative para ancorar o "Ver todos". */
 #page-site-index #frontpage-available-course-list {
   position: relative;
   padding: 70px 32px 60px;
@@ -421,7 +444,7 @@ body.pagelayout-frontpage {
   margin: 0 auto;
 }
 
-/* H2 alinhado à esquerda com fio azul ACIMA */
+/* 3.2 — H2 com fio azul ACIMA (via ::before). */
 #page-site-index #frontpage-available-course-list > h2 {
   font-size: 26px;
   font-weight: 700;
@@ -439,7 +462,8 @@ body.pagelayout-frontpage {
   margin-bottom: 10px;
 }
 
-/* "Todos os cursos" — link no canto direito, alinhado com o H2 */
+/* 3.3 — Link "Todos os cursos" posicionado no canto direito,
+         alinhado verticalmente com o H2. */
 #page-site-index .paging-morelink {
   position: absolute !important;
   top: 70px !important;
@@ -470,7 +494,7 @@ body.pagelayout-frontpage {
   color: #0e509a !important;
 }
 
-/* TURMA 1 ACIMA do título (reordena com flex) */
+/* 3.4 — Reordena conteúdo do .summary: categoria (Turma 1) ACIMA do título. */
 #page-site-index .coursebox .summary {
   padding: 14px 16px 18px;
   display: flex !important;
@@ -484,7 +508,7 @@ body.pagelayout-frontpage {
   order: 0 !important;
 }
 
-/* Grid 4 colunas */
+/* 3.5 — Grid 4 colunas (responde a 2 e 1 em breakpoints menores). */
 #page-site-index .frontpage-course-list-all {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -506,7 +530,7 @@ body.pagelayout-frontpage {
   }
 }
 
-/* Card minimal */
+/* 3.6 — Card minimal (borda fina + hover azul). */
 #page-site-index .coursebox {
   background: #fff;
   border: 1px solid #ededed;
@@ -523,7 +547,7 @@ body.pagelayout-frontpage {
   border-color: #0578be;
 }
 
-/* Esconde título duplicado e textos longos */
+/* 3.7 — Esconde título duplicado (.info) e parágrafos longos do summary. */
 #page-site-index .coursebox .info {
   display: none !important;
 }
@@ -531,7 +555,7 @@ body.pagelayout-frontpage {
   display: none;
 }
 
-/* Imagem 130px de altura */
+/* 3.8 — Banner do curso (130px). */
 #page-site-index .coursebox .content > a {
   display: block;
   text-decoration: none;
@@ -544,12 +568,12 @@ body.pagelayout-frontpage {
   background-color: #f3f3f3;
 }
 
-/* Conteúdo */
+/* 3.9 — Conteúdo textual do card. */
 #page-site-index .coursebox .summary {
   padding: 14px 16px 18px;
 }
 
-/* Eyebrow cinza, uppercase */
+/* Eyebrow cinza + título azul-marinho. */
 #page-site-index .coursebox .coursecat {
   font-size: 10px !important;
   letter-spacing: 1px;
@@ -572,7 +596,6 @@ body.pagelayout-frontpage {
   display: none;
 }
 
-/* Título */
 #page-site-index .coursebox .summary .coursename {
   font-size: 14px;
   font-weight: 600;
@@ -588,23 +611,16 @@ body.pagelayout-frontpage {
   color: #0578be !important;
 }
 
-/* Dark mode */
-[data-bs-theme="dark"] #page-site-index .coursebox {
-  background: #1a2333;
-  border-color: #2e3a4d;
-}
-[data-bs-theme="dark"] #page-site-index .coursebox .summary .coursename a {
-  color: #fff !important;
-}
-[data-bs-theme="dark"] #page-site-index #frontpage-available-course-list > h2 {
-  color: #fff;
-}
 
 /* ═══════════════════════════════════════════════════════════
-   FUNPRESP-JUD · Meus Cursos (V1) — escopo /my/courses.php
+   4. MEUS CURSOS — body#page-my-index (/my/courses.php)
+   ───────────────────────────────────────────────────────────
+   Página listando cursos do usuário. Page header limpo com
+   breadcrumb-eyebrow, filter bar como pills, grid 3 colunas,
+   barra de progresso desenhada via ::after no .progress-text.
    ═══════════════════════════════════════════════════════════ */
 
-/* 1) Page header — eyebrow + h1 limpo */
+/* 4.1 — Page header com eyebrow amarelo + h1 grande. */
 body#page-my-index #page-header {
   background: #fff !important;
   padding: 36px 32px 28px !important;
@@ -618,7 +634,7 @@ body#page-my-index #page-header .page-header-headings {
   position: relative !important;
   display: block !important;
 }
-/* Breadcrumb-style eyebrow ACIMA do h1 */
+/* Breadcrumb-eyebrow injetado via ::before. */
 body#page-my-index #page-header .page-header-headings::before {
   content: "Início › Meus cursos" !important;
   display: block !important;
@@ -636,14 +652,14 @@ body#page-my-index #page-header h1 {
   margin: 0 !important;
   line-height: 1.1 !important;
 }
-/* Esconde "Em modo de manutenção" do header */
+/* Esconde aviso "Em modo de manutenção" do header. */
 body#page-my-index #page-header a[href*="maintenancemode"] {
   display: none !important;
 }
-/* Esconde os botões admin (Gerenciar / Criar curso) — descomente para esconder:
+/* Para esconder botões admin (Gerenciar / Criar curso), descomente:
 body#page-my-index #page-header .course-manage { display: none !important; } */
 
-/* 2) Container do bloco — remove o "card" do bloco myoverview */
+/* 4.2 — Remove o "card" do bloco myoverview (fica direto no fundo). */
 body#page-my-index .block_myoverview.card,
 body#page-my-index .block_myoverview > .card-body {
   background: transparent !important;
@@ -666,7 +682,7 @@ body#page-my-index #region-main > .card.card-block {
   box-shadow: none !important;
 }
 
-/* 3) Filter bar — dropdowns como pills */
+/* 4.3 — Filter bar: dropdowns como pills + searchbar limpo. */
 body#page-my-index [data-region="filter"] {
   margin: 0 0 24px !important;
 }
@@ -685,7 +701,7 @@ body#page-my-index
   display: inline-flex !important;
   align-items: center !important;
 }
-/* Força texto visível no span interno do botão (o Lambda esconde com color */
+/* Força texto visível no span interno do botão — Lambda às vezes deixa transparente. */
 body#page-my-index
   [data-region="filter"]
   .btn-outline-secondary.dropdown-toggle,
@@ -745,7 +761,7 @@ body#page-my-index [data-region="filter"] .searchbar input.form-control {
   height: 38px !important;
 }
 
-/* 4) Grid 3 colunas */
+/* 4.4 — Grid 3 colunas. */
 body#page-my-index .card-grid {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
@@ -771,7 +787,7 @@ body#page-my-index .card-grid > .col {
   }
 }
 
-/* 5) Course card — minimal, retangular */
+/* 4.5 — Course card minimal (retangular, hover sobe). */
 body#page-my-index .course-card {
   background: #fff !important;
   border: 1px solid #ededed !important;
@@ -791,12 +807,12 @@ body#page-my-index .course-card:hover {
   transform: translateY(-2px) !important;
 }
 
-/* Imagem 150px — força <a> pai a ser bloco */
+/* <a> pai precisa ser bloco para imagem ocupar largura toda. */
 body#page-my-index .course-card > a {
   display: block !important;
 }
 
-/* ORDER explícito via nth-child — vence qualquer order do Lambda */
+/* Order explícito via nth-child vence qualquer order que o Lambda aplique. */
 body#page-my-index .course-card > :nth-child(1) {
   order: 1 !important;
 }
@@ -815,7 +831,7 @@ body#page-my-index .course-card .card-img-top {
   position: relative !important;
 }
 
-/* Badge de status (derivado da % via JS — data-status no card) */
+/* 4.6 — Badge de status sobre a imagem (atributo data-status setado por JS). */
 body#page-my-index .course-card[data-status] > a .card-img-top::after {
   position: absolute;
   top: 10px;
@@ -850,15 +866,15 @@ body#page-my-index
   background: #888;
 }
 
-/* Card body — cresce para empurrar o progress pro fundo */
+/* 4.7 — Body do card cresce para empurrar progress pro fundo. */
 body#page-my-index .course-card .card-body {
   padding: 14px 18px 8px !important;
   flex: 1 1 auto !important;
   display: flex !important;
   flex-direction: column !important;
 }
-/* O .w-100.text-truncate contém title + categoria — INVERTE ordem
-   (eyebrow ACIMA do título) e mata o text-truncate que esconde tudo */
+/* .w-100.text-truncate contém [título + categoria]: inverte ordem (eyebrow
+   acima) e remove o text-truncate que esconderia o conteúdo. */
 body#page-my-index .course-card .card-body .w-100 {
   display: flex !important;
   flex-direction: column-reverse !important;
@@ -867,7 +883,7 @@ body#page-my-index .course-card .card-body .w-100 {
   overflow: visible !important;
 }
 
-/* Eyebrow azul — categoria (override do .text-truncate Bootstrap) */
+/* Eyebrow azul = categoria. */
 body#page-my-index .course-card .categoryname,
 body#page-my-index .course-card .categoryname.text-truncate {
   font-size: 10px !important;
@@ -889,7 +905,7 @@ body#page-my-index .course-card .text-muted.muted {
   margin: 0 0 4px !important;
 }
 
-/* Título — esquerda, bold, 2 linhas máx */
+/* Título do curso (máx 2 linhas via -webkit-line-clamp). */
 body#page-my-index .course-card a.coursename,
 body#page-my-index .course-card .coursename {
   font-size: 15px !important;
@@ -913,7 +929,7 @@ body#page-my-index .course-card .coursename .multiline {
   text-align: left !important;
 }
 
-/* Footer wrapper (ABAIXO do body, empurrado pro fundo) */
+/* 4.8 — Footer do card (empurrado pro fundo via margin-top:auto). */
 body#page-my-index .course-card > .d-flex.align-items-start {
   align-items: stretch !important;
   margin-top: auto !important;
@@ -927,7 +943,8 @@ body#page-my-index .course-card .card-footer.menu {
   display: none !important;
 }
 
-/* Progress text — vira barra + número */
+/* 4.9 — Barra de progresso desenhada com ::before (trilho) + ::after (preenchimento).
+         A largura vem de --progress (CSS var setada por JS). */
 body#page-my-index .course-card .progress-text {
   position: relative !important;
   font-size: 12px !important;
@@ -967,61 +984,17 @@ body#page-my-index
   background: #d8dde3 !important;
 }
 
-/* 6) Dark mode (Lambda) */
-[data-bs-theme="dark"] body#page-my-index #page-header {
-  background: #0f1620 !important;
-  border-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"] body#page-my-index #page-header h1 {
-  color: #fff !important;
-}
-[data-bs-theme="dark"] body#page-my-index #region-main {
-  background: #0f1620 !important;
-}
-[data-bs-theme="dark"] body#page-my-index .course-card {
-  background: #1a2333 !important;
-  border-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"] body#page-my-index .course-card .coursename {
-  color: #fff !important;
-}
-[data-bs-theme="dark"] body#page-my-index .course-card .progress-text {
-  color: #e6ecf3 !important;
-}
-[data-bs-theme="dark"] body#page-my-index .course-card .progress-text::before {
-  background: #2e3a4d !important;
-}
-[data-bs-theme="dark"]
-  body#page-my-index
-  [data-region="filter"]
-  .btn-outline-secondary.dropdown-toggle,
-[data-bs-theme="dark"]
-  body#page-my-index
-  [data-region="filter"]
-  .btn-outline-secondary.dropdown-toggle
-  * {
-  background: #1a2333 !important;
-  border-color: #2e3a4d !important;
-  color: #e6ecf3 !important;
-}
-[data-bs-theme="dark"] body#page-my-index [data-region="filter"] .searchbar {
-  background: #1a2333 !important;
-  border-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"]
-  body#page-my-index
-  [data-region="filter"]
-  .searchbar
-  input {
-  color: #e6ecf3 !important;
-}
 
 /* ═══════════════════════════════════════════════════════════
-   FUNPRESP-JUD · Login v3 — escopo body#page-login-index
-   Funciona em conjunto com o Custom JS (passo 1)
+   5. LOGIN — body#page-login-index (split-screen v3 + v3.4)
+   ───────────────────────────────────────────────────────────
+   Wrapper .funp-login-wrapper é criado por script.js (Custom JS
+   do Moodle). Lado esquerdo = brand (azul-marinho com padrão
+   diagonal); lado direito = form. v3.4 ajusta inputs full-width
+   e centralização vertical do painel esquerdo.
    ═══════════════════════════════════════════════════════════ */
 
-/* 1) Reset Moodle/Lambda — esconde tudo exceto nosso wrapper */
+/* 5.1 — Reset: esconde todo o chrome do Moodle/Lambda. */
 html body#page-login-index {
   background: #fff !important;
   margin: 0 !important;
@@ -1040,7 +1013,7 @@ html body#page-login-index #page-footer {
   display: none !important;
 }
 
-/* 2) Wrapper split-screen — criado pelo JS, direto no <body> */
+/* 5.2 — Wrapper split-screen 1.1fr / 1fr. */
 html body#page-login-index > .funp-login-wrapper {
   display: grid !important;
   grid-template-columns: 1.1fr 1fr !important;
@@ -1050,7 +1023,7 @@ html body#page-login-index > .funp-login-wrapper {
   background: #fff !important;
 }
 
-/* 3) Painel esquerdo — BRAND */
+/* 5.3 — Painel BRAND (esquerda): fundo azul + gradient + tramado diagonal. */
 html body#page-login-index .funp-login-brand {
   background:
     linear-gradient(
@@ -1114,7 +1087,7 @@ html body#page-login-index .funp-brand-footer {
   max-width: 380px !important;
 }
 
-/* 4) Painel direito — FORM */
+/* 5.4 — Painel FORM (direita). */
 html body#page-login-index .funp-login-form {
   padding: 60px 64px !important;
   display: flex !important;
@@ -1128,7 +1101,7 @@ html body#page-login-index .funp-login-form-inner {
   margin: 0 auto !important;
 }
 
-/* 5) Logo Funpresp (mantém o do Moodle, só ajusta tamanho) */
+/* 5.5 — Logo Funpresp (mantém SVG do Moodle, só ajusta tamanho). */
 html body#page-login-index .funp-login-form #loginlogo,
 html body#page-login-index .funp-login-form .login-logo {
   text-align: left !important;
@@ -1143,7 +1116,7 @@ html body#page-login-index .funp-login-form .login-heading.visually-hidden {
   display: none !important;
 }
 
-/* 6) Form fields — .login-form-* da Lambda */
+/* 5.6 — Inputs base (sobrescritos pelo v3.4 abaixo, mantidos por compat). */
 html body#page-login-index .funp-login-form .login-form-username,
 html body#page-login-index .funp-login-form .login-form-password {
   margin-bottom: 16px !important;
@@ -1171,7 +1144,7 @@ html body#page-login-index .funp-login-form #password:focus {
   box-shadow: 0 0 0 3px rgba(5, 120, 190, 0.12) !important;
 }
 
-/* 7) Input-group do password (com botão olho da Lambda) */
+/* 5.7 — Input-group do password (com botão olho do Lambda). */
 html body#page-login-index .funp-login-form .toggle-sensitive-wrapper {
   display: flex !important;
   align-items: stretch !important;
@@ -1211,7 +1184,7 @@ html body#page-login-index .funp-login-form .toggle-sensitive-btn:hover {
   color: #0578be !important;
 }
 
-/* 8) Botão Acessar */
+/* 5.8 — Botão Acessar. */
 html body#page-login-index .funp-login-form .login-form-submit {
   margin-bottom: 14px !important;
 }
@@ -1238,7 +1211,7 @@ html body#page-login-index .funp-login-form #loginbtn:hover {
   background: #0e509a !important;
 }
 
-/* 9) "Perdeu a senha?" */
+/* 5.9 — "Perdeu a senha?" centralizado. */
 html body#page-login-index .funp-login-form .login-form-forgotpassword {
   text-align: center !important;
   margin-bottom: 20px !important;
@@ -1254,7 +1227,7 @@ html body#page-login-index .funp-login-form .login-form-forgotpassword a:hover {
   text-decoration: underline !important;
 }
 
-/* 10) Divisor Lambda (linha) */
+/* 5.10 — Divisor entre login e signup. */
 html body#page-login-index .funp-login-form .login-divider {
   height: 1px !important;
   background: #ededed !important;
@@ -1262,7 +1235,7 @@ html body#page-login-index .funp-login-form .login-divider {
   border: 0 !important;
 }
 
-/* 11) Signup ("Esta é a sua primeira vez aqui?") */
+/* 5.11 — Bloco signup ("Esta é a sua primeira vez aqui?"). */
 html body#page-login-index .funp-login-form .login-instructions {
   text-align: center !important;
   font-size: 12px !important;
@@ -1305,13 +1278,13 @@ html body#page-login-index .funp-login-form .login-signup a:hover {
   color: #fff !important;
 }
 
-/* 12) Esconde Lambda toggle ("Would you like to log in now…") */
+/* 5.12 — Esconde toggle do Lambda ("Would you like to log in now..."). */
 html body#page-login-index .funp-login-form .loginform-toggle,
 html body#page-login-index .funp-login-form .lambda-toggle {
   display: none !important;
 }
 
-/* 13) Footer aux — idioma + cookies */
+/* 5.13 — Footer auxiliar (idioma + cookies). */
 html body#page-login-index .funp-login-form .loginform > .d-flex:last-child {
   margin-top: 14px !important;
   justify-content: center !important;
@@ -1358,7 +1331,7 @@ html body#page-login-index .funp-login-form .loginform > .d-flex .divider {
   display: none !important;
 }
 
-/* 14) Mensagens de erro */
+/* 5.14 — Mensagens de erro (alert-danger). */
 html body#page-login-index .funp-login-form .loginerrors,
 html body#page-login-index .funp-login-form #loginerrormessage,
 html body#page-login-index .funp-login-form .alert-danger {
@@ -1374,7 +1347,7 @@ html body#page-login-index .funp-login-form .alert-danger {
   margin-bottom: 20px !important;
 }
 
-/* 15) Responsivo — empilha em mobile */
+/* 5.15 — Responsivo: empilha brand sobre form em mobile. */
 @media (max-width: 900px) {
   html body#page-login-index > .funp-login-wrapper {
     grid-template-columns: 1fr !important;
@@ -1391,53 +1364,9 @@ html body#page-login-index .funp-login-form .alert-danger {
   }
 }
 
-/* 16) Dark mode (Lambda data-bs-theme="dark") */
-[data-bs-theme="dark"] html body#page-login-index .funp-login-form {
-  background: #0f1620 !important;
-}
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-form-username
-  input,
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-form-password
-  input,
-[data-bs-theme="dark"] html body#page-login-index .funp-login-form #username,
-[data-bs-theme="dark"] html body#page-login-index .funp-login-form #password {
-  background: #1a2333 !important;
-  border-color: #2e3a4d !important;
-  color: #e6ecf3 !important;
-}
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-instructions
-  .login-heading {
-  color: #fff !important;
-}
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-divider {
-  background: #2e3a4d !important;
-}
+/* ─── Login v3.4 — ajustes finos sobre v3 ─────────────────── */
 
-/* ═══════════════════════════════════════════════════════════
-   FUNPRESP-JUD · Login v3.4
-   — centraliza texto do painel esquerdo
-   — aumenta largura dos inputs para 100% do form-inner
-   ═══════════════════════════════════════════════════════════ */
-
-/* ── 1) Centralização vertical do conteúdo no painel esquerdo ──
-   O primeiro filho do .funp-login-brand (o bloco com eyebrow + h1 + lede)
-   cresce para preencher o espaço disponível e centraliza verticalmente. */
+/* 5.16 — Centraliza verticalmente o conteúdo do painel BRAND. */
 html body#page-login-index .funp-login-brand > div:first-child {
   flex: 1 1 auto !important;
   display: flex !important;
@@ -1445,8 +1374,7 @@ html body#page-login-index .funp-login-brand > div:first-child {
   justify-content: center !important;
 }
 
-/* ── 2) Inputs full-width — resolve a cadeia de containeres ──
-   Garante que .loginform, form, e o input-group sejam 100% em todos os níveis */
+/* 5.17 — Garante que .loginform/form sejam 100% para inputs full-width. */
 html body#page-login-index .funp-login-form-inner .loginform,
 html body#page-login-index .funp-login-form-inner form#login,
 html body#page-login-index .funp-login-form-inner form {
@@ -1463,6 +1391,7 @@ html body#page-login-index .funp-login-form .login-form-password {
   margin-bottom: 14px !important;
 }
 
+/* Input-group como caixa única (input + botão olho). */
 html body#page-login-index .funp-login-form .login-form-username .input-group,
 html body#page-login-index .funp-login-form .login-form-password .input-group {
   width: 100% !important;
@@ -1493,7 +1422,7 @@ html
   box-shadow: 0 0 0 3px rgba(5, 120, 190, 0.12) !important;
 }
 
-/* Input dentro do grupo */
+/* Input dentro do grupo — sem border próprio, cresce até o final. */
 html
   body#page-login-index
   .funp-login-form
@@ -1551,61 +1480,14 @@ html
   outline: none !important;
 }
 
-/* Dark mode inputs */
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-form-username
-  .input-group,
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-form-password
-  .input-group {
-  background: #1a2333 !important;
-  border-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-form-username
-  .input-group
-  .form-control,
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-form-password
-  .input-group
-  .form-control,
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-form-username
-  .input-group
-  #username,
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-form-password
-  .input-group
-  #password {
-  color: #e6ecf3 !important;
-}
-
-/* ── 3) Botão Acessar / Log in — também full-width ── */
+/* 5.18 — Botão Acessar full-width. */
 html body#page-login-index .funp-login-form .login-form-submit,
 html body#page-login-index .funp-login-form .login-form-submit button {
   width: 100% !important;
   box-sizing: border-box !important;
 }
 
-/* ── 4) Placeholder suave ── */
+/* 5.19 — Placeholder suave. */
 html
   body#page-login-index
   .funp-login-form
@@ -1616,7 +1498,7 @@ html body#page-login-index .funp-login-form #password::placeholder {
   color: #aab0ba !important;
 }
 
-/* ── 5) h2 "Esta é a sua primeira vez aqui?" ── */
+/* 5.20 — h2 "Esta é a sua primeira vez aqui?". */
 html body#page-login-index .funp-login-form .login-instructions h2 {
   font-size: 15px !important;
   font-weight: 700 !important;
@@ -1630,16 +1512,8 @@ html body#page-login-index .funp-login-form .login-instructions h2 {
   width: auto !important;
   height: auto !important;
 }
-[data-bs-theme="dark"]
-  html
-  body#page-login-index
-  .funp-login-form
-  .login-instructions
-  h2 {
-  color: #fff !important;
-}
 
-/* ── 6) Botão "Criar uma conta" — garante outline ── */
+/* 5.21 — Botão "Criar uma conta" (outline azul). */
 html body#page-login-index .funp-login-form .login-signup .btn-secondary {
   background: transparent !important;
   background-color: transparent !important;
@@ -1651,17 +1525,19 @@ html body#page-login-index .funp-login-form .login-signup .btn-secondary:hover {
   color: #fff !important;
 }
 
+
 /* ═══════════════════════════════════════════════════════════
-   FUNPRESP-JUD · Auto-inscrição (enrol_self) — escopo /enrol/index.php
-   Estrutura real:
+   6. AUTO-INSCRIÇÃO — body#page-enrol-index (enrol_self)
+   ───────────────────────────────────────────────────────────
+   Estrutura DOM real do Lambda:
      #lambda-incourse-header > h2 "Detalhes de inscrições"
      #region-main > [role=main] >
-       > h2 "Opções de inscrição"  (escondido — duplicado)
-       > .box.generalbox.info > .coursebox.grid   (card do curso)
-       > .box.generalbox.enrol-instance > .card   (card de inscrição)
+       > h2 "Opções de inscrição"  (escondemos — duplicado)
+       > .box.generalbox.info > .coursebox.grid     (card do curso)
+       > .box.generalbox.enrol-instance > .card     (form inscrição)
    ═══════════════════════════════════════════════════════════ */
 
-/* 1) Page wrapper — fundo cinza, zera bordas do region-main */
+/* 6.1 — Fundo cinza + zera region-main. */
 body#page-enrol-index {
   background: #f5f6f8 !important;
 }
@@ -1674,7 +1550,7 @@ body#page-enrol-index #region-main.mx-15 {
   padding: 0 !important;
 }
 
-/* 2) Page header — "Detalhes de inscrições" (Lambda-specific) */
+/* 6.2 — Header com breadcrumb-eyebrow + h2 grande. */
 body#page-enrol-index #lambda-incourse-header {
   background: #fff !important;
   padding: 36px 32px 28px !important;
@@ -1700,23 +1576,20 @@ body#page-enrol-index #lambda-incourse-header h2::before {
   margin-bottom: 10px !important;
 }
 
-/* 3) Wrapper do conteúdo (centralizado, padding generoso) */
+/* 6.3 — Container do conteúdo (centralizado, padding generoso). */
 body#page-enrol-index #region-main [role="main"] {
   max-width: 960px !important;
   margin: 0 auto !important;
   padding: 32px 32px 60px !important;
 }
 
-/* 4) Esconde o h2 redundante "Opções de inscrição" */
+/* 6.4 — Esconde h2 redundante "Opções de inscrição". */
 body#page-enrol-index #region-main [role="main"] > h2 {
   display: none !important;
 }
 
-/* ───────────────────────────────────────────────────
-   5) CARD 1 — info do curso
-   ─────────────────────────────────────────────────── */
+/* ─── 6.5 CARD 1 — informações do curso ─────────────────── */
 
-/* Container .box.generalbox.info — sem fundo/borda */
 body#page-enrol-index .box.generalbox.info {
   background: transparent !important;
   border: 0 !important;
@@ -1724,7 +1597,7 @@ body#page-enrol-index .box.generalbox.info {
   margin: 0 0 24px 0 !important;
 }
 
-/* O coursebox vira o card visual */
+/* O .coursebox.grid vira o card visual com banner em cima. */
 body#page-enrol-index .coursebox.grid {
   display: flex !important;
   flex-direction: column !important;
@@ -1739,12 +1612,11 @@ body#page-enrol-index .coursebox.grid {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* Esconde o .info duplicado (h3 + moreinfo + ícone "→") */
+/* Esconde bloco .info duplicado (h3 + moreinfo + seta). */
 body#page-enrol-index .coursebox.grid > .info {
   display: none !important;
 }
 
-/* .content — wrapper da imagem + summary, vertical */
 body#page-enrol-index .coursebox.grid > .content {
   display: flex !important;
   flex-direction: column !important;
@@ -1758,7 +1630,7 @@ body#page-enrol-index .coursebox.grid > .content > a:first-child {
   text-decoration: none !important;
 }
 
-/* IMAGEM BANNER — full-width no topo */
+/* Banner do curso full-width (280px). */
 body#page-enrol-index .coursebox.grid .courseimage {
   display: block !important;
   width: 100% !important;
@@ -1770,13 +1642,13 @@ body#page-enrol-index .coursebox.grid .courseimage {
   border-radius: 0 !important;
 }
 
-/* Summary (conteúdo de texto) */
+/* Summary (descrição). */
 body#page-enrol-index .coursebox.grid .summary {
   padding: 28px 32px 32px !important;
   margin: 0 !important;
 }
 
-/* Categoria "Turma 1" como EYEBROW azul ACIMA do título */
+/* Categoria como EYEBROW azul acima do título. */
 body#page-enrol-index .coursebox.grid .summary .coursecat {
   font-size: 10px !important;
   letter-spacing: 1.5px !important;
@@ -1810,7 +1682,7 @@ body#page-enrol-index .coursebox.grid .summary .coursecat .sr-only {
   display: none !important;
 }
 
-/* Título do curso — esquerda, bold, grande */
+/* Título grande do curso. */
 body#page-enrol-index .coursebox.grid .summary h3.coursename {
   font-size: 22px !important;
   font-weight: 800 !important;
@@ -1828,7 +1700,7 @@ body#page-enrol-index .coursebox.grid .summary h3.coursename a:hover {
   color: #0578be !important;
 }
 
-/* Texto do summary — legível */
+/* Texto do summary. */
 body#page-enrol-index .coursebox.grid .summary .no-overflow {
   font-size: 14px !important;
   line-height: 1.7 !important;
@@ -1842,9 +1714,7 @@ body#page-enrol-index .coursebox.grid .summary .no-overflow strong {
   color: #0f2137 !important;
 }
 
-/* ───────────────────────────────────────────────────
-   6) CARD 2 — form de inscrição (.enrol-instance)
-   ─────────────────────────────────────────────────── */
+/* ─── 6.6 CARD 2 — form de inscrição (.enrol-instance) ──── */
 
 body#page-enrol-index .box.generalbox.enrol-instance {
   background: transparent !important;
@@ -1852,6 +1722,7 @@ body#page-enrol-index .box.generalbox.enrol-instance {
   padding: 0 !important;
   margin: 0 !important;
 }
+/* Borda esquerda azul destaca o card como CTA. */
 body#page-enrol-index .enrol-instance .card {
   background: #fff !important;
   border: 1px solid #ededed !important;
@@ -1861,7 +1732,7 @@ body#page-enrol-index .enrol-instance .card {
   overflow: hidden !important;
 }
 
-/* Header com eyebrow azul */
+/* Header com eyebrow "INSCRIÇÃO". */
 body#page-enrol-index .enrol-instance .card-header {
   background: #fff !important;
   border: 0 !important;
@@ -1888,7 +1759,7 @@ body#page-enrol-index .enrol-instance .card-header h3 {
   line-height: 1.3 !important;
 }
 
-/* Body com alert */
+/* Body com alert informativo. */
 body#page-enrol-index .enrol-instance .card-body {
   padding: 22px 28px !important;
   background: #fff !important;
@@ -1903,7 +1774,7 @@ body#page-enrol-index .enrol-instance .card-body .alert {
   font-size: 14px !important;
 }
 
-/* Footer com o botão Inscreva-me */
+/* Footer com botão "Inscreva-me". */
 body#page-enrol-index .enrol-instance .card-footer {
   background: #fafbfc !important;
   border: 0 !important;
@@ -1936,84 +1807,12 @@ body#page-enrol-index .enrol-instance button[type="submit"]:hover {
   background: #0e509a !important;
 }
 
-/* Espaço entre múltiplas instâncias (caso o curso tenha mais de um plugin ativo) */
+/* Espaço entre múltiplas instâncias (quando o curso aceita mais de um plugin). */
 body#page-enrol-index .enrol-instance + .enrol-instance {
   margin-top: 20px !important;
 }
 
-/* ───────────────────────────────────────────────────
-   7) Dark mode
-   ─────────────────────────────────────────────────── */
-[data-bs-theme="dark"] body#page-enrol-index {
-  background: #0f1620 !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index #lambda-incourse-header {
-  background: #0f1620 !important;
-  border-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index #lambda-incourse-header h2 {
-  color: #fff !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index .coursebox.grid {
-  background: #1a2333 !important;
-  border-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"]
-  body#page-enrol-index
-  .coursebox.grid
-  .summary
-  h3.coursename,
-[data-bs-theme="dark"]
-  body#page-enrol-index
-  .coursebox.grid
-  .summary
-  h3.coursename
-  a {
-  color: #fff !important;
-}
-[data-bs-theme="dark"]
-  body#page-enrol-index
-  .coursebox.grid
-  .summary
-  .no-overflow {
-  color: #94a3b8 !important;
-}
-[data-bs-theme="dark"]
-  body#page-enrol-index
-  .coursebox.grid
-  .summary
-  .no-overflow
-  strong {
-  color: #fff !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card {
-  background: #1a2333 !important;
-  border-color: #2e3a4d !important;
-  border-left-color: #0578be !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-header {
-  background: #1a2333 !important;
-  border-bottom-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-header h3 {
-  color: #fff !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-body {
-  background: #1a2333 !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-body .alert {
-  background: #0a3a5e !important;
-  border-color: #1c5a85 !important;
-  color: #cfe2f3 !important;
-}
-[data-bs-theme="dark"] body#page-enrol-index .enrol-instance .card-footer {
-  background: #131c28 !important;
-  border-top-color: #2e3a4d !important;
-}
-
-/* ───────────────────────────────────────────────────
-   8) Responsivo
-   ─────────────────────────────────────────────────── */
+/* 6.7 — Responsivo enrol. */
 @media (max-width: 768px) {
   body#page-enrol-index #lambda-incourse-header {
     padding: 24px 20px 18px !important;
@@ -2041,12 +1840,15 @@ body#page-enrol-index .enrol-instance + .enrol-instance {
   }
 }
 
+
 /* ═══════════════════════════════════════════════════════════
-   FUNPRESP-JUD · Signup v2 STANDALONE — /login/signup.php
-   Bloco independente, não depende do CSS do login.
+   7. SIGNUP — body#page-login-signup (/login/signup.php)
+   ───────────────────────────────────────────────────────────
+   Bloco standalone (não depende do CSS do login). Mesmo
+   split-screen, mas com painel direito scrollable (form longo).
    ═══════════════════════════════════════════════════════════ */
 
-/* 1) Reset Moodle/Lambda — esconde page-wrapper original */
+/* 7.1 — Reset do chrome Moodle/Lambda. */
 html body#page-login-signup {
   background: #fff !important;
   margin: 0 !important;
@@ -2065,7 +1867,7 @@ html body#page-login-signup #page-footer {
   display: none !important;
 }
 
-/* 2) Wrapper split-screen 1.1fr / 1fr */
+/* 7.2 — Wrapper split-screen. */
 html body#page-login-signup > .funp-login-wrapper {
   display: grid !important;
   grid-template-columns: 1.1fr 1fr !important;
@@ -2075,7 +1877,7 @@ html body#page-login-signup > .funp-login-wrapper {
   background: #fff !important;
 }
 
-/* 3) PAINEL ESQUERDO — BRAND (fundo dark + gradient, centralizado vertical) */
+/* 7.3 — Painel BRAND (esquerda). Padrão diagonal mais denso. */
 html body#page-login-signup .funp-login-brand {
   background:
     linear-gradient(
@@ -2141,7 +1943,7 @@ html body#page-login-signup .funp-login-brand .funp-brand-footer {
   line-height: 1.55 !important;
 }
 
-/* 4) PAINEL DIREITO — FORM (scrollable) */
+/* 7.4 — Painel FORM (direita) — scrollable porque o form é longo. */
 html body#page-login-signup .funp-login-form {
   background: #fff !important;
   overflow-y: auto !important;
@@ -2156,7 +1958,7 @@ html body#page-login-signup .funp-login-form-inner {
   padding: 56px 40px !important;
 }
 
-/* 5) H1 com eyebrow azul */
+/* 7.5 — H1 com eyebrow "CADASTRO" injetado via ::before. */
 body#page-login-signup .signupform h1.login-heading {
   font-size: 28px !important;
   font-weight: 800 !important;
@@ -2175,7 +1977,7 @@ body#page-login-signup .signupform h1.login-heading::before {
   margin-bottom: 8px !important;
 }
 
-/* 6) Form — empilha label + input */
+/* 7.6 — mform layout: empilha label + input (Moodle usa grid Bootstrap horizontal). */
 body#page-login-signup .signupform .mform .fitem.row,
 body#page-login-signup .signupform .mform .row.fitem {
   display: block !important;
@@ -2236,7 +2038,7 @@ body#page-login-signup .signupform .mform .form-select:focus {
   box-shadow: 0 0 0 3px rgba(5, 120, 190, 0.12) !important;
 }
 
-/* Password policy info */
+/* 7.7 — Password policy info (caixa amarela). */
 body#page-login-signup .signupform .mform .form-control-static {
   font-size: 12px !important;
   color: #4b5563 !important;
@@ -2247,7 +2049,7 @@ body#page-login-signup .signupform .mform .form-control-static {
   line-height: 1.5 !important;
 }
 
-/* Fieldset Dados Pessoais */
+/* 7.8 — Fieldset "Dados Pessoais" colapsável. */
 body#page-login-signup .signupform .mform fieldset.collapsible {
   border: 1px solid #ededed !important;
   border-radius: 2px !important;
@@ -2270,7 +2072,7 @@ body#page-login-signup .signupform .mform fieldset.collapsible .ftoggler {
   margin-bottom: 16px !important;
 }
 
-/* LGPD checkbox */
+/* 7.9 — Checkbox LGPD com card destacado. */
 body#page-login-signup .signupform .form-check {
   display: flex !important;
   align-items: flex-start !important;
@@ -2293,14 +2095,14 @@ body#page-login-signup .signupform .form-check label {
   color: #4b5563 !important;
 }
 
-/* Required */
+/* 7.10 — Linha "* campos obrigatórios". */
 body#page-login-signup .signupform .fdescription.required {
   font-size: 11px !important;
   color: #6b7280 !important;
   margin: 12px 0 !important;
 }
 
-/* Botões */
+/* 7.11 — Botões submit + cancelar. */
 body#page-login-signup .signupform [data-groupname="buttonar"] {
   margin-top: 28px !important;
   padding-top: 24px !important;
@@ -2347,7 +2149,7 @@ body#page-login-signup .signupform input[type="submit"].btn-secondary:hover {
   color: #0f2137 !important;
 }
 
-/* Toggle "Would you like to log in..." */
+/* 7.12 — Toggle "Would you like to log in...". */
 body#page-login-signup .loginform-toggle {
   margin-top: 32px !important;
   padding-top: 20px !important;
@@ -2362,48 +2164,7 @@ body#page-login-signup .loginform-toggle .lambda-toggle {
   margin: 0 !important;
 }
 
-/* 7) Dark mode */
-[data-bs-theme="dark"] body#page-login-signup .funp-login-form {
-  background: #0f1620 !important;
-}
-[data-bs-theme="dark"] body#page-login-signup .signupform h1.login-heading,
-[data-bs-theme="dark"] body#page-login-signup .signupform .mform label,
-[data-bs-theme="dark"]
-  body#page-login-signup
-  .signupform
-  .mform
-  fieldset.collapsible
-  h3 {
-  color: #fff !important;
-}
-[data-bs-theme="dark"] body#page-login-signup .signupform .mform .form-control,
-[data-bs-theme="dark"] body#page-login-signup .signupform .mform .form-select {
-  background-color: #1a2333 !important;
-  border-color: #2e3a4d !important;
-  color: #e6ecf3 !important;
-}
-[data-bs-theme="dark"]
-  body#page-login-signup
-  .signupform
-  .mform
-  fieldset.collapsible {
-  background: #131c28 !important;
-  border-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"] body#page-login-signup .signupform .form-check {
-  background: #1a2333 !important;
-  border-color: #2e3a4d !important;
-}
-[data-bs-theme="dark"] body#page-login-signup .signupform .form-check label,
-[data-bs-theme="dark"]
-  body#page-login-signup
-  .signupform
-  .mform
-  .form-control-static {
-  color: #94a3b8 !important;
-}
-
-/* 8) Responsivo — stack vertical em telas <= 992px */
+/* 7.13 — Responsivo signup: stack vertical em <= 992px. */
 @media (max-width: 992px) {
   html body#page-login-signup > .funp-login-wrapper {
     grid-template-columns: 1fr !important;
@@ -2432,11 +2193,19 @@ body#page-login-signup .loginform-toggle .lambda-toggle {
   }
 }
 
+
 /* ═══════════════════════════════════════════════════════════
-   FUNPRESP-JUD · Footer (dark) — final, sem column-count
+   8. FOOTER GLOBAL
+   ───────────────────────────────────────────────────────────
+   Footer institucional dark (fundo #0a1626) com grid 4 colunas
+   + faixa de copyright full-width. Tema do footer é sempre
+   escuro, independente do modo da página.
    ═══════════════════════════════════════════════════════════ */
 
-html, body { overflow-x: hidden; }
+html,
+body {
+  overflow-x: hidden;
+}
 
 .funp-footer-main {
   width: 100%;
@@ -2445,7 +2214,7 @@ html, body { overflow-x: hidden; }
   text-align: left;
 }
 
-/* Grid 4 colunas — gap reduzido */
+/* 8.1 — Grid 4 colunas (proporções desbalanceadas conforme conteúdo). */
 .funp-footer-grid {
   display: grid;
   grid-template-columns: 1fr 1.4fr 1.4fr 1.6fr;
@@ -2501,12 +2270,14 @@ html, body { overflow-x: hidden; }
   max-width: 180px;
   height: auto;
   display: block;
-  /* filter: brightness(0) invert(1); */
+  /* filter: brightness(0) invert(1);  ← descomente para forçar logo branco */
 }
 
-.funp-footer-divider { display: none !important; }
+.funp-footer-divider {
+  display: none !important;
+}
 
-/* Régua full-width */
+/* 8.2 — Faixa de copyright (full-width via truque 100vw + margem negativa). */
 .funp-copyright-row {
   position: relative !important;
   width: 100vw !important;
@@ -2538,8 +2309,14 @@ html, body { overflow-x: hidden; }
   gap: 24px;
   justify-content: center;
 }
-.funp-copyright-center img { height: 34px; width: auto; }
-.funp-copyright-center a { color: #fff !important; text-decoration: none; }
+.funp-copyright-center img {
+  height: 34px;
+  width: auto;
+}
+.funp-copyright-center a {
+  color: #fff !important;
+  text-decoration: none;
+}
 .funp-copyright-social {
   display: flex;
   gap: 8px;
@@ -2558,9 +2335,11 @@ html, body { overflow-x: hidden; }
   transition: background 0.2s;
   text-decoration: none !important;
 }
-.funp-copyright-social a:hover { background: #2662ba; }
+.funp-copyright-social a:hover {
+  background: #2662ba;
+}
 
-/* Faixa Lambda abaixo */
+/* 8.3 — Faixa Lambda nativa abaixo do nosso footer (alinha background). */
 #page-footer,
 footer.py-3,
 footer,
@@ -2570,9 +2349,11 @@ footer,
   background: #0a1626 !important;
   padding-bottom: 0 !important;
 }
-.funp-copyright-row ~ * { display: none !important; }
+.funp-copyright-row ~ * {
+  display: none !important;
+}
 
-/* Esconde links automáticos do Moodle */
+/* 8.4 — Esconde links automáticos do Moodle (data privacy, mobile, user tours). */
 #course-footer .tool_dataprivacy,
 #course-footer a.mobilelink,
 #course-footer .tool_usertours-resettourcontainer,
@@ -2581,9 +2362,11 @@ footer a.mobilelink {
   display: none !important;
 }
 
-/* Responsivo */
+/* 8.5 — Responsivo footer. */
 @media (max-width: 992px) {
-  .funp-footer-grid { grid-template-columns: 1fr 1fr; }
+  .funp-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 @media (max-width: 600px) {
   .funp-footer-grid {
@@ -2598,5 +2381,7 @@ footer a.mobilelink {
     padding: 0 16px;
   }
   .funp-copyright-center,
-  .funp-copyright-social { justify-content: center; }
+  .funp-copyright-social {
+    justify-content: center;
+  }
 }
