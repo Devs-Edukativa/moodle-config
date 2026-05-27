@@ -1,20 +1,14 @@
 # Moodle FUNPRESP-JUD — Configurações
 
-Documentação de toda a customização aplicada ao Moodle da plataforma EaD FUNPRESP-JUD: identidade visual, configurações do tema Lambda, blocos HTML customizados, CSS/JS personalizados, plugin de auto-inscrição e workarounds operacionais.
+Documentação operacional da plataforma EaD FUNPRESP-JUD: identidade visual, configurações do tema do Moodle, blocos de conteúdo customizados, plugin de auto-inscrição e procedimentos de manutenção.
 
-**Arquivos neste diretório:**
-
-- [style.css](style.css) — CSS customizado completo (colar no campo "Custom CSS" do Lambda)
-- [script.js](script.js) — JS customizado completo (colar no campo "Custom JS" do Lambda)
-- [html/hero.html](html/hero.html) — bloco HTML do hero + atalhos da home
-- [html/about.html](html/about.html) — bloco "Conheça a plataforma" da home
-- [html/faq.html](html/faq.html) — accordion FAQ
-- [html/footer.html](html/footer.html) — markup do footer institucional
+O portal usa **Moodle** com o tema **Lambda**. Em cima do Lambda foram aplicadas customizações de CSS, JavaScript e blocos HTML para entregar a experiência institucional da FUNPRESP-JUD (hero, atalhos, "Conheça a plataforma", FAQ, footer, layouts de login/cadastro/inscrição).
 
 ---
 
 ## Sumário
 
+- [Glossário](#glossário)
 1. [Identidade visual (geral)](#1-identidade-visual-geral)
 2. [Tema Lambda — Configurações](#2-tema-lambda--configurações)
 3. [Customizações por página](#3-customizações-por-página)
@@ -22,23 +16,47 @@ Documentação de toda a customização aplicada ao Moodle da plataforma EaD FUN
 5. [FAQ — como adicionar/editar](#5-faq--como-adicionareditar)
 6. [Plugin autoenrol](#6-plugin-autoenrol)
 7. [Editando blocos HTML — TinyMCE x texto puro](#7-editando-blocos-html--tinymce-x-texto-puro)
-8. [JS customizado (script.js)](#8-js-customizado-scriptjs)
-9. [CSS customizado (style.css)](#9-css-customizado-stylecss)
+8. [JS customizado](#8-js-customizado)
+9. [CSS customizado](#9-css-customizado)
+
+---
+
+## Glossário
+
+Termos curtos que aparecem no documento. Volte aqui quando esbarrar com um.
+
+| Termo | Significado |
+|---|---|
+| **CTA** | *Call-to-action*. Botão ou link cuja função é levar o usuário a uma ação principal (ex.: "Acessar plataforma", "Inscreva-me", "Conhecer a Funpresp-Jud"). Não confundir com link de navegação comum. |
+| **CTA marketing** | CTA das páginas institucionais (hero, sobre). No portal hoje usa **amber** (`#fbba00` fundo, `#2a1d00` texto). |
+| **CTA de form** | Botão de submit em formulários do Moodle (login, signup, inscrição). Continua **azul primário** (`#0578be`) porque é estilizado sobre o markup nativo do Moodle. |
+| **Eyebrow** | Rótulo curto em CAIXA ALTA, letter-spacing largo, posicionado acima de um título. Funciona como categoria/contexto. Pode ser amarelo (`#fbba00`, fundos escuros) ou azul (`#0578be`, fundos claros). |
+| **Lede** | Parágrafo de abertura logo abaixo do título principal — texto mais denso que resume a seção. |
+| **Full-bleed** | Conteúdo que sai do container central (max-width: 1320px) e ocupa **100% da largura da tela**. Usado no hero e nas faixas de fundo. |
+| **Bloco HTML** | Tipo de bloco do Moodle (`block_html`) que aceita markup HTML cru. Usado para hero, sobre, FAQ, footer — qualquer conteúdo customizado fora do fluxo padrão do tema. |
+| **`bui_editid`** | *Block UI edit id* — id da **instância** do bloco na página. Vai na URL `?bui_editid=<n>` para abrir o formulário de edição direto, pulando a renderização da home. |
+| **Lambda** | Tema do Moodle usado no portal (`theme_lambda2`). Define o "chrome" (header, nav, footer, layouts de página). As customizações são overrides em cima dele. |
+| **Custom CSS / Custom JS** | Campos do admin do Lambda onde o CSS e o JavaScript customizados são colados na íntegra. Ver seção 2.8. |
+| **Split-screen** | Layout de duas colunas usado em login e signup: painel "brand" escuro à esquerda + formulário à direita. Montado em runtime por JavaScript. |
+| **mform** | Sistema de formulários do Moodle. Por padrão entrega label + input em layout horizontal (grid Bootstrap). Várias regras CSS empilham isso em vertical no cadastro. |
+| **Eyebrow breadcrumb** | Texto pequeno em maiúsculas tipo "INÍCIO › MEUS CURSOS" injetado via CSS no header de páginas internas. Não é o breadcrumb real do Moodle. |
+| **Pluginfile** | Endpoint do Moodle (`pluginfile.php/<context>/...`) que serve arquivos enviados pelo gerenciador de arquivos. Hospeda as imagens de fundo do hero e do sobre. |
+| **`!important`** | Modificador CSS que vence regras com mesma especificidade. Usado abundantemente para sobrescrever o Lambda — sempre escopado em `body#page-<id>` para não vazar. |
 
 ---
 
 ## 1. Identidade visual (geral)
 
-Fonte única de verdade para cores e fontes. Usar exatamente estes valores nos campos do Lambda e nos blocos HTML/CSS — não inventar tons novos.
+Fonte única de verdade para cores e fontes. Usar exatamente estes valores nos campos do Lambda e nos blocos HTML — não inventar tons novos.
 
 ### 1.1 Paleta
 
 | Token | Hex | Uso |
 |---|---|---|
-| Azul primário | `#0578be` | CTA, links, hover de cards, eyebrows azuis |
+| Azul primário | `#0578be` | CTA de form, links, hover de cards, eyebrows azuis |
 | Azul hover | `#0e509a` | Estado :hover dos CTAs e links |
 | Azul marinho | `#0f2137` | Texto principal escuro, fundo do hero, fundo do footer |
-| Amarelo brand | `#fbba00` | Eyebrows ("PLATAFORMA EAD"), destaques no painel brand do login |
+| Amber brand | `#fbba00` | CTA marketing, eyebrows amarelos, destaques no painel brand do login |
 | Cinza texto | `#1a1a1a` | Headings e body neutros (tema light) |
 | Cinza fundo claro | `#f5f5f5` / `#f5f6f8` | Fundos de seções alternadas, fundo de página interna |
 | Borda neutra | `#ededed` / `#d8dde3` | Bordas de cards, inputs, divisores |
@@ -47,19 +65,36 @@ Fonte única de verdade para cores e fontes. Usar exatamente estes valores nos c
 
 ### 1.2 Tipografia
 
-- **Família**: Open Sans (carregada via Google Fonts pelo Lambda — `font_body` e `font_heading`)
+- **Família**: Open Sans (carregada via Google Fonts pelo Lambda — campos `font_body` e `font_heading`)
 - **Body text size**: 14px
-- **Headings**: weight 700–800, mesma família Open Sans
+- **Headings**: weight 700–800, mesma família
 - **Eyebrows** (rótulos amarelos/azuis pequenos): 10–12px, letter-spacing 1.5–3px, uppercase, weight 600–700
 
 ### 1.3 Onde aplicar cada cor
 
-- CTA primário (`Acessar plataforma`, `Inscreva-me`, `Acessar` do login): fundo `#0578be`, hover `#0e509a`
+Padrão atual de CTA é **amber** para landing/marketing e **azul** apenas para botões de submit dos formulários do Moodle.
+
+**CTAs (botões de ação principal)**
+
+| Contexto | Cor fundo | Cor texto | Onde aparece |
+|---|---|---|---|
+| CTA marketing (hero, sobre) | `#fbba00` | `#2a1d00` | Home — "Acessar plataforma", "Conhecer a Funpresp-Jud" |
+| CTA de form Moodle (submit) | `#0578be` (hover `#0e509a`) | `#ffffff` | Login, signup, inscrição |
+| Link textual com sublinhado amarelo | transparente | `#ffffff` (borda inferior amber) | "explorar o catálogo →" no bloco sobre |
+
+> Existem variações de botão azul-cheio, azul-outline e dark-cheio definidas no CSS que **não estão mais sendo usadas nas páginas atuais** — sobreviveram de versões anteriores. Não usar para CTAs novos; padrão é amber.
+
+**Outras cores**
+
 - Fundo escuro (hero, painel brand do login, footer): `#0f2137`
+- Fundo "Conheça a plataforma": overlay escuro `#0a1a2e` ~88% sobre imagem (variante V13)
 - Eyebrow amarelo (sobre fundos escuros): `#fbba00`
-- Eyebrow azul (sobre fundos claros, ex: categoria do curso): `#0578be`
+- Eyebrow azul (sobre fundos claros, ex.: categoria do curso, "INSCRIÇÃO"): `#0578be`
+- Eyebrow amarelo de breadcrumb interno ("INÍCIO › MEUS CURSOS"): `#fbba00`
+- Links em texto corrido: `#0578be`, hover `#0e509a`
 - Bordas de cards: `#ededed`; bordas de inputs: `#d8dde3`
-- Linha de footer/copyright: fundo `#08131f`, texto `#94a3b8`
+- Linha de footer/copyright: fundo `#0a1626`, texto `#94a3b8`
+- Footer link headings: `#4ea8e0` (azul claro, sobre fundo `#0f2137`)
 
 ---
 
@@ -121,7 +156,7 @@ Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada s
 | Footer Copyright Color (`copyrightcolor`) | `#08131f` |
 | Copyright Text Color (`copyright_textcolor`) | `#94a3b8` |
 
-> O **conteúdo** do footer (texto, colunas, logos) é controlado pelo HTML colado num bloco do tema — ver [html/footer.html](html/footer.html) e seção 7 sobre como acessar os menus de edição do bloco.
+> O **conteúdo** do footer (texto, colunas, logos) é controlado pelo HTML colado num bloco do tema. Ver seção 7 sobre como acessar os menus de edição do bloco.
 
 ### 2.6 Site Home Options
 
@@ -147,29 +182,27 @@ Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada s
 
 ### 2.8 Custom CSS / Custom JS — onde colar
 
-- **Custom CSS**: Lambda → aba **Custom CSS** → colar o conteúdo de [style.css](style.css) na íntegra.
-- **Custom JS**: Lambda → aba **Custom JS** (ou campo `additionalcustomscript` dependendo da versão) → colar o conteúdo de [script.js](script.js) na íntegra.
+- **Custom CSS**: Lambda → aba **Custom CSS** → colar o CSS customizado na íntegra.
+- **Custom JS**: Lambda → aba **Custom JS** (ou campo `additionalcustomscript` dependendo da versão) → colar o JavaScript customizado na íntegra.
 - Após salvar: **Purge all caches** (Administração → Desenvolvimento → Purgar todos os caches).
 
 ---
 
 ## 3. Customizações por página
 
-Cada página tem um seletor de body (`#page-<id>`) usado como âncora no [style.css](style.css). Toda override é escopada por esse seletor para não vazar.
+Cada página tem um seletor de body (`#page-<id>`) usado como âncora no CSS. Toda override é escopada por esse seletor para não vazar para outras páginas.
 
 ### 3.1 Home pública (`#page-site-index`)
 
-Composta por 3 blocos HTML do Moodle + listagem de cursos do Lambda.
+Composta por blocos HTML do Moodle + listagem de cursos do Lambda.
 
-| Bloco | Onde colar | Arquivo |
-|---|---|---|
-| Hero + atalhos | Bloco HTML 1 da home (acima da listagem de cursos) | [html/hero.html](html/hero.html) |
-| Conheça a plataforma | Bloco HTML 2 da home (abaixo da listagem de cursos) | [html/about.html](html/about.html) |
-| FAQ | Bloco HTML em página dedicada (ver seção 5) | [html/faq.html](html/faq.html) |
+| Bloco | Onde aparece |
+|---|---|
+| Hero + atalhos | Bloco HTML acima da listagem de cursos |
+| Conheça a plataforma | Bloco HTML abaixo da listagem de cursos |
+| FAQ | Bloco HTML em página dedicada (ver seção 5) |
 
-CSS relacionado: [style.css](style.css) seção 2 (hero + atalhos) e seção 3 (cursos disponíveis).
-
-Pontos de atenção:
+Pontos de atenção (técnico):
 
 - O Lambda envolve blocos em `.card.card-block` com `overflow: hidden` — o CSS força `overflow: visible` na cadeia inteira de containers para permitir o full-bleed do hero.
 - O hero, a faixa de atalhos e o "Conheça a plataforma" usam o truque `width: 100vw` + `margin-left/right: -50vw` para sair da container Bootstrap e ocupar a tela toda.
@@ -179,39 +212,35 @@ Pontos de atenção:
 
 Layout reescrito: page header limpo com eyebrow "INÍCIO › MEUS CURSOS", filtros como pills, grid 3 colunas, cards minimalistas com barra de progresso e badge de status.
 
-- Barra de progresso e badge são desenhadas via `::before` + `::after` em `.progress-text` / `.card-img-top`. A largura do preenchimento vem de uma CSS var `--progress` setada por JS.
-- **Script responsável**: [script.js](script.js) bloco 1 — lê o `% concluído` do texto, seta `--progress` e `data-status` (`naoiniciado` / `andamento` / `concluido`). Roda também via `MutationObserver` quando o myoverview troca de filtro via AJAX.
+- Barra de progresso e badge são desenhadas via CSS (`::before` + `::after`) em `.progress-text` / `.card-img-top`. A largura do preenchimento vem de uma CSS var `--progress` setada por JavaScript.
+- O JS lê o `% concluído` do texto, seta `--progress` e `data-status` (`naoiniciado` / `andamento` / `concluido`) em cada card. Re-aplica via `MutationObserver` quando o usuário troca filtro (re-render AJAX).
 
 ### 3.3 Login (`#page-login-index`, `/login/index.php`)
 
-Layout split-screen (painel brand à esquerda, formulário à direita) montado em runtime.
+Layout split-screen (painel brand à esquerda, formulário à direita) montado em runtime por JavaScript.
 
-- **Script responsável**: [script.js](script.js) bloco 2 — cria `.funp-login-wrapper` direto no `<body>`, move `.loginform` original para dentro do painel direito, esconde o `#page-wrapper` antigo, marca `body.funp-login-active`.
-- CSS: [style.css](style.css) seção 5 (v3 + v3.4).
-- Para mudar o copy do painel esquerdo: editar o template do `brand.innerHTML` no [script.js](script.js).
+- O JS pega `.loginform` original do Moodle, cria `.funp-login-wrapper` direto no `<body>`, move o form para o painel direito e esconde o `#page-wrapper` antigo (com header, nav, etc.).
+- Para mudar o copy do painel esquerdo: editar o template do `brand.innerHTML` no bloco de login do JS customizado.
 
 ### 3.4 Signup (`#page-login-signup`, `/login/signup.php`)
 
-Mesmo padrão split-screen do login, com painel direito scrollable (form é longo). Inclui várias regras específicas pro `mform` empilhar label + input (Moodle entrega `.col-md-3` + `.col-md-9` horizontal por padrão).
+Mesmo padrão split-screen do login, com painel direito scrollable (form é longo). Inclui várias regras CSS específicas para o `mform` empilhar label + input em vertical (Moodle entrega `.col-md-3` + `.col-md-9` horizontal por padrão).
 
-- **Script split-screen**: [script.js](script.js) bloco 3.
-- **CPF + telefone**: [script.js](script.js) bloco 4 (descrito em detalhe na seção 8).
-- CSS: [style.css](style.css) seção 7.
+Há também tratamento global de **CPF + telefone** (descrito na seção 8).
 
 ### 3.5 Auto-inscrição (`#page-enrol-index`, `/enrol/index.php?id=<courseid>`)
 
 Página servida pelo plugin **autoenrol** (ver seção 6). Estilizada como dois cards empilhados:
 
-1. Card do curso (banner 280px + categoria como eyebrow azul + título grande + descrição).
-2. Card do form de inscrição com **borda esquerda azul** + eyebrow "INSCRIÇÃO" + botão "Inscreva-me" full azul.
+1. **Card do curso** — banner 280px + categoria como eyebrow azul + título grande + descrição.
+2. **Card do form de inscrição** — borda esquerda azul + eyebrow "INSCRIÇÃO" + botão "Inscreva-me" full azul.
 
-CSS: [style.css](style.css) seção 6. O header da página é o `#lambda-incourse-header` do tema — ganha breadcrumb-eyebrow amarelo "INÍCIO › CURSOS › INSCRIÇÃO" via `::before`.
+O header da página é o `#lambda-incourse-header` do tema — recebe breadcrumb-eyebrow amarelo "INÍCIO › CURSOS › INSCRIÇÃO" via CSS `::before`.
 
-### 3.6 Footer global ([html/footer.html](html/footer.html))
+### 3.6 Footer global
 
-- Grid 4 colunas (`.funp-footer-grid`) com proporções `1fr 1.4fr 1.4fr 1.6fr`.
-- Faixa de copyright (`.funp-copyright-row`) full-width fora do container, com fundo `#08131f`.
-- CSS: [style.css](style.css) seção 8.
+- Grid 3 colunas (`.funp-footer-grid`): logo institucional · links Funpresp-Jud/Privacidade · "Onde estamos".
+- Faixa de copyright (`.funp-copyright-row`) full-width fora do container, com fundo `#0a1626`.
 
 > **Importante**: os menus de edição do bloco do footer podem não aparecer no layout normal. Ver seção 7 para alcançá-los (zoom out, URL direta `bui_editid`, ou trocar editor para texto simples).
 
@@ -219,16 +248,16 @@ CSS: [style.css](style.css) seção 6. O header da página é o `#lambda-incours
 
 ## 4. Imagens de fundo (hero / sobre)
 
-Os banners de fundo do **hero** (home) e do **"Conheça a plataforma"** não são `<img>` no HTML — são definidos como **`background-image`** em duas classes CSS:
+Os banners de fundo do **hero** (home) e do **"Conheça a plataforma"** não são `<img>` no HTML — são definidos como **`background-image`** em classes CSS dedicadas.
 
-| Bloco | Classe CSS | URL atual da imagem | CSS |
-|---|---|---|---|
-| Hero (topo da home) | `.funp-hero-bg` | `https://ead.funprespjud.com.br/pluginfile.php/601/block_html/content/Banner-Hero%20%281%29.png` | [style.css](style.css) seção 2.8 |
-| Sobre / Conheça | `.funp-known.funp-known-v13` | `https://ead.funprespjud.com.br/pluginfile.php/602/block_html/content/Banner-Institucional%20%281%29.png` | [style.css](style.css) seção 2.12 |
+| Bloco | Classe CSS | URL atual da imagem |
+|---|---|---|
+| Hero (topo da home) | `.funp-hero-bg` | `https://ead.funprespjud.com.br/pluginfile.php/601/block_html/content/Banner-Hero%20%281%29.png` |
+| Sobre / Conheça | `.funp-known.funp-known-v13` | `https://ead.funprespjud.com.br/pluginfile.php/602/block_html/content/Banner-Institucional%20%281%29.png` |
 
 ### Por que ficam dentro de `pluginfile.php/<id>/block_html/content/`
 
-Cada bloco HTML do Moodle tem um **id interno** (`601` para o hero, `602` para o sobre — visíveis no path). Quando você faz upload de uma imagem dentro do editor do bloco, ela é armazenada em `pluginfile.php/<bui_id>/block_html/content/<nome-do-arquivo>`. Por isso a URL contém o id do bloco.
+Cada bloco HTML do Moodle tem um **id interno** (`601` para o hero, `602` para o sobre — visíveis no path). Quando você faz upload de uma imagem dentro do editor do bloco, ela é armazenada em `pluginfile.php/<id>/block_html/content/<nome-do-arquivo>`. Por isso a URL contém o id do bloco.
 
 ### Como editar/trocar uma imagem de fundo
 
@@ -245,32 +274,30 @@ Passos:
 
 1. Logado como admin, acesse a URL de edição do bloco.
 2. No editor do bloco (configurações), use o **gerenciador de arquivos** para enviar/substituir a imagem.
-3. Pegue a URL final do arquivo (ex.: `pluginfile.php/601/block_html/content/Banner-Hero.png`) — Moodle gera essa URL automaticamente.
-4. Atualize a URL no [style.css](style.css):
-   - `.funp-hero-bg { background-image: url("..."); }` (seção 2.8)
-   - `.funp-known.funp-known-v13 { background: ... url("...") ... ; }` (seção 2.12)
+3. O Moodle gera a URL final automaticamente, no formato `pluginfile.php/<id>/block_html/content/<nome>.png`.
+4. Pedir ao dev para atualizar a URL no CSS customizado nas duas classes:
+   - `.funp-hero-bg` (background-image do hero)
+   - `.funp-known.funp-known-v13` (background composto do sobre)
 5. Salvar → **Purgar caches** (Administração → Desenvolvimento → Purgar todos os caches).
 
 ### Observações
 
 - **Dimensões recomendadas**: largura mínima `1920px`, altura `~720px` (hero) / `~480px` (sobre). Imagens menores ficam borradas em telas grandes.
 - **Formato**: PNG ou JPG. PNG só se for arte com transparência/elementos gráficos; JPG para fotos institucionais (peso menor).
-- **Codificar espaços no nome**: o Moodle aceita arquivos com espaços, mas a URL fica com `%20`. Para evitar confusão, **renomeie sem espaços** (`Banner-Hero.png` em vez de `Banner Hero.png`).
-- A imagem **não é referenciada no HTML do bloco** — o bloco serve só como "container" para hospedar o arquivo. Se você apagar o bloco, perde o arquivo.
+- **Evitar espaços no nome**: o Moodle aceita arquivos com espaços, mas a URL fica com `%20`. Para evitar confusão, **renomeie sem espaços** (`Banner-Hero.png` em vez de `Banner Hero.png`).
+- A imagem **não é referenciada no HTML do bloco** — o bloco serve só como "container" para hospedar o arquivo. Se o bloco for apagado, o arquivo se perde.
 
 ---
 
 ## 5. FAQ — como adicionar/editar
 
-**Arquivo fonte**: [html/faq.html](html/faq.html).
+**Onde aparece**: bloco HTML em página dedicada (ex.: página estática "FAQ" criada via Administração → Páginas, ou bloco numa categoria de cursos).
 
-**Onde aparece no Moodle**: bloco HTML em página dedicada (ex.: página estática "FAQ" criada via Administração → Páginas, ou bloco numa categoria de cursos).
-
-**Estrutura**: accordion Bootstrap 5 nativo do Moodle. Wrapper `<div id="funpFaq" class="accordion">`. Cada pergunta é um `.accordion-item` com IDs únicos `funpFaqH{N}` (header) e `funpFaqC{N}` (collapse). O `data-bs-target` do button precisa casar com o `id` do `.accordion-collapse`.
+**Estrutura**: accordion Bootstrap 5 nativo do Moodle. Wrapper `<div id="funpFaq" class="accordion">`. Cada pergunta é um `.accordion-item` com IDs únicos `funpFaqH{N}` (header) e `funpFaqC{N}` (collapse). O `data-bs-target` do botão precisa casar com o `id` do `.accordion-collapse`.
 
 ### Snippet pronto para nova pergunta
 
-Substitua `{N}` por um número sequencial (próximo disponível), `{PERGUNTA}` pelo título da pergunta e `{RESPOSTA_HTML}` por parágrafos `<p>` / listas `<ul>`.
+Substitua `{N}` por um número sequencial (próximo disponível), `{PERGUNTA}` pelo título e `{RESPOSTA_HTML}` por parágrafos `<p>` ou listas `<ul>`.
 
 ```html
 <div class="accordion-item">
@@ -295,7 +322,7 @@ Substitua `{N}` por um número sequencial (próximo disponível), `{PERGUNTA}` p
 - [ ] `N` é único (próximo número da sequência)
 - [ ] `data-bs-target="#funpFaqC{N}"` casa com `id="funpFaqC{N}"`
 - [ ] `aria-labelledby="funpFaqH{N}"` casa com `id="funpFaqH{N}"`
-- [ ] `data-bs-parent="#funpFaq"` mantido (garante que abrir uma fecha as outras)
+- [ ] `data-bs-parent="#funpFaq"` mantido (garante que abrir uma pergunta fecha as outras)
 - [ ] Recomendado salvar com editor em **modo texto puro** para garantir que `data-bs-toggle` / `data-bs-target` não sofram alteração — ver seção 7 (Opção C)
 
 ---
@@ -330,7 +357,7 @@ Plugin de método de inscrição que **auto-matricula** o usuário em um curso q
 
 ### Onde aparece no front-end
 
-URL: `/enrol/index.php?id=<courseid>` (body `#page-enrol-index`). O CSS custom para essa página está em [style.css](style.css) seção 6 — não depende do plugin estar habilitado, mas só aparece quando há uma instância autoenrol (ou outra inscrição que use a mesma estrutura DOM) configurada no curso.
+URL: `/enrol/index.php?id=<courseid>` (body `#page-enrol-index`). Estilização descrita na seção 3.5. A página existe apenas quando há uma instância autoenrol (ou outra inscrição que use a mesma estrutura DOM) configurada no curso.
 
 ### Docs
 
@@ -341,7 +368,7 @@ URL: `/enrol/index.php?id=<courseid>` (body `#page-enrol-index`). O CSS custom p
 
 ## 7. Editando blocos HTML — TinyMCE x texto puro
 
-**Problema real**: ao tentar editar o **bloco do footer** (e em menor grau o do FAQ), os controles de edição do bloco simplesmente **não aparecem** na tela — o bloco fica visível, mas os ícones de configuração/lápis ficam fora do viewport ou sobrepostos pelo layout do tema. Não é sanitização do TinyMCE; é só que o painel admin do bloco não está renderizando os menus de forma acessível.
+**Problema real**: ao tentar editar o **bloco do footer** (e em menor grau o do FAQ), os controles de edição do bloco simplesmente **não aparecem** na tela — o bloco fica visível, mas os ícones de configuração/lápis ficam fora do viewport ou sobrepostos pelo layout do tema. Não é sanitização do editor; é só que o painel admin do bloco não está renderizando os menus de forma acessível.
 
 ### Soluções (qualquer uma resolve)
 
@@ -354,7 +381,7 @@ URL: `/enrol/index.php?id=<courseid>` (body `#page-enrol-index`). O CSS custom p
 
 **Opção B — Editar pela URL direta do bloco**
 
-Como descrito na seção 4, acesse `<https://ead.funprespjud.com.br/?bui_editid=<id>>` com o `bui_editid` do bloco. Isso pula a renderização da home e abre direto o formulário de edição do bloco.
+Acesse `https://ead.funprespjud.com.br/?bui_editid=<id>` com o `bui_editid` do bloco. Isso pula a renderização da home e abre direto o formulário de edição do bloco.
 
 | Bloco | URL |
 |---|---|
@@ -364,12 +391,12 @@ Como descrito na seção 4, acesse `<https://ead.funprespjud.com.br/?bui_editid=
 
 **Opção C — Trocar o editor para "Área de texto simples"** (recomendado para markup complexo)
 
-O TinyMCE preserva markup bem na maioria dos casos, mas se você quiser garantia de que classes, `data-*` e nesting não vão sofrer, troque o editor:
+O TinyMCE preserva markup bem na maioria dos casos, mas se houver receio de que classes, `data-*` e nesting sejam alterados, troque o editor:
 
 1. Menu do usuário (canto superior direito) → **Preferências** (`/user/preferences.php`)
 2. **Preferências do usuário → Preferências do editor**
 3. **Editor de texto**: trocar de `TinyMCE / Atto` → **Área de texto simples** (`textarea`)
-4. Salvar → reabrir o bloco e colar o HTML cru de [html/footer.html](html/footer.html) (ou [html/faq.html](html/faq.html), etc.)
+4. Salvar → reabrir o bloco e colar o HTML cru
 5. Opcional: voltar para TinyMCE depois. A preferência é por usuário, então não afeta outros editores.
 
 ### Onde cada opção faz sentido
@@ -381,16 +408,16 @@ O TinyMCE preserva markup bem na maioria dos casos, mas se você quiser garantia
 
 ---
 
-## 8. JS customizado (script.js)
+## 8. JS customizado
 
-[script.js](script.js) tem 4 IIFEs (Immediately Invoked Function Expressions) independentes. Cada um se auto-detecta pela URL/body id e não roda fora do escopo. Colar inteiro no campo **Custom JS** do Lambda.
+O JavaScript customizado é colado no campo **Custom JS** do Lambda (seção 2.8). É composto por 4 IIFEs (Immediately Invoked Function Expressions) independentes. Cada um se auto-detecta pela URL/body id e não roda fora do escopo.
 
 ### Bloco 1 — Progress bar em "Meus cursos"
 
 - Roda em: páginas com `block_myoverview` (ex.: `/my/courses.php`)
 - O que faz:
   - Lê `.progress-text` de cada `.course-card` → extrai o número `%`
-  - Seta `--progress: <N>%` como CSS var no card (a barra `::after` em `style.css` lê essa var para a largura do preenchimento)
+  - Seta `--progress: <N>%` como CSS var no card (a barra é desenhada via `::after` no CSS, que lê essa var para definir a largura do preenchimento)
   - Seta `data-status` no card: `naoiniciado` (0%), `andamento` (1–99%), `concluido` (100%)
   - Cria um `MutationObserver` em `[data-region="courses-view"]` — re-aplica quando o usuário troca filtro (re-render AJAX dos cards)
 
@@ -403,7 +430,7 @@ O TinyMCE preserva markup bem na maioria dos casos, mas se você quiser garantia
   - Move `.loginform` (e `.loginform-toggle` se existir) para o painel direito
   - Anexa o wrapper direto no `<body>` (escapa qualquer container Bootstrap)
   - Esconde `#page-wrapper` original (com header, nav, etc.)
-  - Marca `body.funp-login-active` (CSS escopado em `.funp-login-active` pode ser adicionado se necessário)
+  - Marca `body.funp-login-active` (escopo CSS adicional pode ser anexado a essa classe se necessário)
 
 ### Bloco 3 — Signup split-screen
 
@@ -424,9 +451,9 @@ O TinyMCE preserva markup bem na maioria dos casos, mas se você quiser garantia
 
 ---
 
-## 9. CSS customizado (style.css)
+## 9. CSS customizado
 
-[style.css](style.css) tem ~2400 linhas, organizado em 8 seções comentadas. Colar inteiro no campo **Custom CSS** do Lambda.
+O CSS customizado é colado no campo **Custom CSS** do Lambda (seção 2.8). Aproximadamente 2400 linhas, organizado em 8 seções comentadas.
 
 ### Estrutura
 
@@ -445,10 +472,10 @@ O TinyMCE preserva markup bem na maioria dos casos, mas se você quiser garantia
 
 O Lambda aplica estilos com seletores muito específicos (ex.: `.block_myoverview > .card-body > h3.card-title`) e, em alguns pontos, estilos inline via Bootstrap utilities. Para vencer essa especificidade sem caçar cada seletor exato do Lambda, as overrides usam `!important` — escopadas em `body#page-<id>` para evitar vazamento.
 
-Regra prática: se adicionar nova regra, **ancorar sempre em `body#page-<id>`** e usar `!important` quando o Lambda já estiver impondo o valor. Não usar `!important` em utilitários novos (`.funp-*`) — esses são markup nosso, sem conflito.
+Regra prática: ao adicionar nova regra, **ancorar sempre em `body#page-<id>`** e usar `!important` quando o Lambda já estiver impondo o valor. Não usar `!important` em utilitários novos (`.funp-*`) — esses são markup nosso, sem conflito.
 
 ### Cuidados
 
 - **Não remover** as regras de `overflow: visible` na cadeia de containers da home (`#page`, `#page-content`, `#region-main-box`, `.card.card-block`, etc.) — o hero full-bleed deixa de funcionar.
 - **Não remover** o `html, body { overflow-x: hidden }` global — o truque `100vw` causa scroll horizontal sem ele.
-- **Não remover** o `MutationObserver` em meus cursos — sem ele, ao trocar filtro a barra de progresso some.
+- **Não remover** o `MutationObserver` em meus cursos (no JS) — sem ele, ao trocar filtro a barra de progresso some.
