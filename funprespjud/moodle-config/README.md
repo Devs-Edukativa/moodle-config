@@ -10,7 +10,6 @@ Documentação de toda a customização aplicada ao Moodle da plataforma EaD FUN
 - [html/about.html](html/about.html) — bloco "Conheça a plataforma" da home
 - [html/faq.html](html/faq.html) — accordion FAQ
 - [html/footer.html](html/footer.html) — markup do footer institucional
-- [docs/screenshots/](docs/screenshots/) — prints dos campos do admin Lambda
 
 ---
 
@@ -19,11 +18,12 @@ Documentação de toda a customização aplicada ao Moodle da plataforma EaD FUN
 1. [Identidade visual (geral)](#1-identidade-visual-geral)
 2. [Tema Lambda — Configurações](#2-tema-lambda--configurações)
 3. [Customizações por página](#3-customizações-por-página)
-4. [FAQ — como adicionar/editar](#4-faq--como-adicionareditar)
-5. [Plugin autoenrol](#5-plugin-autoenrol)
-6. [Footer — workaround do editor TinyMCE](#6-footer--workaround-do-editor-tinymce)
-7. [JS customizado (script.js)](#7-js-customizado-scriptjs)
-8. [CSS customizado (style.css)](#8-css-customizado-stylecss)
+4. [Imagens de fundo (hero / sobre)](#4-imagens-de-fundo-hero--sobre)
+5. [FAQ — como adicionar/editar](#5-faq--como-adicionareditar)
+6. [Plugin autoenrol](#6-plugin-autoenrol)
+7. [Editando blocos HTML — TinyMCE x texto puro](#7-editando-blocos-html--tinymce-x-texto-puro)
+8. [JS customizado (script.js)](#8-js-customizado-scriptjs)
+9. [CSS customizado (style.css)](#9-css-customizado-stylecss)
 
 ---
 
@@ -65,11 +65,9 @@ Fonte única de verdade para cores e fontes. Usar exatamente estes valores nos c
 
 ## 2. Tema Lambda — Configurações
 
-Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada subseção abaixo corresponde a uma aba do tema. Screenshots dos valores aplicados em [docs/screenshots/](docs/screenshots/).
+Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada subseção abaixo corresponde a uma aba do tema.
 
 ### 2.1 Geral
-
-![Lambda — Geral](docs/screenshots/lambda-general.png)
 
 | Campo Lambda | Variável | Valor |
 |---|---|---|
@@ -79,8 +77,6 @@ Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada s
 | Page background color | `theme_lambda2 \| page_bg_color` | `#ffffff` |
 
 ### 2.2 Header
-
-![Lambda — Header](docs/screenshots/lambda-header.png)
 
 | Campo Lambda | Valor |
 |---|---|
@@ -96,8 +92,6 @@ Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada s
 
 ### 2.3 Menu (custom menu + dropdown)
 
-![Lambda — Menu](docs/screenshots/lambda-menu.png)
-
 | Campo Lambda | Valor |
 |---|---|
 | Custom Menu Color (`menufirstlevelcolor`) | `#0f2137` |
@@ -106,8 +100,6 @@ Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada s
 | Menu Drop-down Items - Links (`menusecondlevel_linkcolor`) | `#1a1a1a` |
 
 ### 2.4 Login / Breadcrumb / Search
-
-![Lambda — Login & Nav](docs/screenshots/lambda-login-nav.png)
 
 | Campo Lambda | Valor |
 |---|---|
@@ -120,8 +112,6 @@ Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada s
 
 ### 2.5 Footer (config no admin Lambda)
 
-![Lambda — Footer](docs/screenshots/lambda-footer.png)
-
 | Campo Lambda | Valor |
 |---|---|
 | Footer Background Color (`footercolor`) | `#0f2137` |
@@ -131,11 +121,9 @@ Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada s
 | Footer Copyright Color (`copyrightcolor`) | `#08131f` |
 | Copyright Text Color (`copyright_textcolor`) | `#94a3b8` |
 
-> O **conteúdo** do footer (texto, colunas, logos) é controlado pelo HTML colado num bloco do tema — ver [html/footer.html](html/footer.html) e seção 6 sobre o workaround do editor.
+> O **conteúdo** do footer (texto, colunas, logos) é controlado pelo HTML colado num bloco do tema — ver [html/footer.html](html/footer.html) e seção 7 sobre como acessar os menus de edição do bloco.
 
 ### 2.6 Site Home Options
-
-![Lambda — Site Home](docs/screenshots/lambda-sitehome.png)
 
 | Campo Lambda | Valor |
 |---|---|
@@ -145,9 +133,6 @@ Caminho: **Administração do site → Aparência → Temas → Lambda**. Cada s
 | Blog style for site announcements (`fp_blog_announcements`) | **marcado (ON)** |
 
 ### 2.7 Fontes
-
-![Lambda — Fontes](docs/screenshots/lambda-fonts.png)
-![Lambda — Body / Link](docs/screenshots/lambda-link.png)
 
 | Campo Lambda | Valor |
 |---|---|
@@ -180,7 +165,7 @@ Composta por 3 blocos HTML do Moodle + listagem de cursos do Lambda.
 |---|---|---|
 | Hero + atalhos | Bloco HTML 1 da home (acima da listagem de cursos) | [html/hero.html](html/hero.html) |
 | Conheça a plataforma | Bloco HTML 2 da home (abaixo da listagem de cursos) | [html/about.html](html/about.html) |
-| FAQ | Bloco HTML em página dedicada (ver seção 4) | [html/faq.html](html/faq.html) |
+| FAQ | Bloco HTML em página dedicada (ver seção 5) | [html/faq.html](html/faq.html) |
 
 CSS relacionado: [style.css](style.css) seção 2 (hero + atalhos) e seção 3 (cursos disponíveis).
 
@@ -210,12 +195,12 @@ Layout split-screen (painel brand à esquerda, formulário à direita) montado e
 Mesmo padrão split-screen do login, com painel direito scrollable (form é longo). Inclui várias regras específicas pro `mform` empilhar label + input (Moodle entrega `.col-md-3` + `.col-md-9` horizontal por padrão).
 
 - **Script split-screen**: [script.js](script.js) bloco 3.
-- **CPF + telefone**: [script.js](script.js) bloco 4 (descrito em detalhe na seção 7).
+- **CPF + telefone**: [script.js](script.js) bloco 4 (descrito em detalhe na seção 8).
 - CSS: [style.css](style.css) seção 7.
 
 ### 3.5 Auto-inscrição (`#page-enrol-index`, `/enrol/index.php?id=<courseid>`)
 
-Página servida pelo plugin **autoenrol** (ver seção 5). Estilizada como dois cards empilhados:
+Página servida pelo plugin **autoenrol** (ver seção 6). Estilizada como dois cards empilhados:
 
 1. Card do curso (banner 280px + categoria como eyebrow azul + título grande + descrição).
 2. Card do form de inscrição com **borda esquerda azul** + eyebrow "INSCRIÇÃO" + botão "Inscreva-me" full azul.
@@ -228,11 +213,54 @@ CSS: [style.css](style.css) seção 6. O header da página é o `#lambda-incours
 - Faixa de copyright (`.funp-copyright-row`) full-width fora do container, com fundo `#08131f`.
 - CSS: [style.css](style.css) seção 8.
 
-> **Importante**: editar este HTML pela interface admin exige trocar o editor de TinyMCE para "Área de texto puro" — ver seção 6.
+> **Importante**: os menus de edição do bloco do footer podem não aparecer no layout normal. Ver seção 7 para alcançá-los (zoom out, URL direta `bui_editid`, ou trocar editor para texto simples).
 
 ---
 
-## 4. FAQ — como adicionar/editar
+## 4. Imagens de fundo (hero / sobre)
+
+Os banners de fundo do **hero** (home) e do **"Conheça a plataforma"** não são `<img>` no HTML — são definidos como **`background-image`** em duas classes CSS:
+
+| Bloco | Classe CSS | URL atual da imagem | CSS |
+|---|---|---|---|
+| Hero (topo da home) | `.funp-hero-bg` | `https://ead.funprespjud.com.br/pluginfile.php/601/block_html/content/Banner-Hero%20%281%29.png` | [style.css](style.css) seção 2.8 |
+| Sobre / Conheça | `.funp-known.funp-known-v13` | `https://ead.funprespjud.com.br/pluginfile.php/602/block_html/content/Banner-Institucional%20%281%29.png` | [style.css](style.css) seção 2.12 |
+
+### Por que ficam dentro de `pluginfile.php/<id>/block_html/content/`
+
+Cada bloco HTML do Moodle tem um **id interno** (`601` para o hero, `602` para o sobre — visíveis no path). Quando você faz upload de uma imagem dentro do editor do bloco, ela é armazenada em `pluginfile.php/<bui_id>/block_html/content/<nome-do-arquivo>`. Por isso a URL contém o id do bloco.
+
+### Como editar/trocar uma imagem de fundo
+
+Os blocos HTML da home **não aparecem no fluxo normal de edição da página** (especialmente em telas grandes ou no modo "Site home" do Lambda). O jeito confiável é acessar a URL de edição direta do bloco:
+
+| Bloco | URL de edição |
+|---|---|
+| Hero | <https://ead.funprespjud.com.br/?bui_editid=174> |
+| Sobre | <https://ead.funprespjud.com.br/?bui_editid=175> |
+
+> O parâmetro `bui_editid` é o **block instance id** — diferente do `block_html id` que aparece no path do `pluginfile.php`. Não confundir.
+
+Passos:
+
+1. Logado como admin, acesse a URL de edição do bloco.
+2. No editor do bloco (configurações), use o **gerenciador de arquivos** para enviar/substituir a imagem.
+3. Pegue a URL final do arquivo (ex.: `pluginfile.php/601/block_html/content/Banner-Hero.png`) — Moodle gera essa URL automaticamente.
+4. Atualize a URL no [style.css](style.css):
+   - `.funp-hero-bg { background-image: url("..."); }` (seção 2.8)
+   - `.funp-known.funp-known-v13 { background: ... url("...") ... ; }` (seção 2.12)
+5. Salvar → **Purgar caches** (Administração → Desenvolvimento → Purgar todos os caches).
+
+### Observações
+
+- **Dimensões recomendadas**: largura mínima `1920px`, altura `~720px` (hero) / `~480px` (sobre). Imagens menores ficam borradas em telas grandes.
+- **Formato**: PNG ou JPG. PNG só se for arte com transparência/elementos gráficos; JPG para fotos institucionais (peso menor).
+- **Codificar espaços no nome**: o Moodle aceita arquivos com espaços, mas a URL fica com `%20`. Para evitar confusão, **renomeie sem espaços** (`Banner-Hero.png` em vez de `Banner Hero.png`).
+- A imagem **não é referenciada no HTML do bloco** — o bloco serve só como "container" para hospedar o arquivo. Se você apagar o bloco, perde o arquivo.
+
+---
+
+## 5. FAQ — como adicionar/editar
 
 **Arquivo fonte**: [html/faq.html](html/faq.html).
 
@@ -268,11 +296,11 @@ Substitua `{N}` por um número sequencial (próximo disponível), `{PERGUNTA}` p
 - [ ] `data-bs-target="#funpFaqC{N}"` casa com `id="funpFaqC{N}"`
 - [ ] `aria-labelledby="funpFaqH{N}"` casa com `id="funpFaqH{N}"`
 - [ ] `data-bs-parent="#funpFaq"` mantido (garante que abrir uma fecha as outras)
-- [ ] Salvar com editor em **modo texto puro** (TinyMCE corrompe `data-*`) — mesmo workaround do footer (seção 6)
+- [ ] Recomendado salvar com editor em **modo texto puro** para garantir que `data-bs-toggle` / `data-bs-target` não sofram alteração — ver seção 7 (Opção C)
 
 ---
 
-## 5. Plugin autoenrol
+## 6. Plugin autoenrol
 
 Repositório: <https://github.com/bobopinna/moodle-enrol_autoenrol> (fork mantido por Roberto Pinna a partir do `markward/enrol_autoenrol`).
 
@@ -311,34 +339,49 @@ URL: `/enrol/index.php?id=<courseid>` (body `#page-enrol-index`). O CSS custom p
 
 ---
 
-## 6. Footer — workaround do editor TinyMCE
+## 7. Editando blocos HTML — TinyMCE x texto puro
 
-**Sintoma**: ao editar o bloco HTML do footer (ou qualquer bloco com markup denso de classes Bootstrap + grid customizado) pelo editor TinyMCE padrão do Moodle/Lambda, o HTML salvo perde classes (`.funp-footer-grid`, `.funp-copyright-row`, etc.), atributos `data-*` e reordena nós — o layout quebra.
+**Problema real**: ao tentar editar o **bloco do footer** (e em menor grau o do FAQ), os controles de edição do bloco simplesmente **não aparecem** na tela — o bloco fica visível, mas os ícones de configuração/lápis ficam fora do viewport ou sobrepostos pelo layout do tema. Não é sanitização do TinyMCE; é só que o painel admin do bloco não está renderizando os menus de forma acessível.
 
-**Causa**: o TinyMCE faz sanitização agressiva do HTML que ele não reconhece como "conteúdo de editor" — divs aninhadas com classes utilitárias acabam reescritas.
+### Soluções (qualquer uma resolve)
 
-**Solução**: trocar o editor padrão do usuário admin (quem edita o footer) para **Área de texto simples** apenas na hora de salvar o bloco.
+**Opção A — Zoom out extremo no navegador** (mais rápido)
 
-### Passo a passo
+1. `Ctrl + -` várias vezes (Cmd + - no macOS), até o zoom ficar em ~25–33%.
+2. Os menus de configuração do bloco aparecem (geralmente fora do viewport em zoom 100%).
+3. Clique em configurar → editar conteúdo do bloco.
+4. Volte o zoom ao normal depois.
 
-1. No canto superior direito → menu do usuário → **Preferências** (ou `/user/preferences.php`)
-2. Seção **Preferências do usuário** → **Preferências do editor**
-3. Trocar **Editor de texto** de `Editor Atto / TinyMCE` → **Área de texto simples** (`textarea`)
-4. Salvar
-5. Voltar ao bloco do footer → editar → colar o HTML cru de [html/footer.html](html/footer.html) → salvar
-6. **Opcional**: voltar o editor para TinyMCE depois (mas qualquer reedição quebra de novo — preferível manter como `textarea` para o usuário admin que mantém esses blocos)
+**Opção B — Editar pela URL direta do bloco**
 
-### Onde isso se aplica
+Como descrito na seção 4, acesse `<https://ead.funprespjud.com.br/?bui_editid=<id>>` com o `bui_editid` do bloco. Isso pula a renderização da home e abre direto o formulário de edição do bloco.
 
-- **Bloco HTML do footer** (sempre — markup mais complexo)
-- **Bloco HTML do FAQ** (recomendado — `data-bs-toggle` e `data-bs-target` podem ser corrompidos)
-- **Blocos HTML do hero e about** (recomendado — `<svg>` inline e classes Lucide podem ser corrompidos)
+| Bloco | URL |
+|---|---|
+| Hero | `?bui_editid=174` |
+| Sobre | `?bui_editid=175` |
+| Footer / FAQ | descobrir o `bui_editid` na primeira vez via Opção A → registrar aqui |
 
-Outras áreas (descrições de curso, fóruns, etc.) podem continuar usando TinyMCE normalmente.
+**Opção C — Trocar o editor para "Área de texto simples"** (recomendado para markup complexo)
+
+O TinyMCE preserva markup bem na maioria dos casos, mas se você quiser garantia de que classes, `data-*` e nesting não vão sofrer, troque o editor:
+
+1. Menu do usuário (canto superior direito) → **Preferências** (`/user/preferences.php`)
+2. **Preferências do usuário → Preferências do editor**
+3. **Editor de texto**: trocar de `TinyMCE / Atto` → **Área de texto simples** (`textarea`)
+4. Salvar → reabrir o bloco e colar o HTML cru de [html/footer.html](html/footer.html) (ou [html/faq.html](html/faq.html), etc.)
+5. Opcional: voltar para TinyMCE depois. A preferência é por usuário, então não afeta outros editores.
+
+### Onde cada opção faz sentido
+
+- **Footer**: Opção A ou B para alcançar o menu; Opção C se preferir editar como texto puro.
+- **FAQ**: Opção C recomendada (`data-bs-toggle` / `data-bs-target` são críticos para o accordion).
+- **Hero / Sobre**: Opção B (URL direta) é a mais prática.
+- Descrições de curso, fóruns, posts: TinyMCE normal — sem necessidade de mudar nada.
 
 ---
 
-## 7. JS customizado (script.js)
+## 8. JS customizado (script.js)
 
 [script.js](script.js) tem 4 IIFEs (Immediately Invoked Function Expressions) independentes. Cada um se auto-detecta pela URL/body id e não roda fora do escopo. Colar inteiro no campo **Custom JS** do Lambda.
 
@@ -381,7 +424,7 @@ Outras áreas (descrições de curso, fóruns, etc.) podem continuar usando Tiny
 
 ---
 
-## 8. CSS customizado (style.css)
+## 9. CSS customizado (style.css)
 
 [style.css](style.css) tem ~2400 linhas, organizado em 8 seções comentadas. Colar inteiro no campo **Custom CSS** do Lambda.
 
