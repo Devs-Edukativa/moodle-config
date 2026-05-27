@@ -31,7 +31,6 @@
      8. Footer global
    ═══════════════════════════════════════════════════════════ */
 
-
 /* ═══════════════════════════════════════════════════════════
    1. BASE & TIPOGRAFIA
    ═══════════════════════════════════════════════════════════ */
@@ -97,7 +96,6 @@ footer a:hover,
   color: #fbba00 !important;
   text-decoration: none;
 }
-
 
 /* ═══════════════════════════════════════════════════════════
    2. HOME PÚBLICA — #page-site-index
@@ -276,7 +274,7 @@ img.funp-media-holder {
 }
 
 .funp-hero-bg {
-  background-image: url("https://ead.funprespjud.com.br/pluginfile.php/601/block_html/content/Banner-Hero.png");
+  background-image: url("https://ead.funprespjud.com.br/pluginfile.php/601/block_html/content/Banner-Hero%20%281%29.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -479,7 +477,7 @@ img.funp-media-holder {
       rgba(10, 26, 46, 0.88) 72%,
       rgba(10, 26, 46, 0.96) 100%
     ),
-    url("https://ead.funprespjud.com.br/pluginfile.php/602/block_html/content/Banner-Institucional.png")
+    url("https://ead.funprespjud.com.br/pluginfile.php/602/block_html/content/Banner-Institucional%20%281%29.png")
       15% top / cover no-repeat;
   color: #fff;
   padding: 64px 0;
@@ -527,7 +525,7 @@ img.funp-media-holder {
 .funp-known.funp-known-v13 p {
   font-size: 14.5px;
   line-height: 1.65;
-  color: rgba(255, 255, 255, 0.80);
+  color: rgba(255, 255, 255, 0.8);
   margin: 0 0 12px;
   max-width: 540px;
 }
@@ -572,7 +570,6 @@ img.funp-media-holder {
   background: #e8ac00;
   color: #2a1d00 !important;
 }
-
 
 /* ═══════════════════════════════════════════════════════════
    3. CURSOS DISPONÍVEIS — frontpage course list
@@ -756,7 +753,6 @@ img.funp-media-holder {
 #page-site-index .coursebox .summary .coursename a:hover {
   color: #0578be !important;
 }
-
 
 /* ═══════════════════════════════════════════════════════════
    4. MEUS CURSOS — body#page-my-index (/my/courses.php)
@@ -1129,7 +1125,6 @@ body#page-my-index
   .progress-text::after {
   background: #d8dde3 !important;
 }
-
 
 /* ═══════════════════════════════════════════════════════════
    5. LOGIN — body#page-login-index (split-screen v3 + v3.4)
@@ -1671,7 +1666,6 @@ html body#page-login-index .funp-login-form .login-signup .btn-secondary:hover {
   color: #fff !important;
 }
 
-
 /* ═══════════════════════════════════════════════════════════
    6. AUTO-INSCRIÇÃO — body#page-enrol-index (enrol_self)
    ───────────────────────────────────────────────────────────
@@ -1985,7 +1979,6 @@ body#page-enrol-index .enrol-instance + .enrol-instance {
     padding-right: 20px !important;
   }
 }
-
 
 /* ═══════════════════════════════════════════════════════════
    7. SIGNUP — body#page-login-signup (/login/signup.php)
@@ -2338,7 +2331,6 @@ body#page-login-signup .loginform-toggle .lambda-toggle {
     font-size: 24px !important;
   }
 }
-
 
 /* ═══════════════════════════════════════════════════════════
    8. FOOTER GLOBAL
