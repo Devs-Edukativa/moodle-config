@@ -242,6 +242,13 @@ body.pagelayout-frontpage {
 }
 
 /* 2.8 — Hero principal (fundo azul-marinho). */
+
+.funp-media-holder,
+.funp-media-holder img,
+img.funp-media-holder {
+  display: none !important;
+}
+
 .funp-hero {
   background: #0f2137;
   color: #fff;
@@ -267,6 +274,14 @@ body.pagelayout-frontpage {
   max-width: 480px;
   margin-bottom: 26px;
 }
+
+.funp-hero-bg {
+  background-image: url("https://ead.funprespjud.com.br/pluginfile.php/601/block_html/content/Banner-Hero.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .funp-btn-primary {
   background: #0578be;
   color: #fff !important;
@@ -361,14 +376,12 @@ body.pagelayout-frontpage {
   width: 36px !important;
   height: 36px !important;
   display: block !important;
-  fill: none !important;
   stroke: currentColor !important;
   stroke-width: 2 !important;
   stroke-linecap: round !important;
   stroke-linejoin: round !important;
 }
 .funp-shortcut-icon svg * {
-  fill: none !important;
   stroke: currentColor !important;
 }
 
