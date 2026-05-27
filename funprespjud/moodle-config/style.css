@@ -2333,6 +2333,28 @@ body#page-login-signup .loginform-toggle .lambda-toggle {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   7.14. FAQ (Perguntas Frequentes)
+   ───────────────────────────────────────────────────────────
+   Accordion centralizado com margem lateral coerente
+   com o restante das seções (max-width 1320px).
+   ═══════════════════════════════════════════════════════════ */
+.funp-faq {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+.funp-faq-intro {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .funp-faq {
+    padding: 24px 16px 32px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
    8. FOOTER GLOBAL
    ───────────────────────────────────────────────────────────
    Footer institucional dark (fundo #0a1626) com grid 4 colunas
@@ -2355,9 +2377,10 @@ body {
 /* 8.1 — Grid 4 colunas (proporções desbalanceadas conforme conteúdo). */
 .funp-footer-grid {
   display: grid;
-  grid-template-columns: 1fr 1.4fr 1.4fr 1.6fr;
-  gap: 20px;
+  grid-template-columns: 1.6fr 1fr 1.2fr;
+  gap: 40px;
   align-items: start;
+  justify-items: start;
   max-width: 1320px;
   margin: 0 auto;
   padding: 40px 24px 28px;
@@ -2380,16 +2403,13 @@ body {
   margin-top: 18px !important;
 }
 .funp-footer-block ul {
-  list-style: disc;
-  padding-left: 18px;
+  list-style: none;
+  padding-left: 0;
   margin: 0;
 }
 .funp-footer-block ul li {
   margin: 0 0 4px;
   color: #ffffff !important;
-}
-.funp-footer-block ul li::marker {
-  color: rgba(255, 255, 255, 0.5);
 }
 .funp-footer-block a {
   color: #e6ecf3 !important;
@@ -2405,7 +2425,7 @@ body {
 }
 
 .funp-footer-logo img {
-  max-width: 180px;
+  max-width: 320px;
   height: auto;
   display: block;
   /* filter: brightness(0) invert(1);  ← descomente para forçar logo branco */
