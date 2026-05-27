@@ -282,6 +282,21 @@ img.funp-media-holder {
   background-repeat: no-repeat;
 }
 
+.funp-hero .funp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+.funp-hero .funp-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: #fbba00;
+}
+
 .funp-btn-primary {
   background: #0578be;
   color: #fff !important;
@@ -438,6 +453,124 @@ img.funp-media-holder {
   .funp-known .container-fluid {
     padding: 0 20px;
   }
+
+  .funp-known.funp-known-v13 {
+    padding: 40px 0;
+  }
+  .funp-known.funp-known-v13 .container-fluid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .funp-known.funp-known-v13 .container-fluid::before {
+    display: none;
+  }
+  .funp-known.funp-known-v13 h2 {
+    font-size: 26px;
+  }
+}
+
+/* ─── 2.12 — Sobre o Portal · variante V13 (banner BG + manifesto) ─── */
+.funp-known.funp-known-v13 {
+  background:
+    linear-gradient(
+      85deg,
+      rgba(10, 26, 46, 0.15) 0%,
+      rgba(10, 26, 46, 0.45) 38%,
+      rgba(10, 26, 46, 0.88) 72%,
+      rgba(10, 26, 46, 0.96) 100%
+    ),
+    url("https://ead.funprespjud.com.br/pluginfile.php/602/block_html/content/Banner-Institucional.png")
+      15% top / cover no-repeat;
+  color: #fff;
+  padding: 64px 0;
+  margin-top: 0;
+}
+.funp-known.funp-known-v13 .container-fluid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: center;
+}
+/* coluna vazia à esquerda só pra empurrar o conteúdo pra direita */
+.funp-known.funp-known-v13 .container-fluid::before {
+  content: "";
+  display: block;
+  min-height: 80px;
+}
+.funp-known.funp-known-v13 .funp-known-inner {
+  max-width: 580px;
+  color: #fff;
+}
+.funp-known.funp-known-v13 .funp-known-accent {
+  width: 50px;
+  height: 3px;
+  background: #fbba00;
+  margin-bottom: 12px;
+  border-radius: 2px;
+}
+/* eyebrow em azul claro pra contrastar com o navy do BG */
+.funp-eyebrow.funp-eyebrow-light {
+  color: #7cc4f0;
+}
+.funp-known.funp-known-v13 h2 {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.12;
+  margin: 12px 0 16px;
+  color: #fff;
+  letter-spacing: -0.4px;
+}
+.funp-known.funp-known-v13 h2 em {
+  font-style: normal;
+  color: #fbba00;
+}
+.funp-known.funp-known-v13 p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.80);
+  margin: 0 0 12px;
+  max-width: 540px;
+}
+.funp-known.funp-known-v13 p.funp-known-lede {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 15.5px;
+}
+.funp-known.funp-known-v13 .funp-known-ctas {
+  margin-top: 22px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.funp-known.funp-known-v13 .funp-known-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid #fbba00;
+  padding-bottom: 2px;
+  transition: color 0.15s;
+}
+.funp-known.funp-known-v13 .funp-known-link:hover {
+  color: #fbba00;
+}
+
+/* ─── 2.13 — CTA amber (novo padrão) ─── */
+.funp-btn-amber {
+  background: #fbba00;
+  color: #2a1d00 !important;
+  padding: 12px 26px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 2px;
+  transition: background 0.15s;
+  letter-spacing: 0.3px;
+}
+.funp-btn-amber:hover {
+  background: #e8ac00;
+  color: #2a1d00 !important;
 }
 
 
