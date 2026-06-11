@@ -1,7 +1,8 @@
 # Respostas ao Feedback do Cliente — UX do Portal Educa Funpresp-Jud
 
-> **Status:** rascunho em construção. As respostas serão refinadas conforme os
-> ajustes forem implementados, parte por parte.
+> **Status:** respostas finalizadas para envio. Pendências restantes (itens 2
+> e 5) dependem de decisão do cliente e de verificação no painel admin do
+> Moodle — não de código deste repositório.
 >
 > Cada item traz: a **resposta sugerida** (texto pronto para envio ao cliente)
 > e uma **nota interna** (o que é nativo do Moodle vs. ajustável por nós, e o
@@ -107,6 +108,9 @@ que a ordem dos cursos difere entre o Catálogo e a página inicial?
 
 **Nota interna:**
 
+- **O que é a seção "Cursos disponíveis":** é o course list nativo da
+  frontpage do Moodle, renderizado pelo tema Lambda (estilizado pelo nosso
+  CSS §3). Não é bloco HTML custom — conteúdo, limite e ordem vêm do core.
 - Tudo configuração de admin do Moodle, não CSS:
   - Limite da vitrine: `frontpagecourselimit` + itens da frontpage.
   - Visualização sem login: `forcelogin` / acesso visitante por curso.
@@ -131,22 +135,26 @@ andamento / finalizados / todos).
 
 **Resposta sugerida:**
 
-> A sugestão está alinhada com recursos que o próprio Moodle já oferece
-> nativamente: a área "Meus cursos" possui filtros de "Em andamento",
-> "Concluídos" (Encerrados), "Futuros" e "Todos", além de ordenação por último
-> acesso. Vamos verificar a exposição desses filtros no tema atual e garantir
-> que estejam visíveis e funcionais, priorizando a visualização "Em andamento"
-> como padrão. A separação visual entre cursos em andamento e finalizados será
-> avaliada dentro do que o tema permite.
+> A funcionalidade sugerida já está disponível na plataforma: a área "Meus
+> cursos" possui, nativamente, o seletor de filtros no topo da listagem, com
+> as opções "Todos", "Em andamento", "Não iniciados", "Encerrados",
+> "Favoritos" e "Removido da visualização", além do campo de busca por nome
+> do curso. Com o filtro "Em andamento", o usuário visualiza imediatamente
+> apenas os cursos que demandam continuidade, exatamente como proposto. A
+> seleção fica registrada para os próximos acessos, de modo que cada usuário
+> pode manter a visualização que preferir como padrão.
 
 **Nota interna:**
 
 - Filtros são nativos do bloco Course Overview / página "My courses" do
-  Moodle 4.x. Se o tema Lambda estiver escondendo, é ajuste de tema/CSS.
+  Moodle 4.x. **Verificado em produção: já estão expostos** — Todos, Em
+  andamento, Não iniciados, Encerrados, Favoritos, Removido da visualização,
+  além do campo Buscar.
 - Agrupamento em duas seções empilhadas (andamento em cima, concluídos
   embaixo) **não é nativo** — exigiria customização maior; os filtros
   resolvem a maior parte do pedido.
-- **Status:** ⬜ pendente — verificar exposição dos filtros no Lambda
+- **Status:** ✅ resolvido — filtros nativos já disponíveis; resposta ao
+  cliente pode apontar para eles
 
 ---
 
@@ -232,7 +240,7 @@ externo.
 | 1a | Tela branca no login autenticado | `style.css` + `script.js` | Bug fix | ✅ |
 | 1b | CTA "Acessar plataforma" → `/my/` se logado | `script.js` | Melhoria | ✅ |
 | 2 | Catálogo vs Cursos disponíveis (vitrine, ordenação, login) | Admin Moodle | Config + decisão do cliente | ⬜ |
-| 3 | Filtros em "Meus cursos" | Admin Moodle / tema | Verificação | ⬜ |
+| 3 | Filtros em "Meus cursos" | Admin Moodle / tema | Verificação | ✅ |
 | 4 | Área central + menu lateral | — | Nativo, sem ação | ✅ |
 | 5 | Botão "Avançar" entre módulos | Settings Lambda / plugin | Verificação | ⬜ |
 | 6 | FAQ contextual | `html/faq.html` | Copywriting | ✅ |
