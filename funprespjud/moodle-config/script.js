@@ -127,9 +127,9 @@
     brand.className = 'funp-login-brand';
     brand.innerHTML =
       '<div>' +
-      '<div class="funp-brand-eyebrow">Plataforma EaD</div>' +
-      '<h1>Bem-vindo de volta<br><em>à sua jornada.</em></h1>' +
-      '<p class="funp-brand-lede">Capacitação em previdência complementar, educação financeira e gestão de fundos de pensão — feita para servidores do Judiciário, MPU e CNMP.</p>' +
+      '<div class="funp-brand-eyebrow">Portal Educa Funpresp-Jud</div>' +
+      '<h1>Bem-vindo à sua jornada de capacitação com a Funpresp-Jud!</h1>' +
+      '<p class="funp-brand-lede">Capacitação em educação financeira, previdência complementar e previdenciária — feita para servidores do Judiciário da União, MPU, CNMP, Conselheiros e Representantes Funpresp-Jud.</p>' +
       '</div>' +
       '<div class="funp-brand-footer">© ' + new Date().getFullYear() +
       ' Fundação de Previdência Complementar do Servidor Público Federal do Poder Judiciário</div>';
