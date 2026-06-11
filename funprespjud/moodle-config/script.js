@@ -27,6 +27,8 @@
                       • Máscara CPF em #id_username e #id_profile_field_CPF
                       • Máscara telefone BR em inputs com "telefone" no name/id
                       • Limpa formatação no submit (Moodle salva só dígitos)
+     5. CTA inteligente — hero da home aponta pra /my/ se logado
+                      (escopo: body#page-site-index)
    ═══════════════════════════════════════════════════════════ */
 
 
@@ -112,9 +114,21 @@
     if (document.querySelector('.funp-login-wrapper')) return;
 
     // 1) Pega o .loginform inteiro (é o que o Lambda envolve no login).
+    //    Ausente em dois cenários: usuário já autenticado (Moodle mostra
+    //    "você já está logado" com o mesmo body id) ou mudança de markup
+    //    do Lambda. Sem este guard a página ficava em branco, porque o
+    //    CSS 5.1 esconde o chrome contando com o wrapper que nunca nasce.
     var loginform = document.querySelector('.loginform');
     if (!loginform) {
-      console.warn('[funp-login] .loginform não encontrado');
+      if (!document.body.classList.contains('notloggedin')) {
+        // Já autenticado — manda direto pro painel.
+        window.location.replace('/my/');
+        return;
+      }
+      // Markup mudou — reexibe a página nativa do Moodle (CSS 5.1 ignora
+      // o hide quando .funp-login-fallback está presente).
+      console.warn('[funp-login] .loginform não encontrado — fallback nativo');
+      document.body.classList.add('funp-login-fallback');
       return;
     }
 
@@ -200,7 +214,11 @@
     // Pega o .signupform inteiro (equivalente ao .loginform aqui).
     var signupform = document.querySelector('.signupform');
     if (!signupform) {
-      console.warn('[funp-signup] .signupform não encontrado');
+      // Sem form não dá pra montar o split-screen — reexibe a página
+      // nativa em vez de deixá-la em branco (CSS ignora o hide quando
+      // .funp-login-fallback está presente).
+      console.warn('[funp-signup] .signupform não encontrado — fallback nativo');
+      document.body.classList.add('funp-login-fallback');
       return;
     }
 
@@ -406,5 +424,38 @@
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+  }
+})();
+
+
+/* ═══════════════════════════════════════════════════════════
+   5. CTA INTELIGENTE — "Acessar plataforma" na home
+   ───────────────────────────────────────────────────────────
+   Roda só em body#page-site-index. Se o usuário já está
+   autenticado (body sem .notloggedin), o CTA do hero passa a
+   apontar pro painel /my/ em vez da tela de login, com label
+   ajustado. Evita o caminho home → login → "já está logado".
+
+   HTML correspondente: html/hero.html (.funp-hero-ctas a).
+   ═══════════════════════════════════════════════════════════ */
+(function () {
+  function smartCTA() {
+    // Guard 1 — só na home pública.
+    if (document.body.id !== 'page-site-index') return;
+    // Guard 2 — visitante não autenticado mantém o fluxo de login.
+    if (document.body.classList.contains('notloggedin')) return;
+
+    document
+      .querySelectorAll('.funp-hero-ctas a[href*="/login/"]')
+      .forEach(function (cta) {
+        cta.href = '/my/';
+        cta.textContent = 'Ir para meus cursos';
+      });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', smartCTA);
+  } else {
+    smartCTA();
   }
 })();

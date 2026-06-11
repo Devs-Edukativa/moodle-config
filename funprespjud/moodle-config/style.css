@@ -250,7 +250,9 @@ img.funp-media-holder {
 .funp-hero {
   background: #0f2137;
   color: #fff;
-  padding: 64px 0 96px;
+  /* Proporção reduzida para aproximar do banner do portal
+     institucional (~4:1 — slider 1200x300 em funprespjud.com.br). */
+  padding: 40px 0 72px;
 }
 .funp-eyebrow {
   color: #fbba00;
@@ -261,7 +263,7 @@ img.funp-media-holder {
   margin-bottom: 14px;
 }
 .funp-hero h1 {
-  font-size: 44px;
+  font-size: 38px;
   font-weight: 800;
   line-height: 1.1;
   margin: 0 0 18px;
@@ -284,8 +286,9 @@ img.funp-media-holder {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  font-size: 13px;
+  font-size: 20px;
   letter-spacing: 3px;
+  font-weight: 700;
 }
 .funp-hero .funp-eyebrow::before {
   content: "";
@@ -438,10 +441,13 @@ img.funp-media-holder {
 /* 2.11 — Responsivo home. */
 @media (max-width: 768px) {
   .funp-hero {
-    padding: 48px 0 80px;
+    padding: 32px 0 60px;
   }
   .funp-hero h1 {
-    font-size: 32px;
+    font-size: 28px;
+  }
+  .funp-hero .funp-eyebrow {
+    font-size: 16px;
   }
   .funp-shortcuts-wrap {
     margin-top: -30px;
@@ -1135,22 +1141,25 @@ body#page-my-index
    e centralização vertical do painel esquerdo.
    ═══════════════════════════════════════════════════════════ */
 
-/* 5.1 — Reset: esconde todo o chrome do Moodle/Lambda. */
+/* 5.1 — Reset: esconde todo o chrome do Moodle/Lambda.
+   .funp-login-fallback é adicionada pelo script.js quando o split-screen
+   não pode ser montado (ex.: markup do Lambda mudou) — nesse caso a
+   página nativa volta a aparecer em vez de ficar em branco. */
 html body#page-login-index {
   background: #fff !important;
   margin: 0 !important;
   padding: 0 !important;
 }
-html body#page-login-index #page-wrapper,
-html body#page-login-index #page,
-html body#page-login-index #page-content,
-html body#page-login-index #page-header,
-html body#page-login-index #page-navbar,
-html body#page-login-index .navbar,
-html body#page-login-index .breadcrumb-nav,
-html body#page-login-index .breadcrumb-section,
-html body#page-login-index footer.py-3,
-html body#page-login-index #page-footer {
+html body#page-login-index:not(.funp-login-fallback) #page-wrapper,
+html body#page-login-index:not(.funp-login-fallback) #page,
+html body#page-login-index:not(.funp-login-fallback) #page-content,
+html body#page-login-index:not(.funp-login-fallback) #page-header,
+html body#page-login-index:not(.funp-login-fallback) #page-navbar,
+html body#page-login-index:not(.funp-login-fallback) .navbar,
+html body#page-login-index:not(.funp-login-fallback) .breadcrumb-nav,
+html body#page-login-index:not(.funp-login-fallback) .breadcrumb-section,
+html body#page-login-index:not(.funp-login-fallback) footer.py-3,
+html body#page-login-index:not(.funp-login-fallback) #page-footer {
   display: none !important;
 }
 
@@ -1245,13 +1254,15 @@ html body#page-login-index .funp-login-form-inner {
 /* 5.5 — Logo Funpresp (mantém SVG do Moodle, só ajusta tamanho). */
 html body#page-login-index .funp-login-form #loginlogo,
 html body#page-login-index .funp-login-form .login-logo {
-  text-align: left !important;
+  text-align: center !important;
   margin-bottom: 28px !important;
 }
 html body#page-login-index .funp-login-form #loginlogo img,
 html body#page-login-index .funp-login-form .login-logo img {
   max-height: 44px !important;
   width: auto !important;
+  margin: 0 auto !important;
+  display: inline-block !important;
 }
 html body#page-login-index .funp-login-form .login-heading.visually-hidden {
   display: none !important;
@@ -1987,22 +1998,25 @@ body#page-enrol-index .enrol-instance + .enrol-instance {
    split-screen, mas com painel direito scrollable (form longo).
    ═══════════════════════════════════════════════════════════ */
 
-/* 7.1 — Reset do chrome Moodle/Lambda. */
+/* 7.1 — Reset do chrome Moodle/Lambda.
+   .funp-login-fallback (adicionada pelo script.js quando o split-screen
+   não pode ser montado) reexibe a página nativa em vez de deixá-la
+   em branco. */
 html body#page-login-signup {
   background: #fff !important;
   margin: 0 !important;
   padding: 0 !important;
 }
-html body#page-login-signup #page-wrapper,
-html body#page-login-signup #page,
-html body#page-login-signup #page-content,
-html body#page-login-signup #page-header,
-html body#page-login-signup #page-navbar,
-html body#page-login-signup .navbar,
-html body#page-login-signup .breadcrumb-nav,
-html body#page-login-signup .breadcrumb-section,
-html body#page-login-signup footer.py-3,
-html body#page-login-signup #page-footer {
+html body#page-login-signup:not(.funp-login-fallback) #page-wrapper,
+html body#page-login-signup:not(.funp-login-fallback) #page,
+html body#page-login-signup:not(.funp-login-fallback) #page-content,
+html body#page-login-signup:not(.funp-login-fallback) #page-header,
+html body#page-login-signup:not(.funp-login-fallback) #page-navbar,
+html body#page-login-signup:not(.funp-login-fallback) .navbar,
+html body#page-login-signup:not(.funp-login-fallback) .breadcrumb-nav,
+html body#page-login-signup:not(.funp-login-fallback) .breadcrumb-section,
+html body#page-login-signup:not(.funp-login-fallback) footer.py-3,
+html body#page-login-signup:not(.funp-login-fallback) #page-footer {
   display: none !important;
 }
 
@@ -2095,6 +2109,24 @@ html body#page-login-signup .funp-login-form-inner {
   width: 100% !important;
   max-width: 480px !important;
   padding: 56px 40px !important;
+}
+
+/* 7.4b — Logo Funpresp centralizada no cadastro. */
+html body#page-login-signup .funp-login-form #loginlogo,
+html body#page-login-signup .funp-login-form .login-logo,
+html body#page-login-signup .signupform #loginlogo,
+html body#page-login-signup .signupform .login-logo {
+  text-align: center !important;
+  margin-bottom: 28px !important;
+}
+html body#page-login-signup .funp-login-form #loginlogo img,
+html body#page-login-signup .funp-login-form .login-logo img,
+html body#page-login-signup .signupform #loginlogo img,
+html body#page-login-signup .signupform .login-logo img {
+  max-height: 44px !important;
+  width: auto !important;
+  margin: 0 auto !important;
+  display: inline-block !important;
 }
 
 /* 7.5 — H1 com eyebrow "CADASTRO" injetado via ::before. */
