@@ -275,34 +275,66 @@
 
 
 /* ═══════════════════════════════════════════════════════════
-   4. CPF + TELEFONE — máscaras globais
+   4. CPF + TELEFONE — comportamento por página
    ───────────────────────────────────────────────────────────
-   Roda em qualquer página. Faz três coisas:
+   O campo de fluxo difere entre LOGIN e CADASTRO:
 
-   (a) Renomeia labels "Username"/"Nome de usuário" para "CPF"
-       — visualmente no login e signup.
-   (b) Aplica máscara CPF (000.000.000-00) em #id_username e
-       #id_profile_field_CPF. Limita a 11 dígitos.
-   (c) Aplica máscara telefone BR ((XX) XXXXX-XXXX) em inputs
-       cujo name OU id contenham "telefone".
+   • CADASTRO (body#page-login-signup): username É o CPF.
+       - Label vira "CPF", placeholder 000.000.000-00.
+       - Aceita SÓ números (máscara strict, sem letras).
+       - Valida dígito verificador no submit; CPF inválido
+         BLOQUEIA o envio e mostra mensagem inline.
 
-   ⚠ Compat com usuários antigos:
-   - Se o input contém letras (username texto legado), NÃO
-     formata e NÃO limpa no submit.
-   - Só remove pontuação no submit quando a entrada é
-     puramente numérica com . ou -.
+   • LOGIN (body#page-login-index): username = CPF OU e-mail.
+       - Label vira "CPF ou e-mail".
+       - SEM máscara/validação (e-mail tem letras e seria
+         quebrado pela máscara CPF).
+
+   • PERFIL (qualquer página): #id_profile_field_CPF recebe
+     máscara CPF (strict, só números).
+
+   • TELEFONE (qualquer página): máscara BR ((XX) XXXXX-XXXX)
+     em inputs cujo name OU id contenham "telefone".
 
    ⚠ Persistência no Moodle:
    - O Moodle SALVA só dígitos (12345678901). A máscara é
      puramente visual; o submit handler limpa antes de enviar.
+
+   ⚠ Login por e-mail é setting de servidor (Admin → Plugins →
+     Autenticação → "Permitir login via e-mail"). O frontend só
+     deixa o campo aceitar o e-mail; o backend precisa do toggle.
    ═══════════════════════════════════════════════════════════ */
 (function () {
   /**
-   * Troca o texto "Username"/"Nome de usuário" para "CPF" nos
-   * labels e placeholders associados ao input de username.
-   * Mantém estrutura de filhos (ícones, .form-label-addon, etc.).
+   * Valida CPF pela regra oficial (dígitos verificadores).
+   * Entrada: string qualquer; considera só os dígitos.
+   * Rejeita comprimento != 11 e sequências repetidas (111... etc).
    */
-  function renameUsernameToCPF() {
+  function isValidCPF(value) {
+    var cpf = (value || '').replace(/\D/g, '');
+    if (cpf.length !== 11) return false;
+    if (/^(\d)\1{10}$/.test(cpf)) return false; // todos iguais
+    var sum, rest, i;
+    sum = 0;
+    for (i = 1; i <= 9; i++) sum += parseInt(cpf.charAt(i - 1), 10) * (11 - i);
+    rest = (sum * 10) % 11;
+    if (rest === 10 || rest === 11) rest = 0;
+    if (rest !== parseInt(cpf.charAt(9), 10)) return false;
+    sum = 0;
+    for (i = 1; i <= 10; i++) sum += parseInt(cpf.charAt(i - 1), 10) * (12 - i);
+    rest = (sum * 10) % 11;
+    if (rest === 10 || rest === 11) rest = 0;
+    if (rest !== parseInt(cpf.charAt(10), 10)) return false;
+    return true;
+  }
+
+  /**
+   * Troca o texto do label/placeholder do input de username.
+   * Mantém estrutura de filhos (ícones, .form-label-addon, etc.).
+   * @param {string} newText     texto que substitui "username"/"nome de usuário"
+   * @param {string} placeholder placeholder aplicado ao input
+   */
+  function renameUsernameLabel(newText, placeholder) {
     document.querySelectorAll('label').forEach(function (label) {
       var forAttr = (label.getAttribute('for') || '').toLowerCase();
       var idAttr = (label.id || '').toLowerCase();
@@ -313,15 +345,15 @@
       label.childNodes.forEach(function (n) {
         if (n.nodeType === 3 && /username|nome de usuário/i.test(n.textContent)) {
           n.textContent = n.textContent
-            .replace(/nome de usuário/gi, 'CPF')
-            .replace(/username/gi, 'CPF');
+            .replace(/nome de usuário/gi, newText)
+            .replace(/username/gi, newText);
         }
       });
     });
     // Placeholder do input — só substitui se for o texto Moodle default.
     document.querySelectorAll('input[name="username"], #id_username, #username').forEach(function (i) {
       if (i.placeholder && /username|nome de usuário/i.test(i.placeholder)) {
-        i.placeholder = '000.000.000-00';
+        i.placeholder = placeholder;
       }
     });
   }
@@ -334,7 +366,7 @@
    * Idempotente: usa dataset.cpfMask como flag.
    * Compat: respeita usernames legados com letras.
    */
-  function applyCPFMask(input) {
+  function applyCPFMask(input, strict) {
     if (!input || input.dataset.cpfMask === '1') return;
     input.dataset.cpfMask = '1';
     input.setAttribute('inputmode', 'numeric'); // teclado numérico no mobile
@@ -344,8 +376,9 @@
     }
 
     input.addEventListener('input', function () {
-      // Compat: username legado pode ter letras — não formata.
-      if (/[a-zA-Z]/.test(input.value)) return;
+      // Sem strict: username legado pode ter letras — não formata.
+      // Com strict (cadastro/perfil): força só números, descartando letras.
+      if (!strict && /[a-zA-Z]/.test(input.value)) return;
       // Pega só dígitos, limita a 11.
       var v = input.value.replace(/\D/g, '').slice(0, 11);
       // Aplica máscara progressivamente conforme o tamanho.
@@ -369,6 +402,48 @@
         });
       });
     }
+  }
+
+  /**
+   * Validação de CPF no submit do CADASTRO. CPF inválido bloqueia
+   * o envio e exibe mensagem inline abaixo do campo.
+   *
+   * IMPORTANTE: anexa o listener DEPOIS do clean-handler do
+   * applyCPFMask (mesmo form) para ler já como dígitos. Use
+   * captura (true) garantindo que roda antes do submit nativo.
+   * Idempotente via dataset.cpfValidate.
+   */
+  function attachCPFValidation(input) {
+    var form = input.form;
+    if (!form || form.dataset.cpfValidate === '1') return;
+    form.dataset.cpfValidate = '1';
+    var ERR_ID = 'funp-cpf-error';
+
+    form.addEventListener('submit', function (e) {
+      var digits = (input.value || '').replace(/\D/g, '');
+      var prev = document.getElementById(ERR_ID);
+      if (prev) prev.remove();
+
+      if (isValidCPF(digits)) {
+        input.removeAttribute('aria-invalid');
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+      input.setAttribute('aria-invalid', 'true');
+
+      var msg = document.createElement('div');
+      msg.id = ERR_ID;
+      msg.className = 'funp-cpf-error';
+      msg.setAttribute('role', 'alert');
+      msg.style.cssText = 'color:#c0392b;font-size:.875rem;margin-top:.35rem;';
+      msg.textContent = digits.length === 0
+        ? 'Informe o CPF.'
+        : 'CPF inválido. Digite um CPF válido (somente números).';
+      input.insertAdjacentElement('afterend', msg);
+      input.focus();
+    });
   }
 
   /**
@@ -400,13 +475,26 @@
    * Inicialização: rename labels + aplica máscaras nos inputs alvo.
    */
   function init() {
-    renameUsernameToCPF();
+    var page = document.body.id;
 
-    // CPF: username (login/signup) + profile_field_CPF (perfil).
+    if (page === 'page-login-signup') {
+      // CADASTRO: username é o CPF. Só números + validação no submit.
+      renameUsernameLabel('CPF', '000.000.000-00');
+      document.querySelectorAll(
+        'input[name="username"], #id_username, #username'
+      ).forEach(function (i) {
+        applyCPFMask(i, true);
+        attachCPFValidation(i);
+      });
+    } else if (page === 'page-login-index') {
+      // LOGIN: aceita CPF OU e-mail — sem máscara (e-mail tem letras).
+      renameUsernameLabel('CPF ou e-mail', 'CPF ou e-mail');
+    }
+
+    // Perfil (qualquer página): campo CPF personalizado, só números.
     document.querySelectorAll(
-      'input[name="username"], #id_username, #username, ' +
       'input[name="profile_field_CPF"], #id_profile_field_CPF'
-    ).forEach(applyCPFMask);
+    ).forEach(function (i) { applyCPFMask(i, true); });
 
     // Telefone: qualquer input text/tel com "telefone" no name ou id.
     document.querySelectorAll('input[type="text"], input[type="tel"], input:not([type])').forEach(function (i) {

@@ -437,17 +437,22 @@ O JavaScript customizado é colado no campo **Custom JS** do Lambda (seção 2.8
 - Roda em: `body#page-login-signup`
 - Idêntico ao bloco 2, mas opera em `.signupform` e usa copy diferente no painel brand ("Crie sua conta — Comece sua jornada").
 
-### Bloco 4 — CPF + telefone (global)
+### Bloco 4 — CPF + telefone (por página)
 
-- Roda em: qualquer página
-- O que faz:
-  - **Renomeia labels**: troca todo texto "Nome de usuário" / "Username" → **"CPF"** em labels associadas a inputs `username`
-  - **Máscara CPF visual** (`000.000.000-00`) nos inputs `username`, `#id_username`, `#username`, `input[name="profile_field_CPF"]`, `#id_profile_field_CPF`
-    - `maxlength=14`, `inputmode=numeric`
-    - Se o input já tem texto com letras (usuário antigo `joao.silva`), **respeita e não formata** — compat com usuários criados antes da padronização
-  - **Máscara telefone BR** (`(XX) XXXXX-XXXX`) em qualquer input com `telefone` no `name` ou `id`
-    - `maxlength=15`, `inputmode=tel`
-  - **Submit hook**: antes de enviar o form, limpa a formatação do CPF (Moodle recebe `12345678901`, não `123.456.789-01`). Não toca em valores com letras.
+O comportamento do campo `username` difere entre **login** e **cadastro**:
+
+- **Cadastro** (`body#page-login-signup`) — `username` **é** o CPF:
+  - Label → **"CPF"**, placeholder `000.000.000-00`
+  - **Máscara CPF strict**: aceita **só números** (descarta letras), `maxlength=14`, `inputmode=numeric`
+  - **Validação no submit**: valida dígito verificador (`isValidCPF`). CPF inválido ou vazio **bloqueia o envio** e mostra mensagem inline (`.funp-cpf-error`)
+- **Login** (`body#page-login-index`) — `username` = **CPF ou e-mail**:
+  - Label → **"CPF ou e-mail"**, placeholder `CPF ou e-mail`
+  - **Sem máscara/validação** (e-mail tem letras e seria quebrado pela máscara CPF)
+  - ⚠ Login por e-mail exige o setting de servidor **Admin → Plugins → Autenticação → "Permitir login via e-mail"** (`authloginviaemail=1`). O frontend só libera o campo; o backend precisa do toggle.
+- **Perfil** (qualquer página) — `input[name="profile_field_CPF"]`, `#id_profile_field_CPF`:
+  - **Máscara CPF strict** (só números), `maxlength=14`, `inputmode=numeric`
+- **Telefone** (qualquer página) — máscara BR (`(XX) XXXXX-XXXX`) em qualquer input com `telefone` no `name` ou `id` (`maxlength=15`, `inputmode=tel`)
+- **Submit hook**: antes de enviar, limpa a formatação do CPF (Moodle recebe `12345678901`, não `123.456.789-01`).
 
 ---
 
