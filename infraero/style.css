@@ -2113,3 +2113,226 @@
     border-bottom: 20px solid #bd7029;
   }
 }
+
+/* ========================================= */
+/* CLASSE RECEITAS */
+/* ========================================= */
+
+.container-receitas {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.container-buttons-receitas {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  margin-top: 2rem;
+  overflow-x: hidden;
+  padding: 0;
+}
+
+.wrapper-btn-receitas {
+  display: flex;
+  width: 165px;
+  flex-shrink: 0;
+}
+
+.dobra-btn-receitas {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 0px solid transparent;
+  border-bottom: 20px solid #d32f2f;
+}
+
+.wrapper-btn-receitas .btn-receitas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white !important;
+  padding: 8px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  width: 150px;
+  height: 60px;
+  z-index: 2;
+  transition: all 0.3s ease;
+  border: 1px solid white;
+}
+
+.wrapper-btn-receitas .btn-receitas:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.container-conteudo-completo-receitas {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-trilhas-aprendizagem-receitas {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: end;
+  background-color: #01233f;
+  position: relative;
+  z-index: 1;
+  height: 8rem;
+  margin-top: -2.9rem;
+}
+
+.container-trilhas-aprendizagem-receitas h2 {
+  color: #ffffff !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.container-modulos-receitas {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 0;
+  overflow-x: auto;
+}
+
+.card-modulo-receitas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #f28705;
+  color: white !important;
+  padding: 12px 0;
+  cursor: pointer;
+  width: 360px;
+  height: 80px;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+}
+
+.card-modulo-receitas:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-modulo-receitas span {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* Módulos RECEITAS - Cores diferentes */
+.card-modulo-receitas:nth-child(1) {
+  background-color: #f28705;
+}
+.card-modulo-receitas:nth-child(1):hover {
+  background-color: #ff4800;
+}
+
+.card-modulo-receitas:nth-child(2) {
+  background-color: #f3942a;
+}
+.card-modulo-receitas:nth-child(2):hover {
+  background-color: #ff4800;
+}
+
+.card-modulo-receitas:nth-child(3) {
+  background-color: #f2a04e;
+}
+.card-modulo-receitas:nth-child(3):hover {
+  background-color: #ff4800;
+}
+
+.card-modulo-receitas:nth-child(4) {
+  background-color: #f2ad72;
+}
+.card-modulo-receitas:nth-child(4):hover {
+  background-color: #ff4800;
+}
+
+/* Botões RECEITAS */
+.wrapper-btn-receitas:nth-child(1) .btn-receitas {
+  background-color: #083457;
+}
+.wrapper-btn-receitas:nth-child(1) .btn-receitas:hover {
+  background-color: #01233f;
+}
+.wrapper-btn-receitas:nth-child(1) .dobra-btn-receitas {
+  border-bottom-color: #083457;
+}
+.wrapper-btn-receitas:nth-child(2) .btn-receitas {
+  background-color: #0f4372;
+}
+.wrapper-btn-receitas:nth-child(2) .btn-receitas:hover {
+  background-color: #01233f;
+}
+.wrapper-btn-receitas:nth-child(2) .dobra-btn-receitas {
+  border-bottom-color: #0f4372;
+}
+.wrapper-btn-receitas:nth-child(3) .btn-receitas {
+  background-color: #16558b;
+}
+.wrapper-btn-receitas:nth-child(3) .btn-receitas:hover {
+  background-color: #01233f;
+}
+.wrapper-btn-receitas:nth-child(3) .dobra-btn-receitas {
+  border-bottom-color: #16558b;
+}
+.wrapper-btn-receitas:nth-child(4) .btn-receitas {
+  background-color: #0f4372;
+}
+.wrapper-btn-receitas:nth-child(4) .btn-receitas:hover {
+  background-color: #01233f;
+}
+.wrapper-btn-receitas:nth-child(4) .dobra-btn-receitas {
+  border-bottom-color: #0f4372;
+}
+.wrapper-btn-receitas:nth-child(5) .btn-receitas {
+  background-color: #083457;
+}
+.wrapper-btn-receitas:nth-child(5) .btn-receitas:hover {
+  background-color: #01233f;
+}
+.wrapper-btn-receitas:nth-child(5) .dobra-btn-receitas {
+  border-bottom-color: #083457;
+}
+
+/* Media query RECEITAS */
+@media (max-width: 848px) {
+  .container-buttons-receitas {
+    gap: 0.25rem;
+  }
+
+  .wrapper-btn-receitas .btn-receitas {
+    font-size: 10px;
+    padding: 0;
+  }
+
+  .dobra-btn-receitas {
+    border-left: 15px solid transparent;
+    border-bottom: 20px solid #bd7029;
+  }
+}
