@@ -1,0 +1,2577 @@
+/* ═══════════════════════════════════════════════════════════
+   FUNPRESP-JUD · Moodle Lambda — Custom CSS
+   ───────────────────────────────────────────────────────────
+   Escopo: overrides do tema Lambda do Moodle para o portal
+   FUNPRESP-JUD. Tema light-only (sem dark mode).
+
+   Estratégia geral:
+     • Seletores ancorados em body#page-<id> para escopar
+       cada página e vencer a especificidade do Lambda.
+     • Uso de !important quando o Lambda aplica estilos
+       inline ou com seletores muito específicos.
+     • Blocos .funp-* são markup customizado injetado por
+       script.js e pelos blocos HTML do Moodle.
+
+   Paleta principal:
+     • Azul-primário .... #0578be   (links, CTA)
+     • Azul-hover ....... #0e509a
+     • Azul-marinho ..... #0f2137   (texto principal)
+     • Amarelo brand .... #fbba00   (eyebrows, destaque)
+     • Cinza claro fundo. #f5f5f5 / #f5f6f8
+     • Borda neutra ..... #ededed / #d8dde3
+   ───────────────────────────────────────────────────────────
+   ÍNDICE
+     1. Base & tipografia
+     2. Home pública            (#page-site-index)
+     3. Cursos disponíveis      (frontpage course list)
+     4. Meus cursos             (#page-my-index)
+     5. Login                   (#page-login-index)
+     6. Auto-inscrição          (#page-enrol-index)
+     7. Signup                  (#page-login-signup)
+     8. Footer global
+   ═══════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════
+   1. BASE & TIPOGRAFIA
+   ═══════════════════════════════════════════════════════════ */
+
+/* 1.1 — Fonte global. Open Sans em todos os textos e headings. */
+body,
+.navbar,
+.btn {
+  font-family: "Open Sans", sans-serif;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+}
+
+/* 1.2 — Eyebrow amarelo padrão usado em várias seções. */
+.section-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #fbba00;
+  font-weight: 600;
+}
+
+/* 1.3 — CTAs primários com cantos quase retos (manual da marca). */
+.btn-primary {
+  border-radius: 2px;
+  padding: 10px 22px;
+  font-weight: 600;
+}
+
+/* 1.4 — Login split-screen (regras base; v3 abaixo substitui na prática). */
+#page-login-index .login-container {
+  max-width: none;
+  padding: 0;
+}
+#page-login-index .login-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  min-height: 100vh;
+}
+#page-login-index .login-wrapper::before {
+  content: "";
+  background: #0f2137 url("/path/foto-institucional.jpg") center/cover;
+  background-blend-mode: multiply;
+}
+#page-login-index .login-form {
+  align-self: center;
+}
+
+/* 1.5 — Sub-nav: item ativo ganha borda amarela. */
+.primary-navigation .nav-link.active {
+  color: #fbba00 !important;
+  border-bottom: 2px solid #fbba00;
+}
+
+/* 1.6 — Hover global em links de footer. */
+footer a:hover,
+.footer-container a:hover {
+  color: #fbba00 !important;
+  text-decoration: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2. HOME PÚBLICA — #page-site-index
+   ───────────────────────────────────────────────────────────
+   Markup customizado (.funp-hero, .funp-shortcuts-wrap,
+   .funp-known) é injetado num bloco HTML do Moodle. Vários
+   overrides existem para escapar dos wrappers do Lambda
+   (.card.card-block, .no-overflow, etc.).
+   ═══════════════════════════════════════════════════════════ */
+
+/* 2.1 — Lambda envolve blocos em .card.card-block com overflow:hidden,
+         o que impede o full-bleed do hero. Forçamos overflow:visible
+         em toda a cadeia de containers. */
+#page-site-index,
+#page-site-index #page,
+#page-site-index #page-content,
+#page-site-index #region-main-box,
+#page-site-index #region-main,
+#page-site-index .card.card-block,
+#page-site-index .card-body,
+#page-site-index .card-text,
+#page-site-index .no-overflow,
+#page-site-index #page-top-blocks,
+#page-site-index #page-bottom-blocks,
+#page-site-index .block-region,
+#page-site-index .block_html {
+  overflow: visible !important;
+}
+
+/* 2.2 — Zera padding/margin/card-styles dos wrappers do bloco na home. */
+#page-site-index #region-main {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#page-site-index #region-main-box {
+  padding: 0 !important;
+}
+#page-site-index .card.card-block {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+#page-site-index .block,
+#page-site-index .block_html {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#page-site-index .block .card-body,
+#page-site-index .block_html .card-body {
+  padding: 0 !important;
+}
+#page-site-index .block .card-text,
+#page-site-index .block_html .card-text {
+  margin: 0 !important;
+}
+
+/* 2.3 — Bloqueia scroll horizontal causado pelo truque 100vw + scrollbar. */
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* 2.4 — Fecha o gap branco entre header e hero (Lambda adiciona padding-top
+         em frontpage). Versão agressiva por segurança. */
+body.path-site,
+body.pagelayout-frontpage {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+#page-site-index nav,
+#page-site-index header,
+#page-site-index .primary-navigation,
+#page-site-index .navbar,
+#page-site-index #page-header,
+#page-site-index .page-header-headings,
+#page-site-index .page-context-header,
+#page-site-index .breadcrumb-nav,
+#page-site-index .breadcrumb-section {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#page-site-index #page,
+#page-site-index #page-content,
+#page-site-index .main-inner,
+#page-site-index #region-main-box,
+#page-site-index #region-main,
+#page-site-index #page-top-blocks,
+#page-site-index main,
+#page-site-index #page-wrapper {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+#page-site-index .skip-block,
+#page-site-index #maincontent {
+  display: block;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2.5 — Slider do Lambda não é usado; esconde wrapper vazio. */
+#page-site-index #fp-slider-wrapper:empty {
+  display: none !important;
+}
+#page-site-index #fp-slider-wrapper {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 2.6 — Esconde tabs do Lambda (Configurações/Participantes/Relatórios)
+         e labels de posição de bloco que o admin vê. */
+#page-site-index .secondary-navigation,
+#page-site-index .block-pos-desc,
+#page-site-index .fp-admin-blocks .admin-blocks {
+  display: none !important;
+}
+
+/* 2.7 — Full-bleed robusto via truque 100vw + margem negativa. */
+.funp-hero,
+.funp-shortcuts-wrap,
+.funp-known {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.funp-hero .container-fluid,
+.funp-shortcuts-wrap .container-fluid,
+.funp-known .container-fluid {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* 2.8 — Hero principal (fundo azul-marinho). */
+
+.funp-media-holder,
+.funp-media-holder img,
+img.funp-media-holder {
+  display: none !important;
+}
+
+.funp-hero {
+  background: #0f2137;
+  color: #fff;
+  /* Proporção reduzida para aproximar do banner do portal
+     institucional (~4:1 — slider 1200x300 em funprespjud.com.br). */
+  padding: 40px 0 72px;
+}
+.funp-eyebrow {
+  color: #fbba00;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.funp-hero h1 {
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 18px;
+  color: #fff;
+}
+.funp-hero p {
+  opacity: 0.75;
+  max-width: 480px;
+  margin-bottom: 26px;
+}
+
+.funp-hero-bg {
+  background-image: url("https://ead.funprespjud.com.br/pluginfile.php/601/block_html/content/Banner-Hero%20%281%29.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.funp-hero .funp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
+.funp-hero .funp-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: #fbba00;
+}
+
+.funp-btn-primary {
+  background: #0578be;
+  color: #fff !important;
+  padding: 12px 26px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  margin-right: 10px;
+  transition: background 0.2s;
+}
+.funp-btn-primary:hover {
+  background: #0e509a;
+  color: #fff !important;
+}
+.funp-btn-outline {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff !important;
+  padding: 12px 26px;
+  font-size: 13px;
+  text-decoration: none;
+  display: inline-block;
+}
+.funp-btn-outline:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff !important;
+}
+
+/* 2.9 — Atalhos (3 cards horizontais sobrepostos ao hero).
+         margin-top negativo cria o efeito de "subir" sobre o hero. */
+.funp-shortcuts-wrap {
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+  padding-bottom: 40px;
+}
+.funp-shortcut {
+  background: #fff;
+  padding: 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border-top: 3px solid #0578be;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Caixa do ícone grande à esquerda. */
+.funp-shortcut-icon {
+  width: 72px !important;
+  height: 72px !important;
+  flex: 0 0 72px !important;
+  background: #eef4fa !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #0578be !important;
+}
+
+/* Wrapper de texto (h5/p/a) à direita do ícone. */
+.funp-shortcut-body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.funp-shortcut h5 {
+  font-weight: 700;
+  margin: 0 0 2px;
+  color: #0f2137;
+  font-size: 18px;
+}
+.funp-shortcut p {
+  color: #666;
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+.funp-shortcut a {
+  color: #0578be;
+  font-weight: 600;
+  font-size: 12px;
+  text-decoration: none;
+}
+.funp-shortcut a:hover {
+  color: #0e509a;
+}
+
+/* SVG Lucide dentro do ícone — força stroke e tamanho maior. */
+.funp-shortcut-icon svg {
+  width: 36px !important;
+  height: 36px !important;
+  display: block !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+.funp-shortcut-icon svg * {
+  stroke: currentColor !important;
+}
+
+/* 2.10 — Bloco "Conheça a plataforma" (faixa cinza). */
+.funp-known {
+  background: #f5f5f5;
+  padding: 64px 0;
+  margin-top: 40px;
+}
+.funp-known-bar {
+  width: 60px;
+  height: 3px;
+  background: #0578be;
+  margin-bottom: 18px;
+}
+.funp-known h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  color: #0f2137;
+}
+.funp-known p {
+  color: #555;
+  max-width: 520px;
+  margin-bottom: 22px;
+}
+.funp-btn-dark {
+  background: #0f2137;
+  color: #fff !important;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+}
+.funp-btn-dark:hover {
+  background: #0a1626;
+  color: #fff !important;
+}
+
+/* 2.11 — Responsivo home. */
+@media (max-width: 768px) {
+  .funp-hero {
+    padding: 32px 0 60px;
+  }
+  .funp-hero h1 {
+    font-size: 28px;
+  }
+  .funp-hero .funp-eyebrow {
+    font-size: 16px;
+  }
+  .funp-shortcuts-wrap {
+    margin-top: -30px;
+  }
+  .funp-hero .container-fluid,
+  .funp-shortcuts-wrap .container-fluid,
+  .funp-known .container-fluid {
+    padding: 0 20px;
+  }
+
+  .funp-known.funp-known-v13 {
+    padding: 40px 0;
+  }
+  .funp-known.funp-known-v13 .container-fluid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .funp-known.funp-known-v13 .container-fluid::before {
+    display: none;
+  }
+  .funp-known.funp-known-v13 h2 {
+    font-size: 26px;
+  }
+}
+
+/* ─── 2.12 — Sobre o Portal · variante V13 (banner BG + manifesto) ─── */
+.funp-known.funp-known-v13 {
+  background:
+    linear-gradient(
+      85deg,
+      rgba(10, 26, 46, 0.15) 0%,
+      rgba(10, 26, 46, 0.45) 38%,
+      rgba(10, 26, 46, 0.88) 72%,
+      rgba(10, 26, 46, 0.96) 100%
+    ),
+    url("https://ead.funprespjud.com.br/pluginfile.php/602/block_html/content/Banner-Institucional%20%281%29.png")
+      15% top / cover no-repeat;
+  color: #fff;
+  padding: 64px 0;
+  margin-top: 0;
+}
+.funp-known.funp-known-v13 .container-fluid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 48px;
+  align-items: center;
+}
+/* coluna vazia à esquerda só pra empurrar o conteúdo pra direita */
+.funp-known.funp-known-v13 .container-fluid::before {
+  content: "";
+  display: block;
+  min-height: 80px;
+}
+.funp-known.funp-known-v13 .funp-known-inner {
+  max-width: 580px;
+  color: #fff;
+}
+.funp-known.funp-known-v13 .funp-known-accent {
+  width: 50px;
+  height: 3px;
+  background: #fbba00;
+  margin-bottom: 12px;
+  border-radius: 2px;
+}
+/* eyebrow em azul claro pra contrastar com o navy do BG */
+.funp-eyebrow.funp-eyebrow-light {
+  color: #7cc4f0;
+}
+.funp-known.funp-known-v13 h2 {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.12;
+  margin: 12px 0 16px;
+  color: #fff;
+  letter-spacing: -0.4px;
+}
+.funp-known.funp-known-v13 h2 em {
+  font-style: normal;
+  color: #fbba00;
+}
+.funp-known.funp-known-v13 p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 12px;
+  max-width: 540px;
+}
+.funp-known.funp-known-v13 p.funp-known-lede {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 15.5px;
+}
+.funp-known.funp-known-v13 .funp-known-ctas {
+  margin-top: 22px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.funp-known.funp-known-v13 .funp-known-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 1px solid #fbba00;
+  padding-bottom: 2px;
+  transition: color 0.15s;
+}
+.funp-known.funp-known-v13 .funp-known-link:hover {
+  color: #fbba00;
+}
+
+/* ─── 2.13 — CTA amber (novo padrão) ─── */
+.funp-btn-amber {
+  background: #fbba00;
+  color: #2a1d00 !important;
+  padding: 12px 26px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 2px;
+  transition: background 0.15s;
+  letter-spacing: 0.3px;
+}
+.funp-btn-amber:hover {
+  background: #e8ac00;
+  color: #2a1d00 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3. CURSOS DISPONÍVEIS — frontpage course list
+   ───────────────────────────────────────────────────────────
+   Estilo "em destaque" do wireframe V2: H2 alinhado à esquerda
+   com fio azul acima, link "Todos os cursos" ancorado à direita,
+   grid de 4 colunas com cards minimalistas.
+   ═══════════════════════════════════════════════════════════ */
+
+/* 3.1 — Wrapper centralizado, position:relative para ancorar o "Ver todos". */
+#page-site-index #frontpage-available-course-list {
+  position: relative;
+  padding: 70px 32px 60px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* 3.2 — H2 com fio azul ACIMA (via ::before). */
+#page-site-index #frontpage-available-course-list > h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f2137;
+  text-align: left;
+  margin: 0 0 28px;
+  position: relative;
+}
+#page-site-index #frontpage-available-course-list > h2::before {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #0578be;
+  margin-bottom: 10px;
+}
+
+/* 3.3 — Link "Todos os cursos" posicionado no canto direito,
+         alinhado verticalmente com o H2. */
+#page-site-index .paging-morelink {
+  position: absolute !important;
+  top: 70px !important;
+  right: 32px !important;
+  bottom: auto !important;
+  left: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  text-align: right !important;
+  z-index: 10 !important;
+  width: auto !important;
+}
+#page-site-index .paging-morelink a,
+#page-site-index .paging-morelink .btn,
+#page-site-index .paging-morelink a.btn-secondary {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #0578be !important;
+  border: 0 !important;
+  padding: 0 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+#page-site-index .paging-morelink a:hover {
+  color: #0e509a !important;
+}
+
+/* 3.4 — Reordena conteúdo do .summary: categoria (Turma 1) ACIMA do título. */
+#page-site-index .coursebox .summary {
+  padding: 14px 16px 18px;
+  display: flex !important;
+  flex-direction: column !important;
+}
+#page-site-index .coursebox .summary .coursecat {
+  order: -1 !important;
+  margin-bottom: 6px !important;
+}
+#page-site-index .coursebox .summary .coursename {
+  order: 0 !important;
+}
+
+/* 3.5 — Grid 4 colunas (responde a 2 e 1 em breakpoints menores). */
+#page-site-index .frontpage-course-list-all {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 992px) {
+  #page-site-index .frontpage-course-list-all {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #page-site-index .paging-morelink {
+    position: static;
+    margin-top: 24px;
+    text-align: right;
+  }
+}
+@media (max-width: 576px) {
+  #page-site-index .frontpage-course-list-all {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 3.6 — Card minimal (borda fina + hover azul). */
+#page-site-index .coursebox {
+  background: #fff;
+  border: 1px solid #ededed;
+  border-radius: 2px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+  display: flex;
+  flex-direction: column;
+  float: none !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+#page-site-index .coursebox:hover {
+  border-color: #0578be;
+}
+
+/* 3.7 — Esconde título duplicado (.info) e parágrafos longos do summary. */
+#page-site-index .coursebox .info {
+  display: none !important;
+}
+#page-site-index .coursebox .summary > div:last-child {
+  display: none;
+}
+
+/* 3.8 — Banner do curso (130px). */
+#page-site-index .coursebox .content > a {
+  display: block;
+  text-decoration: none;
+}
+#page-site-index .coursebox .courseimage {
+  width: 100%;
+  height: 130px;
+  background-size: cover;
+  background-position: center;
+  background-color: #f3f3f3;
+}
+
+/* 3.9 — Conteúdo textual do card. */
+#page-site-index .coursebox .summary {
+  padding: 14px 16px 18px;
+}
+
+/* Eyebrow cinza + título azul-marinho. */
+#page-site-index .coursebox .coursecat {
+  font-size: 10px !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 6px !important;
+  color: #888 !important;
+  position: static !important;
+  background: transparent !important;
+  padding: 0 !important;
+  display: block;
+}
+#page-site-index .coursebox .coursecat .categoryname {
+  color: #888 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 10px !important;
+}
+#page-site-index .coursebox .coursecat .sr-only {
+  display: none;
+}
+
+#page-site-index .coursebox .summary .coursename {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.35;
+  text-align: left;
+}
+#page-site-index .coursebox .summary .coursename a {
+  color: #0f2137 !important;
+  text-decoration: none;
+}
+#page-site-index .coursebox .summary .coursename a:hover {
+  color: #0578be !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   4. MEUS CURSOS — body#page-my-index (/my/courses.php)
+   ───────────────────────────────────────────────────────────
+   Página listando cursos do usuário. Page header limpo com
+   breadcrumb-eyebrow, filter bar como pills, grid 3 colunas,
+   barra de progresso desenhada via ::after no .progress-text.
+   ═══════════════════════════════════════════════════════════ */
+
+/* 4.1 — Page header com eyebrow amarelo + h1 grande. */
+body#page-my-index #page-header {
+  background: #fff !important;
+  padding: 36px 32px 28px !important;
+  border-bottom: 1px solid #ededed !important;
+  margin-bottom: 0 !important;
+}
+body#page-my-index #page-header .page-context-header {
+  margin-bottom: 0 !important;
+}
+body#page-my-index #page-header .page-header-headings {
+  position: relative !important;
+  display: block !important;
+}
+/* Breadcrumb-eyebrow injetado via ::before. */
+body#page-my-index #page-header .page-header-headings::before {
+  content: "Início › Meus cursos" !important;
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #fbba00 !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+body#page-my-index #page-header h1 {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: #0f2137 !important;
+  margin: 0 !important;
+  line-height: 1.1 !important;
+}
+/* Esconde aviso "Em modo de manutenção" do header. */
+body#page-my-index #page-header a[href*="maintenancemode"] {
+  display: none !important;
+}
+/* Para esconder botões admin (Gerenciar / Criar curso), descomente:
+body#page-my-index #page-header .course-manage { display: none !important; } */
+
+/* 4.2 — Remove o "card" do bloco myoverview (fica direto no fundo). */
+body#page-my-index .block_myoverview.card,
+body#page-my-index .block_myoverview > .card-body {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+body#page-my-index .block_myoverview > .card-body > h3.card-title {
+  display: none !important;
+}
+body#page-my-index .block-myoverview {
+  padding: 24px 32px 60px !important;
+}
+body#page-my-index #region-main {
+  background: #f5f6f8 !important;
+}
+body#page-my-index #region-main > .card.card-block {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 4.3 — Filter bar: dropdowns como pills + searchbar limpo. */
+body#page-my-index [data-region="filter"] {
+  margin: 0 0 24px !important;
+}
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle {
+  background: #fff !important;
+  border: 1px solid #d8dde3 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 0 16px !important;
+  height: 40px !important;
+  line-height: 38px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+/* Força texto visível no span interno do botão — Lambda às vezes deixa transparente. */
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle,
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle
+  * {
+  color: #0f2137 !important;
+}
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle:hover,
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle[aria-expanded="true"] {
+  border-color: #0578be !important;
+}
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle:hover
+  *,
+body#page-my-index
+  [data-region="filter"]
+  .btn-outline-secondary.dropdown-toggle[aria-expanded="true"]
+  * {
+  color: #0578be !important;
+}
+body#page-my-index [data-region="filter"] .dropdown-menu {
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08) !important;
+  font-size: 13px !important;
+  padding: 6px !important;
+}
+body#page-my-index [data-region="filter"] .dropdown-item-active {
+  background: #eef4fa !important;
+  color: #0578be !important;
+  font-weight: 600 !important;
+}
+
+body#page-my-index [data-region="filter"] .simplesearchform {
+  max-width: 360px !important;
+}
+body#page-my-index [data-region="filter"] .searchbar {
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  background: #fff !important;
+  height: 40px !important;
+  align-items: center !important;
+}
+body#page-my-index [data-region="filter"] .searchbar input.form-control {
+  border: 0 !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+  padding: 0 12px !important;
+  background: transparent !important;
+  height: 38px !important;
+}
+
+/* 4.4 — Grid 3 colunas. */
+body#page-my-index .card-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 22px !important;
+  margin: 0 !important;
+}
+body#page-my-index .card-grid > .col {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  flex: 0 1 auto !important;
+}
+@media (max-width: 992px) {
+  body#page-my-index .card-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 576px) {
+  body#page-my-index .card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 4.5 — Course card minimal (retangular, hover sobe). */
+body#page-my-index .course-card {
+  background: #fff !important;
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+  margin: 0 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  transition:
+    border-color 0.15s,
+    transform 0.15s !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: none !important;
+}
+body#page-my-index .course-card:hover {
+  border-color: #0578be !important;
+  transform: translateY(-2px) !important;
+}
+
+/* <a> pai precisa ser bloco para imagem ocupar largura toda. */
+body#page-my-index .course-card > a {
+  display: block !important;
+}
+
+/* Order explícito via nth-child vence qualquer order que o Lambda aplique. */
+body#page-my-index .course-card > :nth-child(1) {
+  order: 1 !important;
+}
+body#page-my-index .course-card > :nth-child(2) {
+  order: 2 !important;
+}
+body#page-my-index .course-card > :nth-child(3) {
+  order: 3 !important;
+}
+body#page-my-index .course-card .card-img-top {
+  height: 150px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: #eef4fa !important;
+  border-radius: 0 !important;
+  position: relative !important;
+}
+
+/* 4.6 — Badge de status sobre a imagem (atributo data-status setado por JS). */
+body#page-my-index .course-card[data-status] > a .card-img-top::after {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+body#page-my-index
+  .course-card[data-status="andamento"]
+  > a
+  .card-img-top::after {
+  content: "Em andamento";
+  background: #0578be;
+}
+body#page-my-index
+  .course-card[data-status="concluido"]
+  > a
+  .card-img-top::after {
+  content: "Concluído";
+  background: #2a8e4e;
+}
+body#page-my-index
+  .course-card[data-status="naoiniciado"]
+  > a
+  .card-img-top::after {
+  content: "Não iniciado";
+  background: #888;
+}
+
+/* 4.7 — Body do card cresce para empurrar progress pro fundo. */
+body#page-my-index .course-card .card-body {
+  padding: 14px 18px 8px !important;
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+/* .w-100.text-truncate contém [título + categoria]: inverte ordem (eyebrow
+   acima) e remove o text-truncate que esconderia o conteúdo. */
+body#page-my-index .course-card .card-body .w-100 {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  overflow: visible !important;
+}
+
+/* Eyebrow azul = categoria. */
+body#page-my-index .course-card .categoryname,
+body#page-my-index .course-card .categoryname.text-truncate {
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: #0578be !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 6px !important;
+  text-align: left !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: none !important;
+}
+body#page-my-index .course-card .text-muted.muted {
+  color: transparent !important;
+  margin: 0 0 4px !important;
+}
+
+/* Título do curso (máx 2 linhas via -webkit-line-clamp). */
+body#page-my-index .course-card a.coursename,
+body#page-my-index .course-card .coursename {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #0f2137 !important;
+  text-decoration: none !important;
+  text-align: left !important;
+  display: block !important;
+}
+body#page-my-index .course-card a.coursename:hover {
+  color: #0578be !important;
+}
+body#page-my-index .course-card .coursename .multiline {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+
+/* 4.8 — Footer do card (empurrado pro fundo via margin-top:auto). */
+body#page-my-index .course-card > .d-flex.align-items-start {
+  align-items: stretch !important;
+  margin-top: auto !important;
+}
+body#page-my-index .course-card .card-footer {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 18px 16px !important;
+}
+body#page-my-index .course-card .card-footer.menu {
+  display: none !important;
+}
+
+/* 4.9 — Barra de progresso desenhada com ::before (trilho) + ::after (preenchimento).
+         A largura vem de --progress (CSS var setada por JS). */
+body#page-my-index .course-card .progress-text {
+  position: relative !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #0f2137 !important;
+  padding-top: 18px !important;
+  margin-top: auto !important;
+  text-align: left !important;
+}
+body#page-my-index .course-card .progress-text::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px !important;
+  background: #eef2f6 !important;
+  border-radius: 2px !important;
+}
+body#page-my-index .course-card .progress-text::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: var(--progress, 0%) !important;
+  height: 4px !important;
+  background: #0578be !important;
+  border-radius: 2px !important;
+  transition: width 0.4s ease !important;
+}
+body#page-my-index .course-card[data-status="concluido"] .progress-text::after {
+  background: #2a8e4e !important;
+}
+body#page-my-index
+  .course-card[data-status="naoiniciado"]
+  .progress-text::after {
+  background: #d8dde3 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5. LOGIN — body#page-login-index (split-screen v3 + v3.4)
+   ───────────────────────────────────────────────────────────
+   Wrapper .funp-login-wrapper é criado por script.js (Custom JS
+   do Moodle). Lado esquerdo = brand (azul-marinho com padrão
+   diagonal); lado direito = form. v3.4 ajusta inputs full-width
+   e centralização vertical do painel esquerdo.
+   ═══════════════════════════════════════════════════════════ */
+
+/* 5.1 — Reset: esconde todo o chrome do Moodle/Lambda.
+   .funp-login-fallback é adicionada pelo script.js quando o split-screen
+   não pode ser montado (ex.: markup do Lambda mudou) — nesse caso a
+   página nativa volta a aparecer em vez de ficar em branco. */
+html body#page-login-index {
+  background: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body#page-login-index:not(.funp-login-fallback) #page-wrapper,
+html body#page-login-index:not(.funp-login-fallback) #page,
+html body#page-login-index:not(.funp-login-fallback) #page-content,
+html body#page-login-index:not(.funp-login-fallback) #page-header,
+html body#page-login-index:not(.funp-login-fallback) #page-navbar,
+html body#page-login-index:not(.funp-login-fallback) .navbar,
+html body#page-login-index:not(.funp-login-fallback) .breadcrumb-nav,
+html body#page-login-index:not(.funp-login-fallback) .breadcrumb-section,
+html body#page-login-index:not(.funp-login-fallback) footer.py-3,
+html body#page-login-index:not(.funp-login-fallback) #page-footer {
+  display: none !important;
+}
+
+/* 5.2 — Wrapper split-screen 1.1fr / 1fr. */
+html body#page-login-index > .funp-login-wrapper {
+  display: grid !important;
+  grid-template-columns: 1.1fr 1fr !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 !important;
+  background: #fff !important;
+}
+
+/* 5.3 — Painel BRAND (esquerda): fundo azul + gradient + tramado diagonal. */
+html body#page-login-index .funp-login-brand {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 33, 55, 0.78) 0%,
+      rgba(15, 33, 55, 0.94) 100%
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.04) 0 1px,
+      transparent 1px 14px
+    ),
+    #0f2137 !important;
+  color: #fff !important;
+  padding: 60px 64px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  position: relative;
+  overflow: hidden;
+}
+html body#page-login-index .funp-brand-eyebrow {
+  font-size: 12px !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  color: #fbba00 !important;
+  font-weight: 600 !important;
+  margin-bottom: 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+html body#page-login-index .funp-brand-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 2px;
+  background: #fbba00;
+}
+html body#page-login-index .funp-login-brand h1 {
+  font-size: 42px !important;
+  font-weight: 300 !important;
+  margin: 0 0 14px !important;
+  line-height: 1.1 !important;
+  color: #fff !important;
+}
+html body#page-login-index .funp-login-brand h1 em {
+  font-style: italic !important;
+  font-weight: 700 !important;
+}
+html body#page-login-index .funp-brand-lede {
+  max-width: 380px !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+html body#page-login-index .funp-brand-footer {
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  line-height: 1.5 !important;
+  max-width: 380px !important;
+}
+
+/* 5.4 — Painel FORM (direita). */
+html body#page-login-index .funp-login-form {
+  padding: 60px 64px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  background: #fff !important;
+}
+html body#page-login-index .funp-login-form-inner {
+  max-width: 380px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* 5.5 — Logo Funpresp (mantém SVG do Moodle, só ajusta tamanho). */
+html body#page-login-index .funp-login-form #loginlogo,
+html body#page-login-index .funp-login-form .login-logo {
+  text-align: center !important;
+  margin-bottom: 28px !important;
+}
+html body#page-login-index .funp-login-form #loginlogo img,
+html body#page-login-index .funp-login-form .login-logo img {
+  max-height: 44px !important;
+  width: auto !important;
+  margin: 0 auto !important;
+  display: inline-block !important;
+}
+html body#page-login-index .funp-login-form .login-heading.visually-hidden {
+  display: none !important;
+}
+
+/* 5.6 — Inputs base (sobrescritos pelo v3.4 abaixo, mantidos por compat). */
+html body#page-login-index .funp-login-form .login-form-username,
+html body#page-login-index .funp-login-form .login-form-password {
+  margin-bottom: 16px !important;
+}
+html body#page-login-index .funp-login-form .login-form-username input,
+html body#page-login-index .funp-login-form .login-form-password input,
+html body#page-login-index .funp-login-form #username,
+html body#page-login-index .funp-login-form #password {
+  height: 46px !important;
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  padding: 0 20px !important;
+  font-size: 14px !important;
+  color: #0f2137 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  font-family: inherit !important;
+}
+html body#page-login-index .funp-login-form input:focus,
+html body#page-login-index .funp-login-form #username:focus,
+html body#page-login-index .funp-login-form #password:focus {
+  border-color: #0578be !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(5, 120, 190, 0.12) !important;
+}
+
+/* 5.7 — Input-group do password (com botão olho do Lambda). */
+html body#page-login-index .funp-login-form .toggle-sensitive-wrapper {
+  display: flex !important;
+  align-items: stretch !important;
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  background: #fff !important;
+  overflow: hidden !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .toggle-sensitive-wrapper
+  input.form-control,
+html
+  body#page-login-index
+  .funp-login-form
+  .toggle-sensitive-wrapper
+  #password {
+  border: 0 !important;
+  box-shadow: none !important;
+  flex: 1 !important;
+  height: 44px !important;
+  padding: 0 20px !important;
+}
+html body#page-login-index .funp-login-form .toggle-sensitive-btn {
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 1px solid #ededed !important;
+  color: #888 !important;
+  padding: 0 20px !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+html body#page-login-index .funp-login-form .toggle-sensitive-btn:hover {
+  color: #0578be !important;
+}
+
+/* 5.8 — Botão Acessar. */
+html body#page-login-index .funp-login-form .login-form-submit {
+  margin-bottom: 14px !important;
+}
+html body#page-login-index .funp-login-form .login-form-submit #loginbtn,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-submit
+  button.btn-primary,
+html body#page-login-index .funp-login-form #loginbtn {
+  background: #0578be !important;
+  border: 0 !important;
+  color: #fff !important;
+  padding: 14px !important;
+  width: 100% !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background 0.2s !important;
+}
+html body#page-login-index .funp-login-form #loginbtn:hover {
+  background: #0e509a !important;
+}
+
+/* 5.9 — "Perdeu a senha?" centralizado. */
+html body#page-login-index .funp-login-form .login-form-forgotpassword {
+  text-align: center !important;
+  margin-bottom: 20px !important;
+}
+html body#page-login-index .funp-login-form .login-form-forgotpassword a {
+  font-size: 12px !important;
+  color: #0578be !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+html body#page-login-index .funp-login-form .login-form-forgotpassword a:hover {
+  color: #0e509a !important;
+  text-decoration: underline !important;
+}
+
+/* 5.10 — Divisor entre login e signup. */
+html body#page-login-index .funp-login-form .login-divider {
+  height: 1px !important;
+  background: #ededed !important;
+  margin: 18px 0 !important;
+  border: 0 !important;
+}
+
+/* 5.11 — Bloco signup ("Esta é a sua primeira vez aqui?"). */
+html body#page-login-index .funp-login-form .login-instructions {
+  text-align: center !important;
+  font-size: 12px !important;
+  color: #777 !important;
+  margin-bottom: 14px !important;
+}
+html body#page-login-index .funp-login-form .login-instructions .login-heading {
+  display: block !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #0f2137 !important;
+  margin: 0 0 6px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  visibility: visible !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+}
+html body#page-login-index .funp-login-form .login-signup {
+  text-align: center !important;
+  margin-bottom: 18px !important;
+}
+html body#page-login-index .funp-login-form .login-signup a.btn,
+html body#page-login-index .funp-login-form .login-signup a {
+  display: inline-block !important;
+  background: transparent !important;
+  color: #0578be !important;
+  border: 1px solid #0578be !important;
+  border-radius: 2px !important;
+  padding: 10px 22px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: all 0.15s !important;
+}
+html body#page-login-index .funp-login-form .login-signup a:hover {
+  background: #0578be !important;
+  color: #fff !important;
+}
+
+/* 5.12 — Esconde toggle do Lambda ("Would you like to log in now..."). */
+html body#page-login-index .funp-login-form .loginform-toggle,
+html body#page-login-index .funp-login-form .lambda-toggle {
+  display: none !important;
+}
+
+/* 5.13 — Footer auxiliar (idioma + cookies). */
+html body#page-login-index .funp-login-form .loginform > .d-flex:last-child {
+  margin-top: 14px !important;
+  justify-content: center !important;
+  gap: 14px !important;
+  font-size: 11px !important;
+  color: #888 !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .login-languagemenu
+  .dropdown-toggle {
+  color: #777 !important;
+  font-size: 11px !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .loginform
+  > .d-flex
+  > button.btn-secondary {
+  background: transparent !important;
+  color: #777 !important;
+  border: 0 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .loginform
+  > .d-flex
+  > button.btn-secondary:hover {
+  color: #0578be !important;
+}
+html body#page-login-index .funp-login-form .loginform > .d-flex .divider {
+  display: none !important;
+}
+
+/* 5.14 — Mensagens de erro (alert-danger). */
+html body#page-login-index .funp-login-form .loginerrors,
+html body#page-login-index .funp-login-form #loginerrormessage,
+html body#page-login-index .funp-login-form .alert-danger {
+  background: #fef2f0 !important;
+  border-left: 3px solid #d64545 !important;
+  border-top: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  color: #8b2e2e !important;
+  border-radius: 2px !important;
+  padding: 12px 14px !important;
+  font-size: 13px !important;
+  margin-bottom: 20px !important;
+}
+
+/* 5.15 — Responsivo: empilha brand sobre form em mobile. */
+@media (max-width: 900px) {
+  html body#page-login-index > .funp-login-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  html body#page-login-index .funp-login-brand {
+    min-height: 280px !important;
+    padding: 40px 32px !important;
+  }
+  html body#page-login-index .funp-login-brand h1 {
+    font-size: 30px !important;
+  }
+  html body#page-login-index .funp-login-form {
+    padding: 40px 32px !important;
+  }
+}
+
+/* ─── Login v3.4 — ajustes finos sobre v3 ─────────────────── */
+
+/* 5.16 — Centraliza verticalmente o conteúdo do painel BRAND. */
+html body#page-login-index .funp-login-brand > div:first-child {
+  flex: 1 1 auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+/* 5.17 — Garante que .loginform/form sejam 100% para inputs full-width. */
+html body#page-login-index .funp-login-form-inner .loginform,
+html body#page-login-index .funp-login-form-inner form#login,
+html body#page-login-index .funp-login-form-inner form {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+html body#page-login-index .funp-login-form .login-form-username,
+html body#page-login-index .funp-login-form .login-form-password {
+  width: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  margin-bottom: 14px !important;
+}
+
+/* Input-group como caixa única (input + botão olho). */
+html body#page-login-index .funp-login-form .login-form-username .input-group,
+html body#page-login-index .funp-login-form .login-form-password .input-group {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  display: flex !important;
+  align-items: stretch !important;
+  flex-wrap: nowrap !important;
+  box-sizing: border-box !important;
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  height: 46px !important;
+  box-shadow: none !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group:focus-within,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group:focus-within {
+  border-color: #0578be !important;
+  box-shadow: 0 0 0 3px rgba(5, 120, 190, 0.12) !important;
+}
+
+/* Input dentro do grupo — sem border próprio, cresce até o final. */
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group
+  .form-control,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group
+  .form-control,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group
+  #username,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group
+  #password {
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  height: 100% !important;
+  padding: 0 20px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  width: auto !important;
+  background: transparent !important;
+  background-image: none !important;
+  font-size: 14px !important;
+  color: #0f2137 !important;
+  font-family: inherit !important;
+  margin: 0 !important;
+}
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-username
+  .input-group
+  .form-control:focus,
+html
+  body#page-login-index
+  .funp-login-form
+  .login-form-password
+  .input-group
+  .form-control:focus {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 5.18 — Botão Acessar full-width. */
+html body#page-login-index .funp-login-form .login-form-submit,
+html body#page-login-index .funp-login-form .login-form-submit button {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 5.19 — Placeholder suave. */
+html
+  body#page-login-index
+  .funp-login-form
+  .input-group
+  .form-control::placeholder,
+html body#page-login-index .funp-login-form #username::placeholder,
+html body#page-login-index .funp-login-form #password::placeholder {
+  color: #aab0ba !important;
+}
+
+/* 5.20 — h2 "Esta é a sua primeira vez aqui?". */
+html body#page-login-index .funp-login-form .login-instructions h2 {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #0f2137 !important;
+  margin: 0 0 8px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  display: block !important;
+  visibility: visible !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* 5.21 — Botão "Criar uma conta" (outline azul). */
+html body#page-login-index .funp-login-form .login-signup .btn-secondary {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #0578be !important;
+  border: 1px solid #0578be !important;
+}
+html body#page-login-index .funp-login-form .login-signup .btn-secondary:hover {
+  background: #0578be !important;
+  color: #fff !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   6. AUTO-INSCRIÇÃO — body#page-enrol-index (enrol_self)
+   ───────────────────────────────────────────────────────────
+   Estrutura DOM real do Lambda:
+     #lambda-incourse-header > h2 "Detalhes de inscrições"
+     #region-main > [role=main] >
+       > h2 "Opções de inscrição"  (escondemos — duplicado)
+       > .box.generalbox.info > .coursebox.grid     (card do curso)
+       > .box.generalbox.enrol-instance > .card     (form inscrição)
+   ═══════════════════════════════════════════════════════════ */
+
+/* 6.1 — Fundo cinza + zera region-main. */
+body#page-enrol-index {
+  background: #f5f6f8 !important;
+}
+body#page-enrol-index #region-main,
+body#page-enrol-index #region-main.mx-15 {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 6.2 — Header com breadcrumb-eyebrow + h2 grande. */
+body#page-enrol-index #lambda-incourse-header {
+  background: #fff !important;
+  padding: 36px 32px 28px !important;
+  border-bottom: 1px solid #ededed !important;
+  margin: 0 !important;
+}
+body#page-enrol-index #lambda-incourse-header h2 {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: #0f2137 !important;
+  margin: 0 !important;
+  line-height: 1.15 !important;
+  position: relative !important;
+}
+body#page-enrol-index #lambda-incourse-header h2::before {
+  content: "Início › Cursos › Inscrição" !important;
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #fbba00 !important;
+  font-weight: 700 !important;
+  margin-bottom: 10px !important;
+}
+
+/* 6.3 — Container do conteúdo (centralizado, padding generoso). */
+body#page-enrol-index #region-main [role="main"] {
+  max-width: 960px !important;
+  margin: 0 auto !important;
+  padding: 32px 32px 60px !important;
+}
+
+/* 6.4 — Esconde h2 redundante "Opções de inscrição". */
+body#page-enrol-index #region-main [role="main"] > h2 {
+  display: none !important;
+}
+
+/* ─── 6.5 CARD 1 — informações do curso ─────────────────── */
+
+body#page-enrol-index .box.generalbox.info {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 0 24px 0 !important;
+}
+
+/* O .coursebox.grid vira o card visual com banner em cima. */
+body#page-enrol-index .coursebox.grid {
+  display: flex !important;
+  flex-direction: column !important;
+  background: #fff !important;
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Esconde bloco .info duplicado (h3 + moreinfo + seta). */
+body#page-enrol-index .coursebox.grid > .info {
+  display: none !important;
+}
+
+body#page-enrol-index .coursebox.grid > .content {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body#page-enrol-index .coursebox.grid > .content > a:first-child {
+  display: block !important;
+  width: 100% !important;
+  text-decoration: none !important;
+}
+
+/* Banner do curso full-width (280px). */
+body#page-enrol-index .coursebox.grid .courseimage {
+  display: block !important;
+  width: 100% !important;
+  height: 280px !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-color: #eef4fa !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* Summary (descrição). */
+body#page-enrol-index .coursebox.grid .summary {
+  padding: 28px 32px 32px !important;
+  margin: 0 !important;
+}
+
+/* Categoria como EYEBROW azul acima do título. */
+body#page-enrol-index .coursebox.grid .summary .coursecat {
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: #0578be !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 10px 0 !important;
+  display: block !important;
+  text-align: left !important;
+  position: static !important;
+}
+body#page-enrol-index .coursebox.grid .summary .coursecat .categoryname,
+body#page-enrol-index
+  .coursebox.grid
+  .summary
+  .coursecat
+  .categoryname.text-truncate {
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  color: #0578be !important;
+  background: transparent !important;
+  padding: 0 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: none !important;
+}
+body#page-enrol-index .coursebox.grid .summary .coursecat .sr-only {
+  display: none !important;
+}
+
+/* Título grande do curso. */
+body#page-enrol-index .coursebox.grid .summary h3.coursename {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  margin: 0 0 18px 0 !important;
+  padding: 0 !important;
+  text-align: left !important;
+  color: #0f2137 !important;
+}
+body#page-enrol-index .coursebox.grid .summary h3.coursename a {
+  color: #0f2137 !important;
+  text-decoration: none !important;
+}
+body#page-enrol-index .coursebox.grid .summary h3.coursename a:hover {
+  color: #0578be !important;
+}
+
+/* Texto do summary. */
+body#page-enrol-index .coursebox.grid .summary .no-overflow {
+  font-size: 14px !important;
+  line-height: 1.7 !important;
+  color: #4b5563 !important;
+  text-align: left !important;
+}
+body#page-enrol-index .coursebox.grid .summary .no-overflow p {
+  margin: 0 0 12px 0 !important;
+}
+body#page-enrol-index .coursebox.grid .summary .no-overflow strong {
+  color: #0f2137 !important;
+}
+
+/* ─── 6.6 CARD 2 — form de inscrição (.enrol-instance) ──── */
+
+body#page-enrol-index .box.generalbox.enrol-instance {
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+/* Borda esquerda azul destaca o card como CTA. */
+body#page-enrol-index .enrol-instance .card {
+  background: #fff !important;
+  border: 1px solid #ededed !important;
+  border-left: 4px solid #0578be !important;
+  border-radius: 2px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+  overflow: hidden !important;
+}
+
+/* Header com eyebrow "INSCRIÇÃO". */
+body#page-enrol-index .enrol-instance .card-header {
+  background: #fff !important;
+  border: 0 !important;
+  border-bottom: 1px solid #ededed !important;
+  padding: 22px 28px 18px !important;
+  position: relative !important;
+}
+body#page-enrol-index .enrol-instance .card-header::before {
+  content: "INSCRIÇÃO" !important;
+  display: block !important;
+  font-size: 10px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  color: #0578be !important;
+  font-weight: 700 !important;
+  margin-bottom: 6px !important;
+}
+body#page-enrol-index .enrol-instance .card-header h3 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: #0f2137 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.3 !important;
+}
+
+/* Body com alert informativo. */
+body#page-enrol-index .enrol-instance .card-body {
+  padding: 22px 28px !important;
+  background: #fff !important;
+}
+body#page-enrol-index .enrol-instance .card-body .alert {
+  background: #eef4fa !important;
+  border: 1px solid #cfe2f3 !important;
+  border-radius: 2px !important;
+  color: #0a4d80 !important;
+  padding: 12px 16px !important;
+  margin: 0 !important;
+  font-size: 14px !important;
+}
+
+/* Footer com botão "Inscreva-me". */
+body#page-enrol-index .enrol-instance .card-footer {
+  background: #fafbfc !important;
+  border: 0 !important;
+  border-top: 1px solid #ededed !important;
+  padding: 18px 28px !important;
+  text-align: left !important;
+}
+body#page-enrol-index .enrol-instance .singlebutton,
+body#page-enrol-index .enrol-instance .singlebutton form {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-block !important;
+}
+body#page-enrol-index .enrol-instance .btn-primary,
+body#page-enrol-index .enrol-instance button[type="submit"] {
+  background: #0578be !important;
+  border: 0 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  padding: 12px 32px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+}
+body#page-enrol-index .enrol-instance .btn-primary:hover,
+body#page-enrol-index .enrol-instance button[type="submit"]:hover {
+  background: #0e509a !important;
+}
+
+/* Espaço entre múltiplas instâncias (quando o curso aceita mais de um plugin). */
+body#page-enrol-index .enrol-instance + .enrol-instance {
+  margin-top: 20px !important;
+}
+
+/* 6.7 — Responsivo enrol. */
+@media (max-width: 768px) {
+  body#page-enrol-index #lambda-incourse-header {
+    padding: 24px 20px 18px !important;
+  }
+  body#page-enrol-index #lambda-incourse-header h2 {
+    font-size: 24px !important;
+  }
+  body#page-enrol-index #region-main [role="main"] {
+    padding: 20px 16px 40px !important;
+  }
+  body#page-enrol-index .coursebox.grid .courseimage {
+    height: 180px !important;
+  }
+  body#page-enrol-index .coursebox.grid .summary {
+    padding: 20px 20px 24px !important;
+  }
+  body#page-enrol-index .coursebox.grid .summary h3.coursename {
+    font-size: 18px !important;
+  }
+  body#page-enrol-index .enrol-instance .card-header,
+  body#page-enrol-index .enrol-instance .card-body,
+  body#page-enrol-index .enrol-instance .card-footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   7. SIGNUP — body#page-login-signup (/login/signup.php)
+   ───────────────────────────────────────────────────────────
+   Bloco standalone (não depende do CSS do login). Mesmo
+   split-screen, mas com painel direito scrollable (form longo).
+   ═══════════════════════════════════════════════════════════ */
+
+/* 7.1 — Reset do chrome Moodle/Lambda.
+   .funp-login-fallback (adicionada pelo script.js quando o split-screen
+   não pode ser montado) reexibe a página nativa em vez de deixá-la
+   em branco. */
+html body#page-login-signup {
+  background: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body#page-login-signup:not(.funp-login-fallback) #page-wrapper,
+html body#page-login-signup:not(.funp-login-fallback) #page,
+html body#page-login-signup:not(.funp-login-fallback) #page-content,
+html body#page-login-signup:not(.funp-login-fallback) #page-header,
+html body#page-login-signup:not(.funp-login-fallback) #page-navbar,
+html body#page-login-signup:not(.funp-login-fallback) .navbar,
+html body#page-login-signup:not(.funp-login-fallback) .breadcrumb-nav,
+html body#page-login-signup:not(.funp-login-fallback) .breadcrumb-section,
+html body#page-login-signup:not(.funp-login-fallback) footer.py-3,
+html body#page-login-signup:not(.funp-login-fallback) #page-footer {
+  display: none !important;
+}
+
+/* 7.2 — Wrapper split-screen. */
+html body#page-login-signup > .funp-login-wrapper {
+  display: grid !important;
+  grid-template-columns: 1.1fr 1fr !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+  margin: 0 !important;
+  background: #fff !important;
+}
+
+/* 7.3 — Painel BRAND (esquerda). Padrão diagonal mais denso. */
+html body#page-login-signup .funp-login-brand {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 33, 55, 0.88) 0%,
+      rgba(15, 33, 55, 0.96) 100%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #0f2137 0,
+      #0f2137 2px,
+      #142a44 2px,
+      #142a44 4px
+    ) !important;
+  color: #fff !important;
+  padding: 64px 56px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+html body#page-login-signup .funp-login-brand > div:first-child {
+  max-width: 480px !important;
+}
+html body#page-login-signup .funp-login-brand .funp-brand-eyebrow {
+  font-size: 11px !important;
+  letter-spacing: 2.5px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  color: #fbba00 !important;
+  margin-bottom: 28px !important;
+}
+html body#page-login-signup .funp-login-brand h1 {
+  font-size: 44px !important;
+  font-weight: 800 !important;
+  line-height: 1.12 !important;
+  color: #fff !important;
+  margin: 0 0 24px 0 !important;
+  letter-spacing: -0.5px !important;
+}
+html body#page-login-signup .funp-login-brand h1 em {
+  font-style: italic !important;
+  font-weight: 800 !important;
+  color: #fbba00 !important;
+}
+html body#page-login-signup .funp-login-brand .funp-brand-lede {
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+  margin: 0 !important;
+  max-width: 460px !important;
+}
+html body#page-login-signup .funp-login-brand .funp-brand-footer {
+  position: absolute !important;
+  bottom: 40px !important;
+  left: 56px !important;
+  right: 56px !important;
+  max-width: none !important;
+  font-size: 11px !important;
+  color: rgba(255, 255, 255, 0.45) !important;
+  letter-spacing: 0.3px !important;
+  line-height: 1.55 !important;
+}
+
+/* 7.4 — Painel FORM (direita) — scrollable porque o form é longo. */
+html body#page-login-signup .funp-login-form {
+  background: #fff !important;
+  overflow-y: auto !important;
+  max-height: 100vh !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+}
+html body#page-login-signup .funp-login-form-inner {
+  width: 100% !important;
+  max-width: 480px !important;
+  padding: 56px 40px !important;
+}
+
+/* 7.4b — Logo Funpresp centralizada no cadastro. */
+html body#page-login-signup .funp-login-form #loginlogo,
+html body#page-login-signup .funp-login-form .login-logo,
+html body#page-login-signup .signupform #loginlogo,
+html body#page-login-signup .signupform .login-logo {
+  text-align: center !important;
+  margin-bottom: 28px !important;
+}
+html body#page-login-signup .funp-login-form #loginlogo img,
+html body#page-login-signup .funp-login-form .login-logo img,
+html body#page-login-signup .signupform #loginlogo img,
+html body#page-login-signup .signupform .login-logo img {
+  max-height: 44px !important;
+  width: auto !important;
+  margin: 0 auto !important;
+  display: inline-block !important;
+}
+
+/* 7.5 — H1 com eyebrow "CADASTRO" injetado via ::before. */
+body#page-login-signup .signupform h1.login-heading {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  color: #0f2137 !important;
+  margin: 0 0 28px 0 !important;
+  line-height: 1.2 !important;
+}
+body#page-login-signup .signupform h1.login-heading::before {
+  content: "CADASTRO" !important;
+  display: block !important;
+  font-size: 11px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  color: #0578be !important;
+  font-weight: 700 !important;
+  margin-bottom: 8px !important;
+}
+
+/* 7.6 — mform layout: empilha label + input (Moodle usa grid Bootstrap horizontal). */
+body#page-login-signup .signupform .mform .fitem.row,
+body#page-login-signup .signupform .mform .row.fitem {
+  display: block !important;
+  margin: 0 0 18px 0 !important;
+}
+body#page-login-signup .signupform .mform .col-md-3.col-form-label {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  padding: 0 !important;
+  margin: 0 0 6px 0 !important;
+  display: flex !important;
+}
+body#page-login-signup .signupform .mform .col-md-9 {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  padding: 0 !important;
+}
+body#page-login-signup .signupform .mform .fitem.femptylabel > .col-md-3 {
+  display: none !important;
+}
+body#page-login-signup .signupform .mform .fitem.femptylabel > .col-md-9 {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+body#page-login-signup .signupform .mform label {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #0f2137 !important;
+  letter-spacing: 0.3px !important;
+  margin: 0 !important;
+}
+body#page-login-signup .signupform .mform .form-label-addon {
+  display: inline-flex !important;
+  margin-left: 6px !important;
+}
+body#page-login-signup .signupform .mform .form-label-addon .icon {
+  font-size: 10px !important;
+}
+body#page-login-signup .signupform .mform .form-control,
+body#page-login-signup .signupform .mform .form-select {
+  border: 1px solid #d8dde3 !important;
+  border-radius: 2px !important;
+  padding: 10px 12px !important;
+  height: auto !important;
+  font-size: 14px !important;
+  width: 100% !important;
+  background-color: #fff !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s !important;
+}
+body#page-login-signup .signupform .mform .form-control:focus,
+body#page-login-signup .signupform .mform .form-select:focus {
+  border-color: #0578be !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 3px rgba(5, 120, 190, 0.12) !important;
+}
+
+/* 7.7 — Password policy info (caixa amarela). */
+body#page-login-signup .signupform .mform .form-control-static {
+  font-size: 12px !important;
+  color: #4b5563 !important;
+  background: #fffbea !important;
+  border: 1px solid #fde68a !important;
+  border-radius: 2px !important;
+  padding: 10px 12px !important;
+  line-height: 1.5 !important;
+}
+
+/* 7.8 — Fieldset "Dados Pessoais" colapsável. */
+body#page-login-signup .signupform .mform fieldset.collapsible {
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+  padding: 20px !important;
+  margin: 24px 0 !important;
+  background: #fafbfc !important;
+}
+body#page-login-signup .signupform .mform fieldset.collapsible legend {
+  display: none !important;
+}
+body#page-login-signup .signupform .mform fieldset.collapsible h3 {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #0578be !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  margin: 0 !important;
+}
+body#page-login-signup .signupform .mform fieldset.collapsible .ftoggler {
+  margin-bottom: 16px !important;
+}
+
+/* 7.9 — Checkbox LGPD com card destacado. */
+body#page-login-signup .signupform .form-check {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px !important;
+  padding: 16px !important;
+  background: #fff !important;
+  border: 1px solid #ededed !important;
+  border-radius: 2px !important;
+}
+body#page-login-signup .signupform .form-check-input {
+  margin-top: 2px !important;
+  flex-shrink: 0 !important;
+}
+body#page-login-signup .signupform .form-check label {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  line-height: 1.55 !important;
+  color: #4b5563 !important;
+}
+
+/* 7.10 — Linha "* campos obrigatórios". */
+body#page-login-signup .signupform .fdescription.required {
+  font-size: 11px !important;
+  color: #6b7280 !important;
+  margin: 12px 0 !important;
+}
+
+/* 7.11 — Botões submit + cancelar. */
+body#page-login-signup .signupform [data-groupname="buttonar"] {
+  margin-top: 28px !important;
+  padding-top: 24px !important;
+  border-top: 1px solid #ededed !important;
+}
+body#page-login-signup .signupform [data-groupname="buttonar"] .d-flex {
+  gap: 12px !important;
+}
+body#page-login-signup .signupform [data-groupname="buttonar"] .fitem {
+  margin: 0 !important;
+}
+body#page-login-signup .signupform input[type="submit"].btn-primary {
+  background: #0578be !important;
+  border: 0 !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  padding: 13px 28px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background 0.15s !important;
+}
+body#page-login-signup .signupform input[type="submit"].btn-primary:hover {
+  background: #0e509a !important;
+}
+body#page-login-signup .signupform input[type="submit"].btn-secondary {
+  background: transparent !important;
+  border: 1px solid #d8dde3 !important;
+  color: #4b5563 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px !important;
+  padding: 13px 28px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: all 0.15s !important;
+}
+body#page-login-signup .signupform input[type="submit"].btn-secondary:hover {
+  background: #f5f6f8 !important;
+  border-color: #b8c0cc !important;
+  color: #0f2137 !important;
+}
+
+/* 7.12 — Toggle "Would you like to log in...". */
+body#page-login-signup .loginform-toggle {
+  margin-top: 32px !important;
+  padding-top: 20px !important;
+  border-top: 1px solid #ededed !important;
+  text-align: center !important;
+}
+body#page-login-signup .loginform-toggle .login-heading,
+body#page-login-signup .loginform-toggle .lambda-toggle {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #6b7280 !important;
+  margin: 0 !important;
+}
+
+/* 7.13 — Responsivo signup: stack vertical em <= 992px. */
+@media (max-width: 992px) {
+  html body#page-login-signup > .funp-login-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+  html body#page-login-signup .funp-login-brand {
+    padding: 40px 32px !important;
+    justify-content: flex-start !important;
+  }
+  html body#page-login-signup .funp-login-brand h1 {
+    font-size: 32px !important;
+  }
+  html body#page-login-signup .funp-login-brand .funp-brand-footer {
+    position: static !important;
+    margin-top: 32px !important;
+  }
+  html body#page-login-signup .funp-login-form {
+    max-height: none !important;
+  }
+}
+@media (max-width: 768px) {
+  html body#page-login-signup .funp-login-form-inner {
+    padding: 32px 20px !important;
+  }
+  body#page-login-signup .signupform h1.login-heading {
+    font-size: 24px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   7.14. FAQ (Perguntas Frequentes)
+   ───────────────────────────────────────────────────────────
+   Accordion centralizado com margem lateral coerente
+   com o restante das seções (max-width 1320px).
+   ═══════════════════════════════════════════════════════════ */
+.funp-faq {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 32px 24px 48px;
+}
+
+.funp-faq-intro {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .funp-faq {
+    padding: 24px 16px 32px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   8. FOOTER GLOBAL
+   ───────────────────────────────────────────────────────────
+   Footer institucional dark (fundo #0a1626) com grid 4 colunas
+   + faixa de copyright full-width. Tema do footer é sempre
+   escuro, independente do modo da página.
+   ═══════════════════════════════════════════════════════════ */
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+.funp-footer-main {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* 8.1 — Grid 4 colunas (proporções desbalanceadas conforme conteúdo). */
+.funp-footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.2fr;
+  gap: 40px;
+  align-items: start;
+  justify-items: start;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 40px 24px 28px;
+}
+
+.funp-footer-block {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #ffffff !important;
+}
+.funp-footer-block h5 {
+  color: #4ea8e0 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  margin: 0 0 10px !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+.funp-footer-block h5:not(:first-child) {
+  margin-top: 18px !important;
+}
+.funp-footer-block ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.funp-footer-block ul li {
+  margin: 0 0 4px;
+  color: #ffffff !important;
+}
+.funp-footer-block a {
+  color: #e6ecf3 !important;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.funp-footer-block a:hover {
+  color: #4ea8e0 !important;
+}
+.funp-footer-block p {
+  margin: 0 0 6px;
+  color: #ffffff !important;
+}
+
+.funp-footer-logo img {
+  max-width: 320px;
+  height: auto;
+  display: block;
+  /* filter: brightness(0) invert(1);  ← descomente para forçar logo branco */
+}
+
+.funp-footer-divider {
+  display: none !important;
+}
+
+/* 8.2 — Faixa de copyright (full-width via truque 100vw + margem negativa). */
+.funp-copyright-row {
+  position: relative !important;
+  width: 100vw !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+  background: #0a1626 !important;
+  padding: 14px 0 !important;
+}
+.funp-copyright-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.funp-copyright-left {
+  font-size: 12px;
+  color: #94a3b8 !important;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+.funp-copyright-center {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  justify-content: center;
+}
+.funp-copyright-center img {
+  height: 34px;
+  width: auto;
+}
+.funp-copyright-center a {
+  color: #fff !important;
+  text-decoration: none;
+}
+.funp-copyright-social {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.funp-copyright-social a {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  transition: background 0.2s;
+  text-decoration: none !important;
+}
+.funp-copyright-social a:hover {
+  background: #2662ba;
+}
+
+/* 8.3 — Faixa Lambda nativa abaixo do nosso footer (alinha background). */
+#page-footer,
+footer.py-3,
+footer,
+.footer-copyright,
+.fcp,
+#footnote {
+  background: #0a1626 !important;
+  padding-bottom: 0 !important;
+}
+.funp-copyright-row ~ * {
+  display: none !important;
+}
+
+/* 8.4 — Esconde links automáticos do Moodle (data privacy, mobile, user tours). */
+#course-footer .tool_dataprivacy,
+#course-footer a.mobilelink,
+#course-footer .tool_usertours-resettourcontainer,
+footer .tool_dataprivacy,
+footer a.mobilelink {
+  display: none !important;
+}
+
+/* 8.5 — Responsivo footer. */
+@media (max-width: 992px) {
+  .funp-footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .funp-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 28px 16px 20px;
+  }
+  .funp-copyright-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 12px;
+    padding: 0 16px;
+  }
+  .funp-copyright-center,
+  .funp-copyright-social {
+    justify-content: center;
+  }
+}
