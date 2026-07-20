@@ -1,0 +1,33 @@
+TOKENS DE DATA - CERTIFICADO (mod_simplecertificate)
+=====================================================
+
+Usar no texto do certificado (Editar certificado > campo de texto).
+Formato de saida: dd/mm/aaaa. Se a data nao existir, sai vazio.
+
+
+1) {ENROLDATE}  -  Data de inscricao do aluno
+   De onde puxa: user_enrolments.timestart (data em que o aluno foi
+   matriculado no curso).
+   Fallback: se nao houver matricula com data, usa a data de inicio do
+   curso (course.startdate).
+   Caso de uso: mostrar quando o aluno comecou/entrou no curso.
+
+
+2) {COMPLETIONDATE}  -  Data de conclusao do aluno
+   De onde puxa: course_completions.timecompleted (data em que o aluno
+   concluiu o curso).
+   Fallback: se nao houver conclusao registrada, usa a data de emissao
+   do certificado.
+   Caso de uso: mostrar quando o aluno terminou o curso.
+
+
+3) {COURSEPERIOD}  -  Periodo do curso (inscricao ate conclusao)
+   De onde puxa: combina as duas datas acima -> "dd/mm/aaaa a dd/mm/aaaa"
+   (inicio = inscricao/ENROLDATE, fim = conclusao/COMPLETIONDATE),
+   com os mesmos fallbacks.
+   Caso de uso: uma linha unica com o intervalo completo do curso.
+   Ex.: "Periodo: 01/03/2026 a 15/06/2026".
+
+
+Observacao: apos subir o plugin no servidor, purgar o cache do Moodle
+para os tokens novos passarem a valer.
