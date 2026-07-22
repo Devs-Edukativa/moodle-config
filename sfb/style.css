@@ -1,0 +1,283 @@
+:root {
+    --cor-terra: #863728;
+    --cor-terra-escura: #6b2a1e;
+    --cor-verde: #2b5506;
+    --cor-verde-escura: #1e3d04;
+    --cor-verde-claro: #6b9e3f;
+    --cor-azul: #114675;
+    --cor-azul-escura: #0c3358;
+    --cor-texto: #2c3e2d;
+    --cor-texto-suave: #6b7568;
+    --cor-fundo: #f4f6f1;
+    --cor-card: #ffffff;
+    --sombra-suave: 0 4px 12px rgba(43, 85, 6, 0.08);
+    --sombra-media: 0 8px 24px rgba(43, 85, 6, 0.12);
+    --sombra-forte: 0 12px 32px rgba(43, 85, 6, 0.18);
+    --radius: 16px;
+    --transicao: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container-sfb {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.banner-sfb {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius);
+    box-shadow: var(--sombra-media);
+    margin-bottom: 48px;
+}
+
+/* ===== Section ===== */
+section {
+    margin-bottom: 56px;
+    padding: 24px;
+}
+
+section:first-of-type {
+    margin-top: 0;
+    padding-top: 24px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--cor-verde-claro);
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--cor-verde-escura);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+/* ===== Botões de acesso ===== */
+.container-botoes-sfb {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.wrapper-btn-sfb {
+    display: flex;
+    position: relative;
+    transition: var(--transicao);
+}
+
+.wrapper-btn-sfb:hover {
+    transform: translateY(-4px);
+}
+
+.dobra-btn-sfb {
+    width: 0;
+    height: 0;
+    border-left: 22px solid transparent;
+    border-bottom: 22px solid var(--cor-verde-escura);
+    flex-shrink: 0;
+    filter: drop-shadow(-2px 2px 2px rgba(0,0,0,0.1));
+}
+
+.btn-sfb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white !important;
+    padding: 20px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-weight: 700;
+    flex: 1;
+    min-height: 120px;
+    background: var(--cor-verde);
+    gap: 10px;
+    border-radius: 0 var(--radius) var(--radius) var(--radius);
+    box-shadow: var(--sombra-suave);
+    transition: var(--transicao);
+    border: none;
+}
+
+.wrapper-btn-sfb:hover .btn-sfb {
+    box-shadow: var(--sombra-forte);
+    background: var(--cor-verde-escura);
+}
+
+.btn-icon {
+    font-size: 36px !important;
+    color: white;
+    opacity: 0.95;
+}
+
+/* ===== Trilha de fases ===== */
+.container-modulos-sfb {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 40px 20px 20px;
+    background: var(--cor-card);
+    border-radius: var(--radius);
+    box-shadow: var(--sombra-suave);
+}
+
+.trilha-modulos {
+    position: absolute;
+    top: 82px;
+    left: 16.66%;
+    width: 66.66%;
+    height: 2px;
+    z-index: 0;
+    border-top: 3px dashed #cfd8c4;
+}
+
+.card-modulo-sfb {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    transition: var(--transicao);
+}
+
+.card-modulo-sfb:hover {
+    transform: translateY(-6px);
+}
+
+.card-icon-pin {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    border: 4px solid var(--cor-card);
+}
+
+.card-icon-pin::after {
+    content: attr(data-step);
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    background: white;
+    color: var(--cor-texto);
+    font-size: 11px;
+    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.card-icon-pin-1 { background: var(--cor-terra); }
+.card-icon-pin-2 { background: var(--cor-verde); }
+.card-icon-pin-3 { background: var(--cor-azul); }
+
+.card-icon {
+    color: white;
+    font-size: 32px !important;
+}
+
+.card-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 8px 20px;
+    border-radius: 999px;
+    color: white;
+    margin-bottom: 14px;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.card-label-1 { background: var(--cor-terra); }
+.card-label-2 { background: var(--cor-verde); }
+.card-label-3 { background: var(--cor-azul); }
+
+.card-description {
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: center;
+    color: var(--cor-texto-suave);
+    max-width: 280px;
+}
+
+/* ===== Material Icons ===== */
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-flex;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: nowrap;
+    direction: ltr;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 768px) {
+    .section-title { font-size: 24px; }
+    .container-botoes-sfb { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .btn-sfb { min-height: 110px; font-size: 12px; }
+    .btn-icon { font-size: 30px !important; }
+}
+
+@media (max-width: 560px) {
+    .container-sfb { padding: 14px; }
+    .banner-sfb { margin-bottom: 32px; }
+    .container-modulos-sfb {
+        grid-template-columns: 1fr;
+        padding: 24px 16px;
+    }
+    .trilha-modulos { display: none; }
+    .card-modulo-sfb { padding-bottom: 24px; border-bottom: 1px dashed #d5dccb; }
+    .card-modulo-sfb:last-child { border-bottom: none; }
+    .container-botoes-sfb { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
