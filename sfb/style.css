@@ -49,7 +49,7 @@ body {
 
 /* ===== Section ===== */
 section {
-  margin-bottom: 16px;
+  margin-bottom: 58px;
   padding: 8px;
 }
 
@@ -93,6 +93,8 @@ section:first-of-type {
   display: flex;
   position: relative;
   transition: var(--transicao);
+  flex-direction: column;
+  align-items: center;
 }
 
 .wrapper-btn-sfb:hover {
@@ -100,12 +102,7 @@ section:first-of-type {
 }
 
 .dobra-btn-sfb {
-  width: 0;
-  height: 0;
-  border-left: 22px solid transparent;
-  border-bottom: 22px solid var(--cor-verde-escura);
-  flex-shrink: 0;
-  filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.1));
+  display: none;
 }
 
 .btn-sfb {
@@ -113,34 +110,39 @@ section:first-of-type {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: white !important;
-  padding: 20px 16px;
+  color: var(--cor-texto) !important;
+  padding: 0;
   text-align: center;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 14px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   cursor: pointer;
   font-weight: 700;
-  flex: 1;
-  min-height: 120px;
-  background: var(--cor-verde);
-  gap: 10px;
-  border-radius: 0 var(--radius) var(--radius) var(--radius);
-  box-shadow: var(--sombra-suave);
-  transition: var(--transicao);
+  gap: 12px;
+  background: transparent;
   border: none;
-}
-
-.wrapper-btn-sfb:hover .btn-sfb {
-  box-shadow: var(--sombra-forte);
-  background: var(--cor-verde-escura);
+  box-shadow: none;
+  transition: var(--transicao);
 }
 
 .btn-icon {
-  font-size: 36px !important;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: #d4e6a8;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: var(--cor-verde);
+  font-size: 40px !important;
+  opacity: 1;
+  transition: var(--transicao);
+}
+
+.wrapper-btn-sfb:hover .btn-icon {
+  background-color: #215f36;
   color: white;
-  opacity: 0.95;
 }
 
 /* ===== Trilha de fases ===== */
@@ -148,16 +150,15 @@ section:first-of-type {
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  padding: 40px 20px 20px;
+  gap: 22px;
+  padding: 32px 24px;
   background: var(--cor-card);
   border-radius: var(--radius);
-  box-shadow: var(--sombra-suave);
 }
 
 .trilha-modulos {
   position: absolute;
-  top: 82px;
+  top: 68px;
   left: 16.66%;
   width: 66.66%;
   height: 2px;
@@ -171,7 +172,6 @@ section:first-of-type {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px;
   transition: var(--transicao);
 }
 
@@ -275,15 +275,6 @@ section:first-of-type {
   .container-botoes-sfb {
     grid-template-columns: repeat(5, 1fr);
     gap: 16px;
-  }
-  .btn-sfb {
-    min-height: 100px;
-    padding: 16px 12px;
-    font-size: 12px;
-    gap: 8px;
-  }
-  .btn-icon {
-    font-size: 28px !important;
   }
 }
 
