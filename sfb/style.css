@@ -83,9 +83,10 @@ section:first-of-type {
 
 /* ===== Botões de acesso ===== */
 .container-botoes-sfb {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 140px;
   width: 100%;
 }
 
@@ -127,8 +128,8 @@ section:first-of-type {
 }
 
 .btn-icon {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   background-color: #d4e6a8;
   display: flex !important;
@@ -273,8 +274,9 @@ section:first-of-type {
 /* ===== Responsivo ===== */
 @media (min-width: 1280px) {
   .container-botoes-sfb {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 80px;
   }
 }
 
